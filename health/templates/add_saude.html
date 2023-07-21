@@ -1,0 +1,34 @@
+{% load static %}
+<head>
+  
+  <link rel="stylesheet" href="{% static 'health/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'health/media.css' %}">
+  <script src="{% static 'health/main.js' %}"></script>
+</head>
+<center>
+<h1>Saúde health</h1>
+<form method="post">
+  <label id="label">Importar informação / ChatGPT:</label><br>
+  <textarea name="prompt" id="prompt" cols="80" rows="3" placeholder="Cole o texto aqui..."></textarea>
+  <input type="button" value="" id="classificar">
+  <h2>Formulário</h2>
+  <label id="label">O que é / Descrição:</label><br>
+  <textarea name="decricao" id="descricao" cols="50" rows="3" placeholder="Adicionar descrição..."></textarea><br>
+  <label id="label">Mecanismos de ação / Como funciona:</label><br>
+  <textarea name="mecanismo" id="mecanismo" cols="50" rows="3" placeholder="Adicionar mecanismo de ação..."></textarea><br>
+  <label id="label">Potencial Benefícios / Para que serve:</label><br>
+  <textarea name="beneficio" id="beneficio" cols="50" rows="3" placeholder="Adicionar potencial..."></textarea><br>
+  <label id="label">Efeitos colaterais/Cuidados:</label><br>
+  <textarea name="efeitos_colaterais" id="efeitos_colaterais" cols="50" rows="3" placeholder="Adicionar efeitos colaterais..."></textarea><br>
+  <label id="label">Interações gênicas:</label><br>
+  <textarea name="interacoes" id="interacoes" cols="50" rows="3" placeholder="Adicionar interações gênicas..."></textarea><br>
+  <label id="label">Experiência dos Usuários:</label><br>
+  <textarea name="experiencia" id="experiencia" cols="50" rows="3" placeholder="Adicionar experiencia dos Usuários..."></textarea><br>
+  <label id="label">Estudos Científicos / Referências Científica:</label><br>
+  <textarea name="estudos_cientificos" id="estudos_cientificos" cols="50" rows="3" placeholder="Adicionar estudos científicos..."></textarea><br>
+  <label id="label">FAQ / Perguntas Frequentes:</label><br>
+  <textarea name="faq" id="faq" cols="50" rows="3" placeholder="Adicionar faq, perguntas frequentes..."></textarea><br>
+  <input type="button" value="Enviar" id="button">
+
+</form>
+</center>

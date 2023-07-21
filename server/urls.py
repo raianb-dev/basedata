@@ -1,21 +1,24 @@
-"""server URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
 
+# Importações locais #
+from health import views as views_health
+from disease import views as views_disease
+from home import views as views_home
+
+# Urls "admin"
 urlpatterns = [
     path('admin/', admin.site.urls),
+]
+
+# Urls "saude"
+urlpatterns = [
+    path('saude/', views_health.todos_os_dados, name='health'),
+    path('saude/<int:id>/', views_health.detalhes_item, name='health-id'),
+    path('saude/cadastrar/', views_health.cadastrar_saude, name='add-saude'),
+    path('doenca/', views_disease.todos_os_dados, name='disease'),
+    path('doenca/<int:id>/', views_disease.detalhes_item, name='disease-id'),
+    path('home/', views_home.redirect, name='home'),
+
 ]

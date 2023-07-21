@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#74qqu)v7s5he4zz_+$=!+a#lk0)um7hg1@6q008$@8w+f14v(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'health',
+    'disease',
+    'tinymce',
+    'home'
 ]
 
 MIDDLEWARE = [
@@ -117,9 +121,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 300,
+    'width': '100%',
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'theme': 'silver',  # Escolha o tema desejado (opcional)
+    # Mais opções podem ser adicionadas conforme suas necessidades
+}
+
