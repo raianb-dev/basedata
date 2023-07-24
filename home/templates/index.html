@@ -4,8 +4,7 @@
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="{% static 'home/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'home/media.css' %}">
+
   <script src="{% static 'home/main.js' %}"></script>
 </head>
 
@@ -18,9 +17,7 @@
 </head>
 
 <body>
-  <div class="nav"><a href="{% url 'home'%}" id="back"></a>
-    <h1>Pagina inicial</h1>
-</div>
+
   <section class="table__body">
     <table>
       <thead>
@@ -37,22 +34,33 @@
       <tbody>
         <tr>
           <td> 1 </td>
-          <td> Saude - Haelfh</td>
+          <td> Saude </td>
           <td></td>
-          <td> 17 Dec, 2022 </td>
-          <td><strong> 127 </strong></td>
+          <td> --- </td>
+          <td><strong> --- </strong></td>
           <td>
-            <a href="{% url 'listar-saude' %}"><p class="status delivered">ver</p></a>
+            <a href="{% url 'health' %}"><p class="status delivered">ver</p></a>
           </td>
         </tr>
         <tr>
           <td> 2 </td>
           <td> Doença</td>
           <td></td>
-          <td> 17 Dec, 2022 </td>
-          <td><strong> 127 </strong></td>
+          <td> --- </td>
+          <td><strong> --- </strong></td>
           <td>
-            <a href="{% url 'listar-saude' %}"><p class="status delivered">ver</p></a>
+            <a href="{% url 'doenca' %}"><p class="status delivered">ver</p></a>
+          </td>
+
+        </tr>
+        <tr>
+          <td> 3 </td>
+          <td> Ervas | Sub.</td>
+          <td></td>
+          <td> --- </td>
+          <td><strong> --- </strong></td>
+          <td>
+            <a href="{% url 'herbsSubstances' %}"><p class="status delivered">ver</p></a>
           </td>
 
         </tr>

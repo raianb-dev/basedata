@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'health',
     'disease',
-    'home'
+    'home',
+    'herbsSubstances'
 ]
 
 MIDDLEWARE = [

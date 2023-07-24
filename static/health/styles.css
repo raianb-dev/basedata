@@ -87,7 +87,7 @@ body, html {
 }
 
 .table__header .input-group img {
-    width: 1.2rem;
+    width: 2.2rem;
     height: 1.2rem;
 }
 
@@ -194,13 +194,14 @@ tbody tr.hide td img {
 }
 
 .status.delivered {
-    background-color: #837607;
+    background-color: #2a4a77;
     color: #ffffff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
+    max-width: 50px;
 }
 a {
     text-decoration: none;

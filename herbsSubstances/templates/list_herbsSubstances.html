@@ -1,0 +1,195 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Listagem de Ervas | Substâncias</title>
+
+    <link rel="stylesheet" href="{% static 'health/styles.css' %}">
+
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="nav">
+
+            <br>
+            <h1>Herbs  Substances</h1>
+        </div>
+        <a href="{% url 'add-herbsSubstances' %}" class="floating-button">+</a>
+        <section class="table__body" style="scale: 0.8;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Breve resumo <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>O que é?  <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Principais Benefícios <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>potencialmente boa para o que? <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Doenças relacionadas <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Desvantagens/cuidados <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Como funciona? <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Dosagem, informações <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>FAQ</th>
+                        <th>studos Científicos</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in herbsSubstances_items %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.resumo|truncatechars:50 }}</td>
+                        <td>{{ item.oque_e|truncatechars:50 }}</td>
+                        <td>{{ item.beneficio|truncatechars:50 }}</td>
+                        <td>{{ item.boa_para_que|truncatechars:50 }}</td>
+                        <td>{{ item.doencas_relacionada|truncatechars:50 }}</td>
+                        <td>{{ item.como_funciona|truncatechars:50 }}</td>
+                        <td>{{ item.desvantagens_cuidados|truncatechars:50 }}</td>
+                        <td>{{ item.dosagem|truncatechars:50 }}</td>
+                        <td>{{ item.faq|truncatechars:50 }}</td>
+                        <td>{{ item.estudos|truncatechars:50 }}</td>
+                        <td>
+                            <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
+                                    class="bi bi-eye"></i> Detalhes</button>
+                            <a href="{% url 'editar-herbsSubstances' item.id %}" class="btn btn-primary"><i class="bi bi-pencil"></i>
+                                Editar</a>
+                            <a href="{% url 'excluir-herbsSubstances' item.id %}" class="btn btn-danger btn-excluir"
+                                data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        </section>
+        <!-- Paginação -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if saude_items.has_previous %}
+                <a href="?page=1">&laquo; Primeira página</a>
+                <a href="?page={{ saude_items.previous_page_number }}">voltar</a>
+                {% endif %}
+
+                <span class="current">
+                    Página {{ saude_items.number }} de {{ saude_items.paginator.num_pages }}.
+                </span>
+
+                {% if saude_items.has_next %}
+                <a href="?page={{ saude_items.next_page_number }}">Próxima</a>
+                <a href="?page={{ saude_items.paginator.num_pages }}">Ultima &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    {% for item in saude_items %}
+    <div class="modal" id="modal-{{ item.id }}">
+        <div class="modal-content">
+            <!-- Conteúdo detalhado do item -->
+            <h2>{{ item.description }}</h2><br>
+            <p><b>Mecanismos de Ação:</b><br> {{ item.action_mechanisms }}</p><br>
+            <p><b>Benefícios Potenciais:</b><br> {{ item.potential_benefits }}</p><br>
+            <p><b>Efeitos Colaterais/Cuidados:</p></b> {{ item.effects_precautions }}</p><br>
+            <p><b>Interações Gênicas:</b><br> {{ item.gene_interactions }}</p><br>
+            <p><b>Estudos Científicos / Referências Científicas:</b><br> {{ item.scientific_studies }}</p><br>
+            <p><b>Experiência dos Usuários:</b><br>{{ item.user_experience }}</p><br>
+            <p><b>FAQ / Perguntas Frequentes:</b><br> {{ item.faq }}</p><br>
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Add your JavaScript here to handle the modal functionality -->
+    <script>
+        const modalBtns = document.querySelectorAll('.modal-btn');
+        const modalCloseBtns = document.querySelectorAll('[data-modal-close]');
+        const modals = document.querySelectorAll('.modal');
+
+        modalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-modal-target');
+                const modal = document.querySelector(target);
+                modal.classList.add('open');
+            });
+        });
+
+        modalCloseBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = btn.closest('.modal');
+                modal.classList.remove('open');
+            });
+        });
+
+        window.addEventListener('click', e => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('open');
+            }
+        });
+    </script>
+
+
+
+
+
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal" id="modal-excluir">
+        <div class="modal-content">
+            <h2>Confirmação de Exclusão</h2>
+            <p>Você tem certeza que deseja excluir este item?</p>
+            <div class="modal-buttons">
+                <form method="GET" id="form-excluir">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" id="item_id_input">
+                    <button type="submit" class="btn btn-primary btn-confirmar">Sim</button>
+                </form>
+                <button class="btn btn-secondary btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var modal = $('#modal-excluir');
+            var btnExcluir = $('.btn-excluir');
+            var btnConfirmar = $('.btn-confirmar');
+            var btnCancela = $('.btn-cancelar');
+            var itemId;
+
+            // Abra o modal quando clicar em um dos links de exclusão
+            btnExcluir.click(function (event) {
+                event.preventDefault(); // Impede o comportamento padrão de clicar no link
+                itemId = $(this).data('item-id');
+                console.log(itemId); // Imprime o valor de itemId no console
+                modal.modal('show');
+                $('#item_id_input').val(itemId); // Armazena o valor do item_id no campo oculto
+            });
+
+            // Ação quando o usuário clicar no botão "Sim" no modal de confirmação
+            btnConfirmar.click(function () {
+                // Realize a ação de exclusão (submeter o formulário de exclusão)
+                $('#form-excluir').submit();
+            });
+
+            // Ação quando o modal for ocultado
+            modal.on('hidden.bs.modal', function () {
+                // Atualize a página após um pequeno atraso
+                setTimeout(function () {
+                    location.reload();
+                }, 100);
+            });
+
+            // Ação quando o usuário clicar no botão "Cancelar" no modal de confirmação
+            btnCancela.click(function () {
+                modal.modal('hide');
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

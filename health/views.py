@@ -7,7 +7,7 @@ Saude = models.Saude
 
 def todos_os_dados(request):
     saude_items = Saude.objects.all()
-    return render(request, 'saude.html', {'saude_items': saude_items})
+    return render(request, 'list_saude.html', {'saude_items': saude_items})
 
 def detalhes_item(request, item_id):
     saude_item = get_object_or_404(Saude, id=item_id)
@@ -34,7 +34,7 @@ def salvar_saude(request):
             scientific_studies=estudos_cientificos,
             faq=faq
         )
-        return redirect('listar-saude')
+        return redirect('health')
 
     return render(request, 'add_saude.html')
 
@@ -95,7 +95,7 @@ def excluir_saude(request, item_id):
         # Verifique se o método da requisição é POST
         # Isso garante que a exclusão ocorra apenas quando o formulário é enviado
         saude_item.delete()
-        return redirect('listar-saude')
+        return redirect('health')
     
     # Se a requisição não for POST, renderize o template normalmente
     return render(request, 'list_saude.html', {'saude_items': Saude.objects.all()})

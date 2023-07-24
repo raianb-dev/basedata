@@ -4,7 +4,7 @@
 <html>
 
 <head>
-  <title>Listagem de Saúde</title>
+  <title>Adicionar Ervas | Substâncias</title>
   <!-- Add your CSS stylesheets here -->
   <link rel="stylesheet" href="{% static 'health/styles.css' %}">
 </head>
@@ -12,41 +12,49 @@
 <body>
   <div class="container">
     <div class="nav">
-      <h1>Saude Health</h1>
+      <h1>Herbs  Substances</h1>
     </div>
     <section>
       <center>
-        <form method="post" action="{% url 'add-saude' %}">
+        <form method="post" action="{% url 'add-herbsSubstances' %}">
           <br>
           <label id="label">Importar informação / ChatGPT:</label><br>
           <textarea name="prompt" id="prompt" cols="140" rows="3" placeholder="Cole o texto aqui..."></textarea>
           <input type="button" value="" id="classificar">
           <h2>Formulário</h2>
           {% csrf_token %}
-          <label id="label">O que é / Descrição:</label><br>
+          <label id="label">Breve resumo do que é e o seu principal benefício:</label><br>
           <textarea name="descricao" id="descricao" cols="70" rows="3"
             placeholder="Adicionar descrição..."></textarea><br>
-          <label id="label">Mecanismos de ação / Como funciona:</label><br>
-          <textarea name="mecanismo" id="mecanismo" cols="70" rows="3"
-            placeholder="Adicionar mecanismo de ação..."></textarea><br>
-          <label id="label">Potencial Benefícios / Para que serve:</label><br>
+          <label id="label">O que é? (maiores detalhes do que o resumo do 1.):</label><br>
+          <textarea name="oque_e" id="oque_e" cols="70" rows="3"
+            placeholder="Adicionar maiores detalhes..."></textarea><br>
+          <label id="label">3. Quais os seus Principais Benefícios:</label><br>
           <textarea name="beneficio" id="beneficio" cols="70" rows="3"
-            placeholder="Adicionar potencial..."></textarea><br>
-          <label id="label">Efeitos colaterais/Cuidados:</label><br>
-          <textarea name="efeitos_colaterais" id="efeitos_colaterais" cols="70" rows="3"
-            placeholder="Adicionar efeitos colaterais..."></textarea><br>
-          <label id="label">Interações gênicas:</label><br>
-          <textarea name="interacoes" id="interacoes" cols="70" rows="3"
-            placeholder="Adicionar interações gênicas..."></textarea><br>
-          <label id="label">Experiência dos Usuários:</label><br>
-          <textarea name="experiencia" id="experiencia" cols="70" rows="3"
-            placeholder="Adicionar experiencia dos Usuários..."></textarea><br>
-          <label id="label">Estudos Científicos / Referências Científica:</label><br>
-          <textarea name="estudos_cientificos" id="estudos_cientificos" cols="70" rows="3"
-            placeholder="Adicionar estudos científicos..."></textarea><br>
+            placeholder="Adicionar principais benefícios..."></textarea><br>
+          <label id="label">Ela é potencialmente boa para o que: </label><br>
+          <textarea name="potencial_beneficios" id="potencial_beneficios" cols="70" rows="3"
+            placeholder="Adicionar uma descrição..."></textarea><br>
+          <label id="label">Quais doenças e Condições se relacionam com ela: </label><br>
+          <textarea name="doencas_relacionadas" id="doencas_relacionadas" cols="70" rows="3"
+            placeholder="Adicionar doenças e condições relacionadas..."></textarea><br>
+
+          <label id="label">Quais as desvantagens/cuidados: </label><br>
+          <textarea name="desvantagens" id="desvantagens" cols="70" rows="3"
+            placeholder="Adicionar desvantagens..."></textarea><br>
+
+          <label id="label">Como funciona:</label><br>
+          <textarea name="como_funciona" id="como_funciona" cols="70" rows="3"
+            placeholder="Adicionar uma descrição..."></textarea><br>
+          <label id="label">Dosagem, informações:</label><br>
+          <textarea name="dosagem" id="dosagem" cols="70" rows="3"
+            placeholder="Adicionar informações de Dosagem..."></textarea><br>
           <label id="label">FAQ / Perguntas Frequentes:</label><br>
           <textarea name="faq" id="faq" cols="70" rows="3"
             placeholder="Adicionar faq, perguntas frequentes..."></textarea><br>
+          <label id="label">Estudos Científicos (scientific references):</label><br>
+          <textarea name="estudos_cientificos" id="faq" cols="70" rows="3"
+            placeholder="Adicionar estudos científicos..."></textarea><br>
           <input type="submit" value="Enviar" id="button">
 
         </form>
