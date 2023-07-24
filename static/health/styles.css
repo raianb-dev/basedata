@@ -1,7 +1,4 @@
-body, html{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f9ff;
-}
+
 
 #button, #back{
     height: 40px;
@@ -27,4 +24,358 @@ body, html{
     background-color: rgb(22, 123, 255);
     border: 0;
     border-radius: 5px;
+}
+
+/*
+Responsive HTML Table With Pure CSS - Web Design/UI Design
+
+Code written by:
+👨🏻‍⚕️ Coding Design (Jeet Saru)
+
+> You can do whatever you want with the code. However if you love my content, you can **SUBSCRIBED** my YouTube Channel.
+
+🌎link: www.youtube.com/codingdesign 
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body, html {
+    min-height: 100vh;
+    background: url(images/html_table.jpg) center / cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Mude para 'flex-start' para alinhar o conteúdo ao topo */
+    width: 100%;
+}
+
+
+.table__header {
+    width: 100%;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table__header .input-group {
+    width: 35%;
+    height: 100%;
+    background-color: #fff5;
+    padding: 0 .8rem;
+    border-radius: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: .2s;
+}
+
+.table__header .input-group:hover {
+    width: 45%;
+    background-color: #fff8;
+    box-shadow: 0 .1rem .4rem #0002;
+}
+
+.table__header .input-group img {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+
+.table__body {
+    scale: 0.9;
+    width: 100%; /* Defina a largura da tabela para 100% */
+    max-height: calc(89% - 1.6rem);
+    background-color: #fffb;
+    /* Remova a propriedade "top: 60px;" para centralizar a tabela verticalmente */
+    position: relative;
+    margin: -5px auto;
+    border-radius: .6rem;
+    overflow: auto;
+    overflow: overlay;
+}
+
+
+.table__body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.9rem;
+}
+
+.table__body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table__body:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+table {
+    width: 100%;
+}
+
+td img {
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+
+    vertical-align: middle;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #d5d1defe;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #0000000b;
+}
+
+tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+tbody tr:hover {
+    background-color: #fff6 !important;
+}
+
+tbody tr td,
+tbody tr td p,
+tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+tbody tr.hide td,
+tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
+}
+
+tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out .5s;
+}
+
+.status {
+    padding: .4rem 0;
+    border-radius: 2rem;
+    text-align: center;
+
+}
+
+.status.delivered {
+    background-color: #837607;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+a {
+    text-decoration: none;
+  }
+
+
+@media (max-width: 1000px) {
+    td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+}
+
+thead th span.icon-arrow {
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: 1.4px solid transparent;
+    
+    text-align: center;
+    font-size: 1rem;
+    
+    margin-left: .5rem;
+    transition: .2s ease-in-out;
+}
+
+thead th:hover span.icon-arrow{
+    border: 1.4px solid #6c00bd;
+}
+
+thead th:hover {
+    color: #6c00bd;
+}
+
+thead th.active span.icon-arrow{
+    background-color: #6c00bd;
+    color: #fff;
+}
+
+thead th.asc span.icon-arrow{
+    transform: rotate(180deg);
+}
+
+thead th.active,tbody td.active {
+    color: #6c00bd;
+}
+h1{
+    margin: 10px auto;
+    color: #f0f9ff;
+
+}
+
+
+#back{
+    color: #f0f9ff;
+}
+
+  .nav {
+    background-color: #2a4a77;
+    display: flex;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+  }
+  
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #f0f9ff;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 60%;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.modal-btn {
+    cursor: pointer;
+}
+
+.modal-close-btn {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Estilizando a barra de rolagem vertical */
+.modal-content::-webkit-scrollbar {
+    width: 8px; /* Largura da barra de rolagem */
+  }
+  
+  .modal-content::-webkit-scrollbar-thumb {
+    background-color: #fff; /* Cor da barra de rolagem */
+    border-radius: 10px; /* Raio do canto da barra de rolagem */
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); /* Sombra da barra de rolagem */
+  }
+  
+  .modal-content::-webkit-scrollbar-thumb:hover {
+    background-color: #c6d2e2; /* Cor da barra de rolagem ao passar o mouse */
+  }
+/* Adicione este bloco de código CSS abaixo do seu CSS existente */
+
+.container {
+    width: 100%;
+    max-width: 3000px; /* Defina o valor máximo da largura da tabela e da paginação */
+    margin: 0 auto; /* Isso centraliza a tabela e a paginação horizontalmente */
+    padding: 20px; /* Ajuste o espaçamento conforme desejado */
+    width: 120%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  
+  /* Estilize a paginação conforme necessário */
+  .pagination {
+    display: flex;
+    justify-content: center; /* Centraliza a paginação horizontalmente */
+    align-items: center; /* Centraliza a paginação verticalmente (opcional) */
+    margin: 20px 0; /* Ajuste o espaçamento conforme desejado */
+  }
+  
+  /* Estilizando os links da paginação */
+  .pagination a {
+    margin: 0 5px; /* Ajuste o espaçamento entre os links */
+    color: #000; /* Defina a cor do texto dos links */
+    text-decoration: none; /* Remova a sublinhado dos links */
+    padding: 5px 10px; /* Ajuste o espaçamento interno dos links */
+    border-radius: 3px; /* Ajuste o raio dos cantos dos links */
+    background-color: #f0f0f0; /* Defina a cor de fundo dos links */
+  }
+  
+  .pagination a:hover {
+    background-color: #d0d0d0; /* Defina a cor de fundo dos links quando passar o mouse */
+  }
+  
+  /* Estilize o link da página atual (opcional) */
+  .pagination .current {
+    font-weight: bold;
+    color: #6c00bd;
+  }
+  
+  /* Estilos para o botão flutuante */
+.floating-button {
+    font-size: 30px;
+    position: fixed;
+    bottom: 40px;
+    right: 20px;
+    background-color: #459;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 9999; /* Certifique-se de que o z-index seja maior do que outros elementos da página */
+}
+
+/* Estilize o botão quando o mouse passar por cima */
+.floating-button:hover {
+    background-color: rgb(35, 51, 114);
 }

@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'health',
     'disease',
-    'tinymce',
     'home'
 ]
 
@@ -140,3 +139,5 @@ TINYMCE_DEFAULT_CONFIG = {
     # Mais opções podem ser adicionadas conforme suas necessidades
 }
 
+
+AUTORELOAD = False
