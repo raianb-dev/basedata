@@ -51,7 +51,7 @@
                     {% for item in saude_items %}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.name  }}</td>
+                        <td>{{ item.name |truncate_chars:50 }}</td>
                         <td>{{ item.description|truncate_chars:50 }}</td>
                         <td>{{ item.action_mechanisms|truncate_chars:50 }}</td>
                         <td>{{ item.potential_benefits|truncate_chars:50 }}</td>
