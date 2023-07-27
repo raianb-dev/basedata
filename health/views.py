@@ -132,7 +132,7 @@ def listar_saude(request):
         saude_items = Saude.objects.all()
 
     # Paginar os resultados
-    itens_por_pagina = 7
+    itens_por_pagina = 3
     paginator = Paginator(saude_items, itens_por_pagina)
 
     page = request.GET.get('page')
