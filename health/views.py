@@ -48,7 +48,7 @@ def listar_saude(request):
     saude_items = Saude.objects.all()
 
     # Defina o número de itens por página
-    itens_por_pagina = 7
+    itens_por_pagina = 3
     paginator = Paginator(saude_items, itens_por_pagina)
 
     # Obtenha o número da página a partir dos parâmetros GET da URL
