@@ -6,7 +6,7 @@
 <head>
     <title>Listagem de Doenças</title>
 
-    <link rel="stylesheet" href="{% static 'health/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'disease/styles.css' %}">
 
 </head>
 
@@ -14,10 +14,26 @@
 <body>
     <div class="container">
         <div class="nav">
+        
 
+            <div class="search-container">
+                <form id="search-form" action="{% url 'doenca' %}">
+                    {% if search_query %}
+                    <input type="text" id="search-input" name="search" value="{{ search_query }}">
+                    {% else %}
+                    <input type="text" id="search-input" name="search" placeholder="Pesquisar por nome...">
+                    {% endif %}
+                    <button type="submit"><i class="bi bi-search"></i></button>
+                    {% if search_query %}
+                    <a href="{% url 'doenca' %}" class="btn btn-secondary" style="margin-right: 10px;">Limpar filtro</a>
+                    {% endif %}
+                </form>
+            </div>
             <br>
-            <h1>Doenças Auto-Imune</h1>
+            <h1 style="transform: translateX(-45px);">Doenças</h1>
         </div>
+        <!--<a href="{% url 'home' %}" rel="noopener noreferrer" style="position: absolute; top: 60px; left: 5px;">Início</a>-->
+
         <a href="{% url 'add-doenca' %}" class="floating-button">+</a>
         <section class="table__body" style="scale: 0.86;">
             <table>

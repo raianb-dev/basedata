@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  
 
   <script src="{% static 'home/main.js' %}"></script>
 </head>
@@ -13,11 +12,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Pagina inicial</title>
-  <link rel="stylesheet" href="{% static 'health/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'home/styles.css' %}">
 </head>
 
 <body>
-
+  <div class="container">
+    <div class="nav">
+      <h1>Saude Health | Pagina inicial</h1><br>
+    </div>
   <section class="table__body">
     <table>
       <thead>
@@ -39,7 +41,7 @@
           <td> --- </td>
           <td><strong> --- </strong></td>
           <td>
-            <a href="{% url 'health' %}"><p class="status delivered">ver</p></a>
+            <a href="{% url 'health' %}"><p class="">ver</p></a>
           </td>
         </tr>
         <tr>
@@ -49,7 +51,7 @@
           <td> --- </td>
           <td><strong> --- </strong></td>
           <td>
-            <a href="{% url 'doenca' %}"><p class="status delivered">ver</p></a>
+            <a href="{% url 'doenca' %}"><p class="">ver</p></a>
           </td>
 
         </tr>
@@ -60,7 +62,7 @@
           <td> --- </td>
           <td><strong> --- </strong></td>
           <td>
-            <a href="{% url 'herbsSubstances' %}"><p class="status delivered">ver</p></a>
+            <a href="{% url 'herbsSubstances' %}"><p class="">ver</p></a>
           </td>
 
         </tr>

@@ -370,7 +370,7 @@ h1{
     background-color: #459;
     color: #fff;
     padding: 10px 20px;
-    border-radius: 30px;
+    border-radius: 60px;
     text-decoration: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 9999; /* Certifique-se de que o z-index seja maior do que outros elementos da página */
@@ -380,4 +380,60 @@ h1{
 .floating-button:hover {
     background-color: rgb(35, 51, 114);
 }
+
+/* Estilo para o campo de pesquisa */
+.search-container {
+    position: relative;
+    min-width: 75%; /* Alterado de 300px para 80% */
+    margin: 10px auto;
+}
+
+#search-form {
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Adicionado para garantir que o formulário preencha a largura do container */
+}
+
+#search-input {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%; /* Adicionado para garantir que o input preencha a largura do formulário */
+}
+
+#search-input::placeholder {
+    color: rgb(92, 89, 89);
+}
+
+#search-input:focus::placeholder {
+    color: transparent;
+}
+
+#search-form button {
+    background-color: #104c8b;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-radius: 30px;
+    margin-right: 10px;
+}
+
+#search-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Ícone de pesquisa usando Bootstrap Icons (bi) */
+.bi-search {
+    font-size: 20px;
+}
+
 

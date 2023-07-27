@@ -4,6 +4,7 @@ from django.db import models
 class Saude(models.Model):
 
     id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200, default="null")
     description = models.CharField(max_length=10000)
     action_mechanisms = models.CharField(max_length=10000)
     potential_benefits = models.CharField(max_length=10000)

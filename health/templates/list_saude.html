@@ -5,7 +5,6 @@
 
 <head>
     <title>Listagem de Saúde</title>
-
     <link rel="stylesheet" href="{% static 'health/styles.css' %}">
 
 </head>
@@ -14,7 +13,19 @@
 <body>
     <div class="container">
         <div class="nav">
-
+            <div class="search-container">
+                <form id="search-form" action="{% url 'health' %}">
+                    {% if search_query %}
+                    <input type="text" id="search-input" name="search" value="{{ search_query }}">
+                    {% else %}
+                    <input type="text" id="search-input" name="search" placeholder="Pesquisar por nome...">
+                    {% endif %}
+                    <button type="submit"><i class="bi bi-search"></i></button>
+                    {% if search_query %}
+                    <a href="{% url 'health' %}" class="btn btn-secondary" style="margin-right: 10px;">Limpar filtro</a>
+                    {% endif %}
+                </form>
+            </div>
             <br>
             <h1>Saude Health</h1>
         </div>
@@ -24,6 +35,7 @@
                 <thead>
                     <tr>
                         <th>Id <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Nome <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Descrição <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Mecanismos de Ação <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Benefícios Potenciais <span class="icon-arrow">&UpArrow;</span></th>
@@ -39,6 +51,7 @@
                     {% for item in saude_items %}
                     <tr>
                         <td>{{ item.id }}</td>
+                        <td>{{ item.name  }}</td>
                         <td>{{ item.description|truncate_chars:50 }}</td>
                         <td>{{ item.action_mechanisms|truncate_chars:50 }}</td>
                         <td>{{ item.potential_benefits|truncate_chars:50 }}</td>
@@ -47,13 +60,14 @@
                         <td>{{ item.scientific_studies|truncate_chars:50 }}</td>
                         <td>{{ item.user_experience|truncate_chars:50 }}</td>
                         <td>{{ item.faq|truncate_chars:50 }}</td>
+                        
                         <td>
                             <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
                                     class="bi bi-eye"></i> Detalhes</button>
-                            <a href="{% url 'editar-saude' item.id %}" class="btn btn-primary"><i
-                                    class="bi bi-pencil"></i> Editar</a>
-                            <a href="{% url 'excluir-saude' item.id %}" class="btn btn-danger btn-excluir"
-                                data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</a>
+                            <button><a href="{% url 'editar-saude' item.id %}" class="btn btn-primary"><i
+                                    class="bi bi-pencil"></i> Editar</a></button>
+                            <button><a href="{% url 'excluir-saude' item.id %}" class="btn btn-danger btn-excluir"
+                                data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</a></button>
 
                         </td>
                     </tr>
@@ -86,7 +100,8 @@
     <div class="modal" id="modal-{{ item.id }}">
         <div class="modal-content">
             <!-- Conteúdo detalhado do item -->
-            <h2>{{ item.description }}</h2><br>
+            <h2>{{ item.name }}</h2><br>
+            <p><b>Descrição / O que é?</b><br> {{ item.description }}</p><br>
             <p><b>Mecanismos de Ação:</b><br> {{ item.action_mechanisms }}</p><br>
             <p><b>Benefícios Potenciais:</b><br> {{ item.potential_benefits }}</p><br>
             <p><b>Efeitos Colaterais/Cuidados:</p></b> {{ item.effects_precautions }}</p><br>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator, EmptyPage
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from .models import Doenca
 
 def todos_os_dados(request):
@@ -12,6 +13,7 @@ def detalhes_item(request, item_id):
 
 def salvar_disease(request):
     if request.method == 'POST':
+        # Get data from the form
         nome_comum = request.POST.get('nome_comum')
         termo_medico = request.POST.get('termo_medico')
         descricao = request.POST.get('descricao')
@@ -25,9 +27,10 @@ def salvar_disease(request):
         dieta = request.POST.get('dieta')
         prognostico = request.POST.get('prognostico')
         suplemento = request.POST.get('suplemento')
-        faq = request.POST.get('faq')
+        faq_doenca = request.POST.get('faq')
         referencia = request.POST.get('referencia')
 
+        # Create a new Doenca object with the received data
         new_disease = Doenca.objects.create(
             nome_comum=nome_comum,
             termo_medico=termo_medico,
@@ -42,7 +45,7 @@ def salvar_disease(request):
             dieta=dieta,
             prognostico=prognostico,
             suplemento=suplemento,
-            faq_doença=faq,  # Corrigir o nome do campo aqui para "faq"
+            faq_doenca=faq_doenca,
             referencia=referencia
         )
   
@@ -51,29 +54,55 @@ def salvar_disease(request):
     return render(request, 'add_disease.html')
 
 def listar_disease(request):
-    disease_items = Doenca.objects.all()
+    search_query = request.GET.get('search')
+    
+    # Check if the value of search_query is None and replace it with an empty string
+    search_query = search_query if search_query else ""
 
-    # Defina o número de itens por página
+    if search_query:
+        # Use the Q object to combine filters and get a more refined search
+        disease_items = Doenca.objects.filter(
+            Q(nome_comum__icontains=search_query) |
+            Q(termo_medico__icontains=search_query) |
+            Q(descricao__icontains=search_query) |
+            Q(causa__icontains=search_query) |
+            Q(prevencao__icontains=search_query) |
+            Q(sinal_sintoma__icontains=search_query) |
+            Q(fator_risco__icontains=search_query) |
+            Q(diagnostico_tratamento__icontains=search_query) |
+            Q(medidas_gerais__icontains=search_query) |
+            Q(medicamentos_gerais__icontains=search_query) |
+            Q(dieta__icontains=search_query) |
+            Q(prognostico__icontains=search_query) |
+            Q(suplemento__icontains=search_query) |
+            Q(faq_doenca__icontains=search_query) |
+            Q(referencia__icontains=search_query)
+        )
+    else:
+        disease_items = Doenca.objects.all()
+
+    # Paginate the results
     itens_por_pagina = 7
     paginator = Paginator(disease_items, itens_por_pagina)
 
-    # Obtenha o número da página a partir dos parâmetros GET da URL
     page = request.GET.get('page')
-
     try:
-        # Obtenha os itens da página solicitada
         disease_items_paginados = paginator.get_page(page)
     except EmptyPage:
-        # Caso a página solicitada esteja fora do alcance, retorne a última página
+        # If the requested page is out of range, return the last page
         disease_items_paginados = paginator.get_page(paginator.num_pages)
+    except PageNotAnInteger:
+        # If the page number is not an integer, show the first page
+        disease_items_paginados = paginator.get_page(1)
 
-    return render(request, 'list_disease.html', {'disease_items': disease_items_paginados})
+    return render(request, 'list_disease.html', {'disease_items': disease_items_paginados, 'search_query': search_query})
+
 
 def editar_disease(request, item_id):
     disease_item = get_object_or_404(Doenca, id=item_id)
 
     if request.method == 'POST':
-        # Obtenha os dados atualizados do formulário
+        # Get updated data from the form
         nome_comum = request.POST.get('nome_comum')
         termo_medico = request.POST.get('termo_medico')
         descricao = request.POST.get('descricao')
@@ -87,10 +116,10 @@ def editar_disease(request, item_id):
         dieta = request.POST.get('dieta')
         prognostico = request.POST.get('prognostico')
         suplemento = request.POST.get('suplemento')
-        faq_doença = request.POST.get('faq')
-        referencia = request.POST.get('estudos_cientificos')
+        faq_doenca = request.POST.get('faq')
+        referencia = request.POST.get('referencia')
 
-        # Atualize os campos do objeto disease_item
+        # Update the fields of the disease_item object
         disease_item.nome_comum = nome_comum
         disease_item.termo_medico = termo_medico
         disease_item.descricao = descricao
@@ -104,10 +133,10 @@ def editar_disease(request, item_id):
         disease_item.dieta = dieta
         disease_item.prognostico = prognostico
         disease_item.suplemento = suplemento
-        disease_item.faq_doença = faq_doença
+        disease_item.faq_doenca = faq_doenca
         disease_item.referencia = referencia
 
-        # Salve as alterações no banco de dados
+        # Save the changes to the database
         disease_item.save()
 
         return redirect('doenca')
@@ -117,10 +146,10 @@ def editar_disease(request, item_id):
 def excluir_disease(request, item_id):
     disease_item = get_object_or_404(Doenca, id=item_id)
     if request.method == 'GET':
-        # Verifique se o método da requisição é POST
-        # Isso garante que a exclusão ocorra apenas quando o formulário é enviado
+        # Check if the request method is POST
+        # This ensures that the deletion occurs only when the form is submitted
         disease_item.delete()
         return redirect('doenca')
     
-    # Se a requisição não for POST, renderize o template normalmente
+    # If the request is not POST, render the template normally
     return render(request, 'list_disease.html', {'disease_items': Doenca.objects.all()})

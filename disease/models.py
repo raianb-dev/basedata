@@ -17,7 +17,7 @@ class Doenca (models.Model):
     dieta = models.CharField(max_length=500)
     prognostico = models.CharField(max_length=500)
     suplemento = models.CharField(max_length=500)
-    faq_doença = models.CharField(max_length=500)
+    faq_doenca = models.CharField(max_length=500)
     referencia = models.CharField(max_length=500)
 
     class Meta:

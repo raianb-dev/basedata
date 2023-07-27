@@ -1,32 +1,84 @@
 {% load static %}
+
 <head>
   <link rel="stylesheet" href="{% static 'health/styles.css' %}">
   <link rel="stylesheet" href="{% static 'health/media.css' %}">
   <script src="{% static 'health/main.js' %}"></script>
 </head>
-<center>
-<h1>Saúde health</h1>
-<form method="post">
-  <label for="">Importar informação / ChatGPT:</label><br>
-  <textarea name="prompt" id="prompt" cols="80" rows="3" placeholder="Cole o texto aqui..."></textarea>
-  <input type="button" value="" id="classificar">
-  <h2>Formulário</h2>
-  <label for="">O que é / Descrição:</label><br>
-  <textarea name="decricao" id="descricao" cols="50" rows="3" placeholder="Adicionar descrição..."></textarea><br>
-  <label for="">Mecanismos de ação / Como funciona:</label><br>
-  <textarea name="mecanismo" id="mecanismo" cols="50" rows="3" placeholder="Adicionar mecanismo de ação..."></textarea><br>
-  <label for="">Potencial Benefícios / Para que serve:</label><br>
-  <textarea name="beneficio" id="beneficio" cols="50" rows="3" placeholder="Adicionar potencial..."></textarea><br>
-  <label for="">Efeitos colaterais/Cuidados:</label><br>
-  <textarea name="efeitos_colaterais" id="efeitos_colaterais" cols="50" rows="3" placeholder="Adicionar efeitos colaterais..."></textarea><br>
-  <label for="">Interações gênicas:</label><br>
-  <textarea name="interacoes" id="interacoes" cols="50" rows="3" placeholder="Adicionar interações gênicas..."></textarea><br>
-  <label for="">Experiência dos Usuários:</label><br>
-  <textarea name="experiencia" id="experiencia" cols="50" rows="3" placeholder="Adicionar experiencia dos Usuários..."></textarea><br>
-  <label for="">Estudos Científicos / Referências Científica:</label><br>
-  <textarea name="estudos_cientificos" id="estudos_cientificos" cols="50" rows="3" placeholder="Adicionar estudos científicos..."></textarea><br>
-  <label for="">FAQ / Perguntas Frequentes:</label><br>
-  <textarea name="faq" id="faq" cols="50" rows="3" placeholder="Adicionar faq, perguntas frequentes..."></textarea><br>
-  <input type="button" value="Enviar" id="button">
-</form>
-</center>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <h1>Doenças (Editar)</h1>
+    </div>
+    <center>
+
+      <form method="post" action="{% url 'editar-doenca' disease_item.id %}">
+        <br>
+        <h2>Formulário</h2>
+        {% csrf_token %}
+
+        <label id="label">Nome comum:</label><br>
+        <textarea name="nome_comum" id="nome_comum" cols="90" rows="3"
+          placeholder="Adicionar nome comum...">{{ disease_item.nome_comum }}</textarea><br>
+
+        <label id="label">Termo médico:</label><br>
+        <textarea name="termo_medico" id="termo_medico" cols="90" rows="3"
+          placeholder="Adicionar termo médico...">{{ disease_item.termo_medico }}</textarea><br>
+
+        <label id="label">Descrição:</label><br>
+        <textarea name="descricao" id="descricao" cols="90" rows="3"
+          placeholder="Adicionar descrição...">{{ disease_item.descricao }}</textarea><br>
+
+        <label id="label">Causas:</label><br>
+        <textarea name="causa" id="causa" cols="90" rows="3"
+          placeholder="Adicionar causas...">{{ disease_item.causa }}</textarea><br>
+
+        <label id="label">Prevenção:</label><br>
+        <textarea name="prevencao" id="prevencao" cols="90" rows="3"
+          placeholder="Adicionar prevenção...">{{ disease_item.prevencao}}</textarea><br>
+
+        <label id="label">Sinais e Sintomas:</label><br>
+        <textarea name="sinal_sintoma" id="sinal_sintoma" cols="90" rows="3"
+          placeholder="Adicionar sinais e sintomas...">{{ disease_item.sinal_sintoma }}</textarea><br>
+
+        <label id="label">Fatores de Risco:</label><br>
+        <textarea name="fator_risco" id="fator_risco" cols="90" rows="3"
+          placeholder="Adicionar fatores de risco...">{{ disease_item.fator_risco }}</textarea><br>
+
+        <label id="label">Diagnóstico e Tratamento:</label><br>
+        <textarea name="diagnostico_tratamento" id="diagnostico_tratamento" cols="90" rows="3"
+          placeholder="Adicionar diagnóstico e tratamento...">{{ disease_item.diagnostico_tratamento }}</textarea><br>
+
+        <label id="label">Medidas Gerais:</label><br>
+        <textarea name="medidas_gerais" id="medidas_gerais" cols="90" rows="3"
+          placeholder="Adicionar medidas gerais...">{{ disease_item.medidas_gerais }}</textarea><br>
+
+        <label id="label">Medicamentos associados:</label><br>
+        <textarea name="medicamentos_gerais" id="medicamentos_gerais" cols="90" rows="3"
+          placeholder="Adicionar medicamentos associados...">{{ disease_item.medicamentos_gerais }}</textarea><br>
+
+        <label id="label">Dieta:</label><br>
+        <textarea name="dieta" id="dieta" cols="90" rows="3"
+          placeholder="Adicionar dieta...">{{ disease_item.dieta  }}</textarea><br>
+
+        <label id="label">Prognóstico:</label><br>
+        <textarea name="prognostico" id="prognostico" cols="90" rows="3"
+          placeholder="Adicionar prognóstico...">{{ disease_item.prognostico }}></textarea><br>
+
+        <label id="label">Suplementos e Ervas Conectadas:</label><br>
+        <textarea name="suplemento" id="suplemento" cols="90" rows="3"
+          placeholder="Adicionar suplementos e ervas conectadas...">{{ disease_item.suplemento }}</textarea><br>
+
+        <label id="label">FAQ (Perguntas Frequentes):</label><br>
+        <textarea name="faq" id="faq" cols="90" rows="3"
+          placeholder="Adicionar faq, perguntas frequentes...">{{ disease_item.faq_doenca }}</textarea><br>
+
+        <label id="label">Referências Científicas:</label><br>
+        <textarea name="referencia" id="referencia" cols="90" rows="3"
+          placeholder="Adicionar referências científicas...">{{ disease_item.referencia }}</textarea><br>
+
+        <input type="submit" value="Enviar" id="button">
+      </form>
+    </center>
+</body>

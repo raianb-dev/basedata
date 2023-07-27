@@ -52,6 +52,7 @@ body, html {
     justify-content: center;
     align-items: flex-start; /* Mude para 'flex-start' para alinhar o conteúdo ao topo */
     width: 100%;
+    position: fixed;
 }
 
 
@@ -93,7 +94,7 @@ body, html {
 
 
 .table__body {
-    scale: 0.8;
+    scale: 0.9;
     width: 100%; /* Defina a largura da tabela para 100% */
     max-height: calc(89% - 1.6rem);
     background-color: #fffb;
@@ -122,8 +123,7 @@ body, html {
 }
 
 table {
-    width: 90%;
-    position: relative;
+    width: 100%;
 }
 
 td img {
@@ -387,6 +387,7 @@ h1{
     position: relative;
     min-width: 75%; /* Alterado de 300px para 80% */
     margin: 10px auto;
+    transform: translateX(30px)
 }
 
 #search-form {
@@ -436,5 +437,7 @@ h1{
 .bi-search {
     font-size: 20px;
 }
+
+
 
 

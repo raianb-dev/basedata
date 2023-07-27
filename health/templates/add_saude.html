@@ -23,6 +23,8 @@
           <input type="button" value="" id="classificar">
           <h2>Formulário</h2>
           {% csrf_token %}
+          <label id="label">Nome:</label><br>
+          <textarea name="name" id="name" cols="70" rows="3" placeholder="nome..."></textarea><br>
           <label id="label">O que é / Descrição:</label><br>
           <textarea name="descricao" id="descricao" cols="70" rows="3"
             placeholder="Adicionar descrição..."></textarea><br>
@@ -54,53 +56,56 @@
 
     </section>
   </div>
-  <!-- Resto do código HTML ... -->
 
-  <!-- Adicione o seguinte script no final da página, antes da tag </body> -->
+  <!-- Adicione o script abaixo no mesmo local onde estava a função de autopreenchimento anterior -->
   <script>
     // Função para preencher os campos do formulário com base no texto fornecido
     function autoPreenchimento() {
       const texto = document.getElementById('prompt').value;
-      const regexTópicos = /\d+\. (.+?)(?=(?:\d+\. )|$)/gs;
+      const regexTópicos = /%(\d+)%([^%]+)%(\d+)%/gs;
 
       let match;
       let tópicos = [];
 
       while ((match = regexTópicos.exec(texto)) !== null) {
-        const conteudoTópico = match[1].trim();
+        const conteudoTópico = match[2].trim();
         tópicos.push(conteudoTópico);
       }
 
       if (tópicos.length >= 1) {
-        document.getElementById('descricao').value = tópicos[0].replace(/^\d+\.\s*/, '');
+        document.getElementById('name').value = tópicos[0];
       }
 
       if (tópicos.length >= 2) {
-        document.getElementById('mecanismo').value = tópicos[1].replace(/^\d+\.\s*/, '');
+        document.getElementById('descricao').value = tópicos[1];
       }
 
       if (tópicos.length >= 3) {
-        document.getElementById('beneficio').value = tópicos[2].replace(/^\d+\.\s*/, '');
+        document.getElementById('mecanismo').value = tópicos[2];
       }
 
       if (tópicos.length >= 4) {
-        document.getElementById('efeitos_colaterais').value = tópicos[3].replace(/^\d+\.\s*/, '');
+        document.getElementById('beneficio').value = tópicos[3];
       }
 
       if (tópicos.length >= 5) {
-        document.getElementById('interacoes').value = tópicos[4].replace(/^\d+\.\s*/, '');
+        document.getElementById('efeitos_colaterais').value = tópicos[4];
       }
 
       if (tópicos.length >= 6) {
-        document.getElementById('experiencia').value = tópicos[5].replace(/^\d+\.\s*/, '');
+        document.getElementById('interacoes').value = tópicos[5];
       }
 
       if (tópicos.length >= 7) {
-        document.getElementById('estudos_cientificos').value = tópicos[6].replace(/^\d+\.\s*/, '');
+        document.getElementById('experiencia').value = tópicos[6];
       }
 
       if (tópicos.length >= 8) {
-        document.getElementById('faq').value = tópicos[7].replace(/^\d+\.\s*/, '');
+        document.getElementById('estudos_cientificos').value = tópicos[7];
+      }
+
+      if (tópicos.length >= 9) {
+        document.getElementById('faq').value = tópicos[8];
       }
     }
 
@@ -108,7 +113,6 @@
     document.getElementById('prompt').addEventListener('change', autoPreenchimento);
   </script>
 
-  <!-- Resto do código HTML ... -->
 
 
 </html>

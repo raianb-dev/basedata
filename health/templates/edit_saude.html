@@ -3,30 +3,46 @@
   <link rel="stylesheet" href="{% static 'health/styles.css' %}">
   <link rel="stylesheet" href="{% static 'health/media.css' %}">
   <script src="{% static 'health/main.js' %}"></script>
+  <title>Editar | Saude health</title>
 </head>
-<center>
-<h1>Saúde health</h1>
-<form method="post">
-  <label for="">Importar informação / ChatGPT:</label><br>
-  <textarea name="prompt" id="prompt" cols="80" rows="3" placeholder="Cole o texto aqui..."></textarea>
-  <input type="button" value="" id="classificar">
-  <h2>Formulário</h2>
-  <label for="">O que é / Descrição:</label><br>
-  <textarea name="decricao" id="descricao" cols="50" rows="3" placeholder="Adicionar descrição..."></textarea><br>
-  <label for="">Mecanismos de ação / Como funciona:</label><br>
-  <textarea name="mecanismo" id="mecanismo" cols="50" rows="3" placeholder="Adicionar mecanismo de ação..."></textarea><br>
-  <label for="">Potencial Benefícios / Para que serve:</label><br>
-  <textarea name="beneficio" id="beneficio" cols="50" rows="3" placeholder="Adicionar potencial..."></textarea><br>
-  <label for="">Efeitos colaterais/Cuidados:</label><br>
-  <textarea name="efeitos_colaterais" id="efeitos_colaterais" cols="50" rows="3" placeholder="Adicionar efeitos colaterais..."></textarea><br>
-  <label for="">Interações gênicas:</label><br>
-  <textarea name="interacoes" id="interacoes" cols="50" rows="3" placeholder="Adicionar interações gênicas..."></textarea><br>
-  <label for="">Experiência dos Usuários:</label><br>
-  <textarea name="experiencia" id="experiencia" cols="50" rows="3" placeholder="Adicionar experiencia dos Usuários..."></textarea><br>
-  <label for="">Estudos Científicos / Referências Científica:</label><br>
-  <textarea name="estudos_cientificos" id="estudos_cientificos" cols="50" rows="3" placeholder="Adicionar estudos científicos..."></textarea><br>
-  <label for="">FAQ / Perguntas Frequentes:</label><br>
-  <textarea name="faq" id="faq" cols="50" rows="3" placeholder="Adicionar faq, perguntas frequentes..."></textarea><br>
-  <input type="button" value="Enviar" id="button">
-</form>
-</center>
+<body>
+  <div class="container">
+    <div class="nav">
+      <h1>Saude Health (Editar)</h1><br>
+    </div>
+  <center>
+    <form method="post" action="{% url 'editar-saude' saude_item.id %}">
+      {% csrf_token %}
+      <!-- ... (your other fields) ... -->
+
+      <!-- Populate the form fields with the existing data -->
+      <label id="label">Nome:</label><br>
+      <textarea name="name" id="name" cols="70" rows="3" placeholder="nome...">{{ saude_item.name }}</textarea><br>
+      <label id="label">O que é / Descrição:</label><br>
+      <textarea name="description" id="descricao" cols="70" rows="3"
+        placeholder="Adicionar descrição...">{{ saude_item.description }}</textarea><br>
+      <label id="label">Mecanismos de ação / Como funciona:</label><br>
+      <textarea name="action_mechanisms" id="mecanismo" cols="70" rows="3"
+        placeholder="Adicionar mecanismo de ação...">{{ saude_item.action_mechanisms }}</textarea><br>
+      <label id="label">Potencial Benefícios / Para que serve:</label><br>
+      <textarea name="potential_benefits" id="beneficio" cols="70" rows="3"
+        placeholder="Adicionar potencial...">{{ saude_item.potential_benefits }}</textarea><br>
+      <label id="label">Efeitos colaterais/Cuidados:</label><br>
+      <textarea name="effects_precautions" id="efeitos_colaterais" cols="70" rows="3"
+        placeholder="Adicionar efeitos colaterais...">{{ saude_item.effects_precautions }}</textarea><br>
+      <label id="label">Interações gênicas:</label><br>
+      <textarea name="gene_interactions" id="interacoes" cols="70" rows="3"
+        placeholder="Adicionar interações gênicas...">{{ saude_item.gene_interactions }}</textarea><br>
+      <label id="label">Experiência dos Usuários:</label><br>
+      <textarea name="user_experience" id="experiencia" cols="70" rows="3"
+        placeholder="Adicionar experiencia dos Usuários...">{{ saude_item.user_experience }}</textarea><br>
+      <label id="label">Estudos Científicos / Referências Científica:</label><br>
+      <textarea name="scientific_studies" id="estudos_cientificos" cols="70" rows="3"
+        placeholder="Adicionar estudos científicos...">{{ saude_item.scientific_studies }}</textarea><br>
+      <label id="label">FAQ / Perguntas Frequentes:</label><br>
+      <textarea name="faq" id="faq" cols="70" rows="3"
+        placeholder="Adicionar faq, perguntas frequentes...">{{ saude_item.faq }}</textarea><br>
+      <input type="submit" value="Enviar" id="button">
+    </form>
+    </center>
+</body>
