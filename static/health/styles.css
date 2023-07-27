@@ -101,7 +101,6 @@ body, html {
     position: relative;
     margin: -5px auto;
     border-radius: .6rem;
-    overflow: auto;
     overflow: overlay;
 }
 
