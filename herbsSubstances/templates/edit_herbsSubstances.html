@@ -1,32 +1,54 @@
 {% load static %}
 <head>
-  <link rel="stylesheet" href="{% static 'health/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'health/media.css' %}">
-  <script src="{% static 'health/main.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'herbs/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'herbs/media.css' %}">
+  <script src="{% static 'herbs/main.js' %}"></script>
 </head>
+<div class="container">
+  <div class="nav">
+    <h1>Ervas medicinais(Editar)</h1><br>
+  </div>
 <center>
-<h1>Saúde health</h1>
-<form method="post">
-  <label for="">Importar informação / ChatGPT:</label><br>
-  <textarea name="prompt" id="prompt" cols="80" rows="3" placeholder="Cole o texto aqui..."></textarea>
-  <input type="button" value="" id="classificar">
+<form method="post" action="{% url 'editar-herbsSubstances' herbsSubstances_item.id %}">
+  <br>
   <h2>Formulário</h2>
-  <label for="">O que é / Descrição:</label><br>
-  <textarea name="decricao" id="descricao" cols="50" rows="3" placeholder="Adicionar descrição..."></textarea><br>
-  <label for="">Mecanismos de ação / Como funciona:</label><br>
-  <textarea name="mecanismo" id="mecanismo" cols="50" rows="3" placeholder="Adicionar mecanismo de ação..."></textarea><br>
-  <label for="">Potencial Benefícios / Para que serve:</label><br>
-  <textarea name="beneficio" id="beneficio" cols="50" rows="3" placeholder="Adicionar potencial..."></textarea><br>
-  <label for="">Efeitos colaterais/Cuidados:</label><br>
-  <textarea name="efeitos_colaterais" id="efeitos_colaterais" cols="50" rows="3" placeholder="Adicionar efeitos colaterais..."></textarea><br>
-  <label for="">Interações gênicas:</label><br>
-  <textarea name="interacoes" id="interacoes" cols="50" rows="3" placeholder="Adicionar interações gênicas..."></textarea><br>
-  <label for="">Experiência dos Usuários:</label><br>
-  <textarea name="experiencia" id="experiencia" cols="50" rows="3" placeholder="Adicionar experiencia dos Usuários..."></textarea><br>
-  <label for="">Estudos Científicos / Referências Científica:</label><br>
-  <textarea name="estudos_cientificos" id="estudos_cientificos" cols="50" rows="3" placeholder="Adicionar estudos científicos..."></textarea><br>
-  <label for="">FAQ / Perguntas Frequentes:</label><br>
-  <textarea name="faq" id="faq" cols="50" rows="3" placeholder="Adicionar faq, perguntas frequentes..."></textarea><br>
-  <input type="button" value="Enviar" id="button">
+  {% csrf_token %}
+  <label id="label">Nome comum:</label><br>
+  <textarea name="name" id="name" cols="140" rows="5" placeholder="Adicione o nome...">{{  herbsSubstances_item.name }}</textarea><br>
+
+  <label id="label">Breve resumo do que é e o seu principal benefício:</label><br>
+  <textarea name="descricao" id="descricao" cols="140" rows="5"
+    placeholder="Adicionar descrição...">{{ herbsSubstances_item.resumo }}</textarea><br>
+  <label id="label">O que é? (maiores detalhes do que o resumo do 1.):</label><br>
+  <textarea name="oque_e" id="oque_e" cols="140" rows="5"
+    placeholder="Adicionar maiores detalhes...">{{ herbsSubstances_item.oque_e }}</textarea><br>
+  <label id="label">5. Quais os seus Principais Benefícios:</label><br>
+  <textarea name="beneficio" id="beneficio" cols="140" rows="5"
+    placeholder="Adicionar principais benefícios...">{{ herbsSubstances_item.beneficios }}</textarea><br>
+  <label id="label">Ela é potencialmente boa para o que: </label><br>
+  <textarea name="potencial_beneficios" id="potencial_beneficios" cols="140" rows="5"
+    placeholder="Adicionar uma descrição...">{{ herbsSubstances_item.boa_para_que }}</textarea><br>
+  <label id="label">Quais doenças e Condições se relacionam com ela: </label><br>
+  <textarea name="doencas_relacionadas" id="doencas_relacionadas" cols="140" rows="5"
+    placeholder="Adicionar doenças e condições relacionadas...">{{ herbsSubstances_item.doencas_relacionada }}</textarea><br>
+
+  <label id="label">Quais as desvantagens/cuidados: </label><br>
+  <textarea name="desvantagens" id="desvantagens" cols="140" rows="5"
+    placeholder="Adicionar desvantagens...">{{ herbsSubstances_item.desvantagens_cuidados }}</textarea><br>
+
+  <label id="label">Como funciona:</label><br>
+  <textarea name="como_funciona" id="como_funciona" cols="140" rows="5"
+    placeholder="Adicionar uma descrição...">{{ herbsSubstances_item.como_funciona }}</textarea><br>
+  <label id="label">Dosagem, informações:</label><br>
+  <textarea name="dosagem" id="dosagem" cols="140" rows="5"
+    placeholder="Adicionar informações de Dosagem...">{{ herbsSubstances_item.dosagem }}</textarea><br>
+  <label id="label">FAQ / Perguntas Frequentes:</label><br>
+  <textarea name="faq" id="faq" cols="140" rows="5"
+    placeholder="Adicionar faq, perguntas frequentes...">{{ herbsSubstances_item.faq }}</textarea><br>
+  <label id="label">Estudos Científicos (scientific references):</label><br>
+  <textarea name="estudos_cientificos" id="estudos_cientificos" cols="140" rows="5"
+    placeholder="Adicionar estudos científicos...">{{ herbsSubstances_item.estudos }}</textarea><br>
+  <input type="submit" value="Editar" id="button">
+
 </form>
 </center>

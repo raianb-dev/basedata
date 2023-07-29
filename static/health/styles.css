@@ -19,11 +19,13 @@
 
 #classificar{
     height: 51px;
-    width: 40px;
+    width: 100px;
     cursor: pointer;
     background-color: rgb(22, 123, 255);
     border: 0;
     border-radius: 5px;
+    color: #fffbfb;
+    font-weight: bolder;
 }
 
 /*
@@ -396,6 +398,7 @@ h1{
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%; /* Adicionado para garantir que o formulário preencha a largura do container */
+
 }
 
 #search-input {
@@ -406,6 +409,7 @@ h1{
     outline: none;
     background: transparent;
     width: 100%; /* Adicionado para garantir que o input preencha a largura do formulário */
+    
 }
 
 #search-input::placeholder {
@@ -436,4 +440,44 @@ h1{
     font-size: 20px;
 }
 
+/* Estilo para os botões do modal */
+.btn {
+    padding: 8px 15px;
+    margin-left: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transform: translateX(-40px);
+}
 
+.btn-secondary {
+    background-color: #ccc;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Estilo para o botão de fechar do modal */
+.close {
+    cursor: pointer;
+}
+
+/* Estilo para o botão de fechar do modal (ícone "X") */
+.close span {
+    position: relative;
+    top: -3px;
+}
+
+/* Estilo para o botão de fechar do modal quando hover */
+.close:hover {
+    color: #333;
+}
+textarea{
+    border-radius: 10px;
+}
+#label{
+    font-weight: bolder;
+}

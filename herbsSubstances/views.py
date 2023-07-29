@@ -2,19 +2,18 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage
 
 from herbsSubstances import models
-herbsSubstances = models.herbsSubstance
+from .models import herbsSubstance
 
 
-def todos_os_dados(request):
-    herbsSubstances_items = herbsSubstances.objects.all()
-    return render(request, 'list_herbsSubstances.html', {'herbsSubstances_items': herbsSubstances_items})
+
 
 def detalhes_item(request, item_id):
-    herbsSubstances_item = get_object_or_404(herbsSubstances, id=item_id)
+    herbsSubstances_item = get_object_or_404(herbsSubstance, id=item_id)
     return render(request, 'herbsSubstances_id.html', {'herbsSubstances_item': herbsSubstances_item})
     
 def salvar_herbsSubstances(request):
     if request.method == 'POST':
+        name = request.POST.get('name')
         descricao = request.POST.get('descricao')
         oque_e = request.POST.get('oque_e')
         beneficio = request.POST.get('beneficio')
@@ -27,7 +26,8 @@ def salvar_herbsSubstances(request):
         estudos_cientificos = request.POST.get('estudos_cientificos')
 
         # Renomeie a variável local para evitar conflito com a classe herbsSubstance
-        nova_herbsSubstance = herbsSubstances.objects.create(
+        nova_herbsSubstance = herbsSubstance.objects.create(
+            name=name,
             resumo=descricao,
             oque_e=oque_e,
             beneficios=beneficio,
@@ -45,9 +45,8 @@ def salvar_herbsSubstances(request):
     return render(request, 'add_herbsSubstances.html')
 
 def listar_herbsSubstances(request):
-    herbsSubstances_items = herbsSubstances.objects.all()
+    herbsSubstances_items = herbsSubstance.objects.all()
 
-    # Defina o número de itens por página
     itens_por_pagina = 7
     paginator = Paginator(herbsSubstances_items, itens_por_pagina)
 
@@ -64,44 +63,56 @@ def listar_herbsSubstances(request):
     return render(request, 'list_herbsSubstances.html', {'herbsSubstances_items': herbsSubstances_items_paginados})
 
 def editar_herbsSubstances(request, item_id):
-    herbsSubstances_item = get_object_or_404(herbsSubstances, id=item_id)
+    herbsSubstances_item = get_object_or_404(herbsSubstance, id=item_id)
 
     if request.method == 'POST':
         # Obtenha os dados atualizados do formulário
+        name = request.POST.get('name')
         descricao = request.POST.get('descricao')
-        mecanismo = request.POST.get('mecanismo')
+        oque_e = request.POST.get('oque_e')
         beneficio = request.POST.get('beneficio')
-        efeitos_colaterais = request.POST.get('efeitos_colaterais')
-        interacoes = request.POST.get('interacoes')
-        experiencia = request.POST.get('experiencia')
-        estudos_cientificos = request.POST.get('estudos_cientificos')
+        potencial_beneficios = request.POST.get('potencial_beneficios')
+        doencas_relacionadas = request.POST.get('doencas_relacionadas')
+        como_funciona = request.POST.get('como_funciona')
+        desvantagens = request.POST.get('desvantagens')
+        dosagem = request.POST.get('dosagem')
         faq = request.POST.get('faq')
-
+        estudos_cientificos = request.POST.get('estudos_cientificos')
         # Atualize os campos do objeto herbsSubstances
-        herbsSubstances_item.description = descricao
-        herbsSubstances_item.action_mechanisms = mecanismo
-        herbsSubstances_item.potential_benefits = beneficio
-        herbsSubstances_item.effects_precautions = efeitos_colaterais
-        herbsSubstances_item.gene_interactions = interacoes
-        herbsSubstances_item.user_experience = experiencia
-        herbsSubstances_item.scientific_studies = estudos_cientificos
+
+        herbsSubstances_item.name = name
+        herbsSubstances_item.resumo = descricao
+        herbsSubstances_item.oque_e = oque_e
+        herbsSubstances_item.beneficios = beneficio
+        herbsSubstances_item.boa_para_que = potencial_beneficios
+        herbsSubstances_item.doencas_relacionada = doencas_relacionadas
+        herbsSubstances_item.como_funciona = como_funciona
+        herbsSubstances_item.desvantagens_cuidados = desvantagens
+        herbsSubstances_item.dosagem = dosagem
         herbsSubstances_item.faq = faq
+        herbsSubstances_item.estudos = estudos_cientificos
 
         # Salve as alterações no banco de dados
         herbsSubstances_item.save()
 
-        return redirect('listar-herbsSubstances')
+        return redirect('herbsSubstances')
 
     return render(request, 'edit_herbsSubstances.html', {'herbsSubstances_item': herbsSubstances_item})
 
 
-def excluir_herbsSubstances(request, item_id):
-    herbsSubstances_item = get_object_or_404(herbsSubstances, id=item_id)
+
+
+from django.shortcuts import get_object_or_404, redirect
+from herbsSubstances.models import herbsSubstance
+
+def excluir_substances(request, item_id):
     if request.method == 'GET':
-        # Verifique se o método da requisição é POST
-        # Isso garante que a exclusão ocorra apenas quando o formulário é enviado
-        herbsSubstances_item.delete()
+        # Obter o item a ser excluído
+        saude_item = get_object_or_404(herbsSubstance, id=item_id)
+
+        # Excluir o item
+        saude_item.delete()
+
+        # Redirecionar para a página de listagem após a exclusão
         return redirect('herbsSubstances')
-    
-    # Se a requisição não for POST, renderize o template normalmente
-    return render(request, 'list_herbsSubstances.html', {'herbsSubstances_items': herbsSubstances.objects.all()})
+

@@ -20,10 +20,10 @@ urlpatterns = [
     path('saude/editar/<int:item_id>/', views_health.editar_saude, name='editar-saude'),
     path('saude/excluir/<int:item_id>/', views_health.excluir_saude, name='excluir-saude'),
     # Routes "herbs"
-    path('ervas/', views_herbsSubstances.todos_os_dados, name='herbsSubstances'),
+    path('ervas/', views_herbsSubstances.listar_herbsSubstances, name='herbsSubstances'),
     path('ervas/cadastrar/', views_herbsSubstances.salvar_herbsSubstances, name='add-herbsSubstances'),
     path('ervas/editar/<int:item_id>/', views_herbsSubstances.editar_herbsSubstances, name='editar-herbsSubstances'),
-    path('ervas/excluir/<int:item_id>/', views_herbsSubstances.excluir_herbsSubstances, name='excluir-herbsSubstances'),
+    path('ervas/excluir/<int:item_id>/', views_herbsSubstances.excluir_substances, name='excluir-herbsSubstances'),
     # Routes "Doença"
     path('doenca/', views_disease.listar_disease, name='doenca'),
     path('doenca/<int:item_id>/', views_disease.detalhes_item, name='doenca-id'),

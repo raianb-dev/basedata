@@ -6,7 +6,7 @@
 <head>
   <title>Adicionar Ervas | Substâncias</title>
   <!-- Add your CSS stylesheets here -->
-  <link rel="stylesheet" href="{% static 'health/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'herbs/styles.css' %}">
 </head>
 
 <body>
@@ -19,41 +19,44 @@
         <form method="post" action="{% url 'add-herbsSubstances' %}">
           <br>
           <label id="label">Importar informação / ChatGPT:</label><br>
-          <textarea name="prompt" id="prompt" cols="140" rows="3" placeholder="Cole o texto aqui..."></textarea>
-          <input type="button" value="" id="classificar">
+          <textarea name="prompt" id="prompt" cols="140" rows="15" placeholder="Cole o texto aqui..."></textarea><br>
+          <input type="button" value="Importar" id="classificar">
           <h2>Formulário</h2>
           {% csrf_token %}
+          <label id="label">Nome comum:</label><br>
+          <textarea name="name" id="name" cols="140" rows="3" placeholder="Adicione o nome..."></textarea><br>
+
           <label id="label">Breve resumo do que é e o seu principal benefício:</label><br>
-          <textarea name="descricao" id="descricao" cols="70" rows="3"
+          <textarea name="descricao" id="descricao" cols="140" rows="3"
             placeholder="Adicionar descrição..."></textarea><br>
           <label id="label">O que é? (maiores detalhes do que o resumo do 1.):</label><br>
-          <textarea name="oque_e" id="oque_e" cols="70" rows="3"
+          <textarea name="oque_e" id="oque_e" cols="140" rows="3"
             placeholder="Adicionar maiores detalhes..."></textarea><br>
           <label id="label">3. Quais os seus Principais Benefícios:</label><br>
-          <textarea name="beneficio" id="beneficio" cols="70" rows="3"
+          <textarea name="beneficio" id="beneficio" cols="140" rows="3"
             placeholder="Adicionar principais benefícios..."></textarea><br>
           <label id="label">Ela é potencialmente boa para o que: </label><br>
-          <textarea name="potencial_beneficios" id="potencial_beneficios" cols="70" rows="3"
+          <textarea name="potencial_beneficios" id="potencial_beneficios" cols="140" rows="3"
             placeholder="Adicionar uma descrição..."></textarea><br>
           <label id="label">Quais doenças e Condições se relacionam com ela: </label><br>
-          <textarea name="doencas_relacionadas" id="doencas_relacionadas" cols="70" rows="3"
+          <textarea name="doencas_relacionadas" id="doencas_relacionadas" cols="140" rows="3"
             placeholder="Adicionar doenças e condições relacionadas..."></textarea><br>
 
           <label id="label">Quais as desvantagens/cuidados: </label><br>
-          <textarea name="desvantagens" id="desvantagens" cols="70" rows="3"
+          <textarea name="desvantagens" id="desvantagens" cols="140" rows="3"
             placeholder="Adicionar desvantagens..."></textarea><br>
 
           <label id="label">Como funciona:</label><br>
-          <textarea name="como_funciona" id="como_funciona" cols="70" rows="3"
+          <textarea name="como_funciona" id="como_funciona" cols="140" rows="3"
             placeholder="Adicionar uma descrição..."></textarea><br>
           <label id="label">Dosagem, informações:</label><br>
-          <textarea name="dosagem" id="dosagem" cols="70" rows="3"
+          <textarea name="dosagem" id="dosagem" cols="140" rows="3"
             placeholder="Adicionar informações de Dosagem..."></textarea><br>
           <label id="label">FAQ / Perguntas Frequentes:</label><br>
-          <textarea name="faq" id="faq" cols="70" rows="3"
+          <textarea name="faq" id="faq" cols="140" rows="3"
             placeholder="Adicionar faq, perguntas frequentes..."></textarea><br>
           <label id="label">Estudos Científicos (scientific references):</label><br>
-          <textarea name="estudos_cientificos" id="faq" cols="70" rows="3"
+          <textarea name="estudos_cientificos" id="estudos_cientificos" cols="140" rows="3"
             placeholder="Adicionar estudos científicos..."></textarea><br>
           <input type="submit" value="Enviar" id="button">
 
@@ -62,61 +65,96 @@
 
     </section>
   </div>
-  <!-- Resto do código HTML ... -->
-
-  <!-- Adicione o seguinte script no final da página, antes da tag </body> -->
   <script>
     // Função para preencher os campos do formulário com base no texto fornecido
     function autoPreenchimento() {
       const texto = document.getElementById('prompt').value;
-      const regexTópicos = /\d+\. (.+?)(?=(?:\d+\. )|$)/gs;
-
+      const regexTópicos = /%(\d+)%([^%]+)%(\d+)%/gs;
+  
       let match;
       let tópicos = [];
-
+  
       while ((match = regexTópicos.exec(texto)) !== null) {
-        const conteudoTópico = match[1].trim();
+        const conteudoTópico = match[2].trim();
         tópicos.push(conteudoTópico);
       }
-
+  
       if (tópicos.length >= 1) {
-        document.getElementById('descricao').value = tópicos[0].replace(/^\d+\.\s*/, '');
+        document.getElementById('name').value = tópicos[0];
       }
-
+  
       if (tópicos.length >= 2) {
-        document.getElementById('mecanismo').value = tópicos[1].replace(/^\d+\.\s*/, '');
+        document.getElementById('descricao').value = tópicos[1];
       }
-
+  
       if (tópicos.length >= 3) {
-        document.getElementById('beneficio').value = tópicos[2].replace(/^\d+\.\s*/, '');
+        document.getElementById('oque_e').value = tópicos[2];
       }
-
+  
       if (tópicos.length >= 4) {
-        document.getElementById('efeitos_colaterais').value = tópicos[3].replace(/^\d+\.\s*/, '');
+        document.getElementById('beneficio').value = tópicos[3];
       }
-
+  
       if (tópicos.length >= 5) {
-        document.getElementById('interacoes').value = tópicos[4].replace(/^\d+\.\s*/, '');
+        document.getElementById('potencial_beneficios').value = tópicos[4];
       }
-
+  
       if (tópicos.length >= 6) {
-        document.getElementById('experiencia').value = tópicos[5].replace(/^\d+\.\s*/, '');
+        document.getElementById('doencas_relacionadas').value = tópicos[5];
       }
-
+  
       if (tópicos.length >= 7) {
-        document.getElementById('estudos_cientificos').value = tópicos[6].replace(/^\d+\.\s*/, '');
+        document.getElementById('desvantagens').value = tópicos[6];
       }
-
+  
       if (tópicos.length >= 8) {
-        document.getElementById('faq').value = tópicos[7].replace(/^\d+\.\s*/, '');
+        document.getElementById('como_funciona').value = tópicos[7];
       }
+  
+      if (tópicos.length >= 9) {
+        document.getElementById('dosagem').value = tópicos[8];
+      }
+  
+      if (tópicos.length >= 10) {
+        document.getElementById('faq').value = tópicos[9];
+      }
+  
+      if (tópicos.length >= 11) {
+        document.getElementById('estudos_cientificos').value = tópicos[10];
+      }
+  
+      // Continue preenchendo os campos do formulário conforme necessário...
     }
-
+  
     // Chame a função de preenchimento automático quando o campo de texto for alterado
     document.getElementById('prompt').addEventListener('change', autoPreenchimento);
-  </script>
+  
+    // Capturar o botão de classificar pelo ID
+    const classificarBtn = document.getElementById('classificar');
+  
+    // Adicionar evento de clique ao botão de classificar
+    classificarBtn.addEventListener('click', () => {
+      // Capturar o texto colado no campo de prompt
+      const textoPrompt = document.getElementById('prompt').value;
+  
+      // Ação a ser realizada com o texto do prompt (aqui você pode enviar para a API do ChatGPT, por exemplo)
+      // ...
+  
+      // Exemplo de ação: imprimir o texto do prompt no console
+      console.log(textoPrompt);
+    });
+  
+    // Você também pode adicionar outras funções e eventos para melhorar a experiência do usuário, por exemplo,
+    // validações de formulário ou manipulação de dados antes de enviar para o servidor.
+  
+    // Exemplo de validação básica antes do envio do formulário
 
-  <!-- Resto do código HTML ... -->
+      // Outras ações antes de enviar o formulário (por exemplo, enviar para o servidor)
+      // ...
+
+  </script>
+  
+  
 
 
 </html>

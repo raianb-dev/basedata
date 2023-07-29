@@ -60,14 +60,14 @@
                         <td>{{ item.scientific_studies|truncate_chars:50 }}</td>
                         <td>{{ item.user_experience|truncate_chars:50 }}</td>
                         <td>{{ item.faq|truncate_chars:50 }}</td>
-                        
+
                         <td>
                             <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
                                     class="bi bi-eye"></i> Detalhes</button>
-                            <button><a href="{% url 'editar-saude' item.id %}" class="btn btn-primary"><i
-                                    class="bi bi-pencil"></i> Editar</a></button>
-                            <button><a href="{% url 'excluir-saude' item.id %}" class="btn btn-danger btn-excluir"
-                                data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</a></button>
+                            <button class="btn btn-primary"><a href="{% url 'editar-saude' item.id %}" ><i
+                                        class="bi bi-pencil"></i> Editar</a></button>
+                                        <a href="{% url 'excluir-saude' item.id %}"><button class="btn btn-danger btn-excluir"
+                                    data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</button></a>
 
                         </td>
                     </tr>

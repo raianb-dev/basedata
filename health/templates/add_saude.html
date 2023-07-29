@@ -19,35 +19,35 @@
         <form method="post" action="{% url 'add-saude' %}">
           <br>
           <label id="label">Importar informação / ChatGPT:</label><br>
-          <textarea name="prompt" id="prompt" cols="140" rows="3" placeholder="Cole o texto aqui..."></textarea>
-          <input type="button" value="" id="classificar">
+          <textarea name="prompt" id="prompt" cols="140" rows="15" placeholder="Cole o texto aqui..."></textarea><br>
+          <input type="button" value="Importar" id="classificar">
           <h2>Formulário</h2>
           {% csrf_token %}
           <label id="label">Nome:</label><br>
-          <textarea name="name" id="name" cols="70" rows="3" placeholder="nome..."></textarea><br>
+          <textarea name="name" id="name" cols="140" rows="3" placeholder="nome..."></textarea><br>
           <label id="label">O que é / Descrição:</label><br>
-          <textarea name="descricao" id="descricao" cols="70" rows="3"
+          <textarea name="descricao" id="descricao" cols="140" rows="3"
             placeholder="Adicionar descrição..."></textarea><br>
           <label id="label">Mecanismos de ação / Como funciona:</label><br>
-          <textarea name="mecanismo" id="mecanismo" cols="70" rows="3"
+          <textarea name="mecanismo" id="mecanismo" cols="140" rows="3"
             placeholder="Adicionar mecanismo de ação..."></textarea><br>
           <label id="label">Potencial Benefícios / Para que serve:</label><br>
-          <textarea name="beneficio" id="beneficio" cols="70" rows="3"
+          <textarea name="beneficio" id="beneficio" cols="140" rows="3"
             placeholder="Adicionar potencial..."></textarea><br>
           <label id="label">Efeitos colaterais/Cuidados:</label><br>
-          <textarea name="efeitos_colaterais" id="efeitos_colaterais" cols="70" rows="3"
+          <textarea name="efeitos_colaterais" id="efeitos_colaterais" cols="140" rows="3"
             placeholder="Adicionar efeitos colaterais..."></textarea><br>
           <label id="label">Interações gênicas:</label><br>
-          <textarea name="interacoes" id="interacoes" cols="70" rows="3"
+          <textarea name="interacoes" id="interacoes" cols="140" rows="3"
             placeholder="Adicionar interações gênicas..."></textarea><br>
           <label id="label">Experiência dos Usuários:</label><br>
-          <textarea name="experiencia" id="experiencia" cols="70" rows="3"
+          <textarea name="experiencia" id="experiencia" cols="140" rows="3"
             placeholder="Adicionar experiencia dos Usuários..."></textarea><br>
           <label id="label">Estudos Científicos / Referências Científica:</label><br>
-          <textarea name="estudos_cientificos" id="estudos_cientificos" cols="70" rows="3"
+          <textarea name="estudos_cientificos" id="estudos_cientificos" cols="140" rows="3"
             placeholder="Adicionar estudos científicos..."></textarea><br>
           <label id="label">FAQ / Perguntas Frequentes:</label><br>
-          <textarea name="faq" id="faq" cols="70" rows="3"
+          <textarea name="faq" id="faq" cols="140" rows="3"
             placeholder="Adicionar faq, perguntas frequentes..."></textarea><br>
           <input type="submit" value="Enviar" id="button">
 

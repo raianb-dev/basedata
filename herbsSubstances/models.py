@@ -3,6 +3,7 @@ from django.db import models
 class herbsSubstance(models.Model):
 
     id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=1000, default='null')
     resumo = models.CharField(max_length=10000)
     oque_e = models.CharField(max_length=10000)
     beneficios = models.CharField(max_length=10000)

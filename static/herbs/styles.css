@@ -54,7 +54,6 @@ body, html {
     justify-content: center;
     align-items: flex-start; /* Mude para 'flex-start' para alinhar o conteúdo ao topo */
     width: 100%;
-    position: fixed;
 }
 
 
@@ -98,13 +97,12 @@ body, html {
 .table__body {
     scale: 0.9;
     width: 100%; /* Defina a largura da tabela para 100% */
-    max-height: calc(89% - 1.6rem);
+    max-height: calc(95% - 1.6rem);
     background-color: #fffb;
     /* Remova a propriedade "top: 60px;" para centralizar a tabela verticalmente */
     position: relative;
-    margin: -5px auto;
+    margin: -10px auto;
     border-radius: .6rem;
-    overflow: auto;
     overflow: overlay;
 }
 
@@ -389,7 +387,6 @@ h1{
     position: relative;
     min-width: 75%; /* Alterado de 300px para 80% */
     margin: 10px auto;
-    transform: translateX(30px)
 }
 
 #search-form {
@@ -400,7 +397,7 @@ h1{
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%; /* Adicionado para garantir que o formulário preencha a largura do container */
-    opacity: 0.9;
+
 }
 
 #search-input {
@@ -411,6 +408,7 @@ h1{
     outline: none;
     background: transparent;
     width: 100%; /* Adicionado para garantir que o input preencha a largura do formulário */
+    
 }
 
 #search-input::placeholder {
@@ -442,6 +440,54 @@ h1{
 }
 
 
+/* Estilo para o fundo do modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Estilo para a caixa do modal */
+.modal-dialog {
+    position: relative;
+    margin: 10% auto;
+    padding: 20px;
+    max-width: 500px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para o cabeçalho do modal */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Estilo para o corpo do modal */
+.modal-body {
+    padding: 10px 0;
+}
+
+/* Estilo para o rodapé do modal */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
 
 /* Estilo para os botões do modal */
 .btn {
@@ -479,3 +525,9 @@ h1{
     color: #333;
 }
 
+textarea{
+    border-radius: 10px;
+}
+#label{
+    font-weight: bolder;
+}

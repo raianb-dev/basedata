@@ -4,12 +4,12 @@
 <html>
 
 <head>
-  <title>Listagem de Saúde</title>
+  <title>Listagem de Doenças</title>
   <!-- Add your CSS stylesheets here -->
   <link rel="stylesheet" href="{% static 'health/styles.css' %}">
 </head>
 
-<body>
+<body >
   <div class="container">
     <div class="nav">
       <h1>Doenças</h1>
@@ -19,67 +19,68 @@
         <form method="post" action="{% url 'add-doenca' %}">
           <br>
           <label id="label">Importar informação / ChatGPT:</label><br>
-          <textarea name="prompt" id="prompt" cols="140" rows="3" placeholder="Cole o texto aqui..."></textarea>
-          <input type="button" value="" id="classificar">
+          <textarea name="prompt" id="prompt" cols="140" rows="15
+          " placeholder="Cole o texto aqui..."></textarea><br>
+          <input type="button" value="Importar" id="classificar">
           <h2>Formulário</h2>
           {% csrf_token %}
 
           <label id="label">Nome comum:</label><br>
-          <textarea name="nome_comum" id="nome_comum" cols="90" rows="3"
+          <textarea name="nome_comum" id="nome_comum" cols="140" rows="3"
             placeholder="Adicionar nome comum..."></textarea><br>
 
           <label id="label">Termo médico:</label><br>
-          <textarea name="termo_medico" id="termo_medico" cols="90" rows="3"
+          <textarea name="termo_medico" id="termo_medico" cols="140" rows="3"
             placeholder="Adicionar termo médico..."></textarea><br>
 
           <label id="label">Descrição:</label><br>
-          <textarea name="descricao" id="descricao" cols="90" rows="3"
+          <textarea name="descricao" id="descricao" cols="140" rows="3"
             placeholder="Adicionar descrição..."></textarea><br>
 
           <label id="label">Causas:</label><br>
-          <textarea name="causa" id="causa" cols="90" rows="3" placeholder="Adicionar causas..."></textarea><br>
+          <textarea name="causa" id="causa" cols="140" rows="3" placeholder="Adicionar causas..."></textarea><br>
 
           <label id="label">Prevenção:</label><br>
-          <textarea name="prevencao" id="prevencao" cols="90" rows="3"
+          <textarea name="prevencao" id="prevencao" cols="140" rows="3"
             placeholder="Adicionar prevenção..."></textarea><br>
 
           <label id="label">Sinais e Sintomas:</label><br>
-          <textarea name="sinal_sintoma" id="sinal_sintoma" cols="90" rows="3"
+          <textarea name="sinal_sintoma" id="sinal_sintoma" cols="140" rows="3"
             placeholder="Adicionar sinais e sintomas..."></textarea><br>
 
           <label id="label">Fatores de Risco:</label><br>
-          <textarea name="fator_risco" id="fator_risco" cols="90" rows="3"
+          <textarea name="fator_risco" id="fator_risco" cols="140" rows="3"
             placeholder="Adicionar fatores de risco..."></textarea><br>
 
           <label id="label">Diagnóstico e Tratamento:</label><br>
-          <textarea name="diagnostico_tratamento" id="diagnostico_tratamento" cols="90" rows="3"
+          <textarea name="diagnostico_tratamento" id="diagnostico_tratamento" cols="140" rows="3"
             placeholder="Adicionar diagnóstico e tratamento..."></textarea><br>
 
           <label id="label">Medidas Gerais:</label><br>
-          <textarea name="medidas_gerais" id="medidas_gerais" cols="90" rows="3"
+          <textarea name="medidas_gerais" id="medidas_gerais" cols="140" rows="3"
             placeholder="Adicionar medidas gerais..."></textarea><br>
 
           <label id="label">Medicamentos associados:</label><br>
-          <textarea name="medicamentos_gerais" id="medicamentos_gerais" cols="90" rows="3"
+          <textarea name="medicamentos_gerais" id="medicamentos_gerais" cols="140" rows="3"
             placeholder="Adicionar medicamentos associados..."></textarea><br>
 
           <label id="label">Dieta:</label><br>
-          <textarea name="dieta" id="dieta" cols="90" rows="3" placeholder="Adicionar dieta..."></textarea><br>
+          <textarea name="dieta" id="dieta" cols="140" rows="3" placeholder="Adicionar dieta..."></textarea><br>
 
           <label id="label">Prognóstico:</label><br>
-          <textarea name="prognostico" id="prognostico" cols="90" rows="3"
+          <textarea name="prognostico" id="prognostico" cols="140" rows="3"
             placeholder="Adicionar prognóstico..."></textarea><br>
 
           <label id="label">Suplementos e Ervas Conectadas:</label><br>
-          <textarea name="suplemento" id="suplemento" cols="90" rows="3"
+          <textarea name="suplemento" id="suplemento" cols="140" rows="3"
             placeholder="Adicionar suplementos e ervas conectadas..."></textarea><br>
 
           <label id="label">FAQ (Perguntas Frequentes):</label><br>
-          <textarea name="faq" id="faq" cols="90" rows="3"
+          <textarea name="faq" id="faq" cols="140" rows="3"
             placeholder="Adicionar faq, perguntas frequentes..."></textarea><br>
 
           <label id="label">Referências Científicas:</label><br>
-          <textarea name="referencia" id="referencia" cols="90" rows="3"
+          <textarea name="referencia" id="referencia" cols="140" rows="3"
             placeholder="Adicionar referências científicas..."></textarea><br>
 
           <input type="submit" value="Enviar" id="button">
@@ -90,61 +91,124 @@
 
     </section>
   </div>
-  <!-- Resto do código HTML ... -->
-
-  <!-- Adicione o seguinte script no final da página, antes da tag </body> -->
-  <script>
+   <!-- Add your JavaScript here to handle the modal functionality -->
+   <script>
     // Função para preencher os campos do formulário com base no texto fornecido
     function autoPreenchimento() {
       const texto = document.getElementById('prompt').value;
-      const regexTópicos = /\d+\. (.+?)(?=(?:\d+\. )|$)/gs;
-
+      const regexTópicos = /%(\d+)%([^%]+)%(\d+)%/gs;
+  
       let match;
       let tópicos = [];
-
+  
       while ((match = regexTópicos.exec(texto)) !== null) {
-        const conteudoTópico = match[1].trim();
+        const conteudoTópico = match[2].trim();
         tópicos.push(conteudoTópico);
       }
-
+  
       if (tópicos.length >= 1) {
-        document.getElementById('descricao').value = tópicos[0].replace(/^\d+\.\s*/, '');
+        document.getElementById('nome_comum').value = tópicos[0];
       }
-
+  
       if (tópicos.length >= 2) {
-        document.getElementById('mecanismo').value = tópicos[1].replace(/^\d+\.\s*/, '');
+        document.getElementById('termo_medico').value = tópicos[1];
       }
-
+  
       if (tópicos.length >= 3) {
-        document.getElementById('beneficio').value = tópicos[2].replace(/^\d+\.\s*/, '');
+        document.getElementById('descricao').value = tópicos[2];
       }
-
+  
       if (tópicos.length >= 4) {
-        document.getElementById('efeitos_colaterais').value = tópicos[3].replace(/^\d+\.\s*/, '');
+        document.getElementById('causa').value = tópicos[3];
       }
-
+  
       if (tópicos.length >= 5) {
-        document.getElementById('interacoes').value = tópicos[4].replace(/^\d+\.\s*/, '');
+        document.getElementById('prevencao').value = tópicos[4];
       }
-
+  
       if (tópicos.length >= 6) {
-        document.getElementById('experiencia').value = tópicos[5].replace(/^\d+\.\s*/, '');
+        document.getElementById('sinal_sintoma').value = tópicos[5];
       }
-
+  
       if (tópicos.length >= 7) {
-        document.getElementById('estudos_cientificos').value = tópicos[6].replace(/^\d+\.\s*/, '');
+        document.getElementById('fator_risco').value = tópicos[6];
       }
-
+  
       if (tópicos.length >= 8) {
-        document.getElementById('faq').value = tópicos[7].replace(/^\d+\.\s*/, '');
+        document.getElementById('diagnostico_tratamento').value = tópicos[7];
       }
+  
+      if (tópicos.length >= 9) {
+        document.getElementById('medidas_gerais').value = tópicos[8];
+      }
+  
+      if (tópicos.length >= 3) {
+        document.getElementById('medicamentos_gerais').value = tópicos[9];
+      }
+  
+      if (tópicos.length >= 11) {
+        document.getElementById('dieta').value = tópicos[3];
+      }
+  
+      if (tópicos.length >= 12) {
+        document.getElementById('prognostico').value = tópicos[11];
+      }
+  
+      if (tópicos.length >= 13) {
+        document.getElementById('suplemento').value = tópicos[12];
+      }
+  
+      if (tópicos.length >= 14) {
+        document.getElementById('faq').value = tópicos[13];
+      }
+  
+      if (tópicos.length >= 15) {
+        document.getElementById('referencia').value = tópicos[14];
+      }
+  
+      // Continue preenchendo os campos do formulário conforme necessário...
     }
-
+  
     // Chame a função de preenchimento automático quando o campo de texto for alterado
     document.getElementById('prompt').addEventListener('change', autoPreenchimento);
+  
+    // Capturar o botão de classificar pelo ID
+    const classificarBtn = document.getElementById('classificar');
+  
+    // Adicionar evento de clique ao botão de classificar
+    classificarBtn.addEventListener('click', () => {
+      // Capturar o texto colado no campo de prompt
+      const textoPrompt = document.getElementById('prompt').value;
+  
+      // Ação a ser realizada com o texto do prompt (aqui você pode enviar para a API do ChatGPT, por exemplo)
+      // ...
+  
+      // Exemplo de ação: imprimir o texto do prompt no console
+      console.log(textoPrompt);
+    });
+  
+    // Você também pode adicionar outras funções e eventos para melhorar a experiência do usuário, por exemplo,
+    // validações de formulário ou manipulação de dados antes de enviar para o servidor.
+  
+    // Exemplo de validação básica antes do envio do formulário
+    const form = document.querySelector('form');
+  
+    form.addEventListener('submit', (event) => {
+      // Cancelar o envio do formulário se algum campo estiver vazio
+      const inputs = form.querySelectorAll('textarea');
+      for (const input of inputs) {
+        if (!input.value.trim()) {
+          alert('Por favor, preencha todos os campos do formulário.');
+          event.preventDefault();
+          return;
+        }
+      }
+  
+      // Outras ações antes de enviar o formulário (por exemplo, enviar para o servidor)
+      // ...
+    });
   </script>
-
-  <!-- Resto do código HTML ... -->
+  
 
 
 </html>

@@ -74,10 +74,10 @@
                         <td>
                             <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
                                     class="bi bi-eye"></i> Detalhes</button>
-                            <button><a href="{% url 'editar-doenca' item.id %}" class="btn btn-primary"><i class="bi bi-pencil"></i>
+                            <button class="btn btn-primary"><a href="{% url 'editar-doenca' item.id %}" ><i class="bi bi-pencil"></i>
                                 Editar</a></button>
-                            <button><a href="{% url 'excluir-doenca' item.id %}" class="btn btn-danger btn-excluir"
-                                data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</a></button>
+                                <a href="{% url 'excluir-doenca' item.id %}"> <button class="btn btn-danger btn-excluir"
+                                data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</button></a>
                         </td>
                     </tr>
                     {% endfor %}
