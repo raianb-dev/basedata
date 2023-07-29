@@ -193,20 +193,10 @@
     // Exemplo de validação básica antes do envio do formulário
     const form = document.querySelector('form');
   
-    form.addEventListener('submit', (event) => {
-      // Cancelar o envio do formulário se algum campo estiver vazio
-      const inputs = form.querySelectorAll('textarea');
-      for (const input of inputs) {
-        if (!input.value.trim()) {
-          alert('Por favor, preencha todos os campos do formulário.');
-          event.preventDefault();
-          return;
-        }
-      }
+    
   
       // Outras ações antes de enviar o formulário (por exemplo, enviar para o servidor)
-      // ...
-    });
+ 
   </script>
   
 
