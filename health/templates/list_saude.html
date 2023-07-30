@@ -6,7 +6,12 @@
 <head>
     <title>Listagem de Saúde</title>
     <link rel="stylesheet" href="{% static 'health/styles.css' %}">
-
+    <style>
+        .studies,
+        p {
+            margin-left: 30px;
+        }
+    </style>
 </head>
 
 
@@ -22,7 +27,7 @@
                     {% endif %}
                     <button type="submit"><i class="bi bi-search"></i></button>
                     {% if search_query %}
-                    <a href="{% url 'health' %}" class="btn btn-secondary" style="margin-right: 10px;">Limpar filtro</a>
+                    <a href="{% url 'health' %}" class="" style="margin-right: 10px;">Limpar filtro</a>
                     {% endif %}
                 </form>
             </div>
@@ -41,7 +46,6 @@
                         <th>Benefícios Potenciais <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Efeitos Colaterais/Cuidados <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Interações Gênicas <span class="icon-arrow">&UpArrow;</span></th>
-                        <th>Estudos Científicos / Referências Científicas <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Experiência dos Usuários <span class="icon-arrow">&UpArrow;</span></th>
                         <th>FAQ / Perguntas Frequentes <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Ações</th>
@@ -57,17 +61,18 @@
                         <td>{{ item.potential_benefits|truncate_chars:50 }}</td>
                         <td>{{ item.effects_precautions|truncate_chars:50 }}</td>
                         <td>{{ item.gene_interactions|truncate_chars:50 }}</td>
-                        <td>{{ item.scientific_studies|truncate_chars:50 }}</td>
                         <td>{{ item.user_experience|truncate_chars:50 }}</td>
                         <td>{{ item.faq|truncate_chars:50 }}</td>
 
                         <td>
-                            <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
-                                    class="bi bi-eye"></i> Detalhes</button>
-                            <button class="btn btn-primary"><a href="{% url 'editar-saude' item.id %}" ><i
-                                        class="bi bi-pencil"></i> Editar</a></button>
-                                        <a href="{% url 'excluir-saude' item.id %}"><button class="btn btn-danger btn-excluir"
-                                    data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</button></a>
+                            <div style="transform: translateX(30px);"> <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
+                                        class="bi bi-eye"></i> Detalhes</button>
+                                <button class="btn btn-primary"><a href="{% url 'editar-saude' item.id %}"><i
+                                            class="bi bi-pencil"></i> Editar</a></button>
+                                <a href="{% url 'excluir-saude' item.id %}"><button class="btn btn-danger btn-excluir"
+                                        data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</button></a>
+                            </div>
+
 
                         </td>
                     </tr>
@@ -95,55 +100,81 @@
         </div>
     </div>
 
+
+    <!-- Seu HTML -->
+
     <!-- Modal -->
     {% for item in saude_items %}
     <div class="modal" id="modal-{{ item.id }}">
         <div class="modal-content">
             <!-- Conteúdo detalhado do item -->
-            <h2>{{ item.name }}</h2><br>
-            <p><b>Descrição / O que é?</b><br> {{ item.description }}</p><br>
-            <p><b>Mecanismos de Ação:</b><br> {{ item.action_mechanisms }}</p><br>
-            <p><b>Benefícios Potenciais:</b><br> {{ item.potential_benefits }}</p><br>
-            <p><b>Efeitos Colaterais/Cuidados:</p></b> {{ item.effects_precautions }}</p><br>
-            <p><b>Interações Gênicas:</b><br> {{ item.gene_interactions }}</p><br>
-            <p><b>Estudos Científicos / Referências Científicas:</b><br> {{ item.scientific_studies }}</p><br>
-            <p><b>Experiência dos Usuários:</b><br>{{ item.user_experience }}</p><br>
-            <p><b>FAQ / Perguntas Frequentes:</b><br> {{ item.faq }}</p><br>
+            <h2>{{ item.name }}</h2><br><br>
+            <p><b>Descrição / O que é?</b><br> {{ item.description|linebreaksbr }}</p><br><br>
+            <p><b>Mecanismos de Ação:</b><br> {{ item.action_mechanisms|linebreaksbr }}</p><br><br>
+            <p><b>Benefícios Potenciais:</b><br> {{ item.potential_benefits|linebreaksbr }}</p><br><br>
+            <p><b>Efeitos Colaterais/Cuidados:</b><br> {{ item.effects_precautions|linebreaksbr }}</p><br><br>
+            <p><b>Interações Gênicas:</b><br> {{ item.gene_interactions|linebreaksbr }}</p><br><br>
+            <p><b>Experiência dos Usuários:</b><br>{{ item.user_experience|linebreaksbr }}</p><br><br>
+            <p><b>FAQ / Perguntas Frequentes:</b><br> {{ item.faq|linebreaksbr }}</p><br><br>
+            <div id="estudos-cientificos-{{ item.id }}" class="studies"><b>Estudos Científicos / Referências
+                    Científicas:</b><br><br>
+                {{ item.scientific_studies|safe }}</div><br><br>
         </div>
     </div>
     {% endfor %}
 
+
     <!-- Add your JavaScript here to handle the modal functionality -->
     <script>
-        const modalBtns = document.querySelectorAll('.modal-btn');
-        const modalCloseBtns = document.querySelectorAll('[data-modal-close]');
-        const modals = document.querySelectorAll('.modal');
+        document.addEventListener("DOMContentLoaded", function () {
+            const modalBtns = document.querySelectorAll('.modal-btn');
+            const modals = document.querySelectorAll('.modal');
 
-        modalBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.getAttribute('data-modal-target');
-                const modal = document.querySelector(target);
-                modal.classList.add('open');
+            modalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-modal-target');
+                    const modal = document.querySelector(target);
+                    modal.classList.add('open');
+
+                    const itemID = btn.getAttribute('data-item-id');
+                    convertToLinks(itemID);
+                });
+            });
+
+            modals.forEach(modal => {
+                modal.addEventListener('click', e => {
+                    if (e.target.classList.contains('modal')) {
+                        modal.classList.remove('open');
+                    }
+                });
             });
         });
 
-        modalCloseBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const modal = btn.closest('.modal');
-                modal.classList.remove('open');
-            });
-        });
+        function convertToLinks(itemID) {
+            const paragraph = document.getElementById(`estudos-cientificos-${itemID}`);
+            const content = paragraph.innerHTML; // Use innerHTML para obter os links corretamente
 
-        window.addEventListener('click', e => {
-            if (e.target.classList.contains('modal')) {
-                e.target.classList.remove('open');
+            // Create a temporary element to parse the content as HTML
+            const tempElement = document.createElement('div');
+            tempElement.innerHTML = content;
+
+            // Get all the links in the content
+            const links = tempElement.getElementsByTagName('a');
+
+            // Create a new HTML content to replace the existing one
+            let newContent = '';
+
+            // Iterate through the links and add each link to the new content
+            for (const link of links) {
+                newContent += `<a href="${link.href}" target="_blank">${link.innerText}</a><br>`;
             }
-        });
+
+            // Replace the content of the paragraph with the modified HTML
+            paragraph.innerHTML = newContent;
+        }
     </script>
 
-
-
-
+    <!-- Seu HTML continua abaixo... -->
 
 
     <!-- Modal de Confirmação de Exclusão -->

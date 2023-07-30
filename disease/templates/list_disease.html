@@ -5,17 +5,19 @@
 
 <head>
     <title>Listagem de Doenças</title>
-
     <link rel="stylesheet" href="{% static 'disease/styles.css' %}">
-
+    <style>
+        .estudos,
+        p {
+            margin-left: 30px;
+        }
+    </style>
 </head>
-
 
 <body>
     <div class="container">
         <div class="nav">
-        
-
+            <a href="{% url 'home' %}" target="" rel="noopener noreferrer"></a>
             <div class="search-container">
                 <form id="search-form" action="{% url 'doenca' %}">
                     {% if search_query %}
@@ -25,14 +27,13 @@
                     {% endif %}
                     <button type="submit"><i class="bi bi-search"></i></button>
                     {% if search_query %}
-                    <a href="{% url 'doenca' %}" class="btn btn-secondary" style="margin-right: 10px;">Limpar filtro</a>
+                    <a href="{% url 'doenca' %}" class="" style="margin-right: 10px;">Limpar filtro</a>
                     {% endif %}
                 </form>
             </div>
             <br>
             <h1 style="transform: translateX(-45px);">Doenças</h1>
         </div>
-        <!--<a href="{% url 'home' %}" rel="noopener noreferrer" style="position: absolute; top: 60px; left: 5px;">Início</a>-->
 
         <a href="{% url 'add-doenca' %}" class="floating-button">+</a>
         <section class="table__body" style="scale: 0.86;">
@@ -50,53 +51,52 @@
                         <th>Medicamentos<span class="icon-arrow">&UpArrow;</span></th>
                         <th>Dieta<span class="icon-arrow">&UpArrow;</span></th>
                         <th>Prognóstico<span class="icon-arrow">&UpArrow;</span></th>
-
                         <th></th>
                         <th>Ações</th>
                     </tr>
-                    
                 </thead>
                 <tbody>
                     {% for item in disease_items %}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.nome_comum|truncatechars:60 }}</td>
-                        <td>{{ item.termo_medico|truncatechars:60 }}</td>
-                        <td>{{ item.descricao|truncatechars:60 }}</td>
-                        <td>{{ item.causa|truncatechars:60 }}</td>
-                        <td>{{ item.prevencao|truncatechars:60 }}</td>
-                        <td>{{ item.sinal_sintoma|truncatechars:60 }}</td>
-                        <td>{{ item.fator_risco|truncatechars:60 }}</td>
-                        <td>{{ item.diagnostico_tratamento|truncatechars:60 }}</td>
-                        <td>{{ item.medidas_gerais|truncatechars:60}}</td>
-                        <td>{{ item.medicamentos_gerais|truncatechars:60 }}</td>
-                        <td>{{ item.dieta|truncatechars:60 }}</td>
+                        <td>{{ item.nome_comum|truncatechars:25 }}</td>
+                        <td>{{ item.termo_medico|truncatechars:25 }}</td>
+                        <td>{{ item.descricao|truncatechars:25 }}</td>
+                        <td>{{ item.causa|truncatechars:25 }}</td>
+                        <td>{{ item.prevencao|truncatechars:25 }}</td>
+                        <td>{{ item.sinal_sintoma|truncatechars:25 }}</td>
+                        <td>{{ item.fator_risco|truncatechars:25 }}</td>
+                        <td>{{ item.diagnostico_tratamento|truncatechars:25 }}</td>
+                        <td>{{ item.medidas_gerais|truncatechars:25}}</td>
+                        <td>{{ item.medicamentos_gerais|truncatechars:25 }}</td>
+                        <td>{{ item.dieta|truncatechars:25 }}</td>
                         <td>
-                            <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
+                            <div style="transform: translateX(30px)">
+                                <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
                                     class="bi bi-eye"></i> Detalhes</button>
-                            <button class="btn btn-primary"><a href="{% url 'editar-doenca' item.id %}" ><i class="bi bi-pencil"></i>
-                                Editar</a></button>
-                                <a href="{% url 'excluir-doenca' item.id %}"> <button class="btn btn-danger btn-excluir"
-                                data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</button></a>
+                            <button class="btn btn-primary"><a href="{% url 'editar-doenca' item.id %}"><i
+                                        class="bi bi-pencil"></i>
+                                    Editar</a></button>
+                            <a href="{% url 'excluir-doenca' item.id %}"><button class="btn btn-danger btn-excluir"
+                                    data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</button></a>
+                            </div>
+                            
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
-                
             </table>
         </section>
         <!-- Paginação -->
         <div class="pagination">
             <span class="step-links">
-                {% if saude_items.has_previous %}
+                {% if disease_items.has_previous %}
                 <a href="?page=1">&laquo; Primeira página</a>
-                <a href="?page={{ saude_items.previous_page_number }}">voltar</a>
+                <a href="?page={{ disease_items.previous_page_number }}">voltar</a>
                 {% endif %}
-
                 <span class="current">
-                    Página {{ saude_items.number }} de {{ saude_items.paginator.num_pages }}.
+                    Página {{ disease_items.number }} de {{ disease_items.paginator.num_pages }}.
                 </span>
-
                 {% if disease_items.has_next %}
                 <a href="?page={{ disease_items.next_page_number }}">Próxima</a>
                 <a href="?page={{ disease_items.paginator.num_pages }}">Ultima &raquo;</a>
@@ -107,57 +107,68 @@
 
     <!-- Modal -->
     <!-- Modal -->
-{% for item in disease_items %}
-<div class="modal" id="modal-{{ item.id }}">
-    <div class="modal-content">
-        <!-- Conteúdo detalhado do item -->
-        <h2>{{ item.nome_comum }}</h2><br>
-        <p><b>Termo Médico:</b><br> {{ item.termo_medico }}</p><br>
-        <p><b>Descrição / O que é?</b><br> {{ item.descricao }}</p><br>
-        <p><b>Causa:</b><br> {{ item.causa }}</p><br>
-        <p><b>Prevenção:</b><br> {{ item.prevencao }}</p><br>
-        <p><b>Sinais e Sintomas:</b><br> {{ item.sinal_sintoma }}</p><br>
-        <p><b>Fator de Risco:</b><br> {{ item.fator_risco }}</p><br>
-        <p><b>Diagnóstico e Tratamento:</b><br> {{ item.diagnostico_tratamento }}</p><br>
-        <p><b>Medidas Gerais:</b><br> {{ item.medidas_gerais }}</p><br>
-        <p><b>Medicamentos Gerais:</b><br> {{ item.medicamentos_gerais }}</p><br>
-        <p><b>Dieta:</b><br> {{ item.dieta }}</p><br>
-        <p><b>Prognóstico:</b><br> {{ item.prognostico }}</p><br>
-        <p><b>Suplemento:</b><br> {{ item.suplemento }}</p><br>
-        <p><b>FAQ / Perguntas Frequentes:</b><br> {{ item.faq_doenca }}</p><br>
-        <p><b>Referências:</b><br> {{ item.referencia }}</p><br>
+    {% for item in disease_items %}
+    <div class="modal" id="modal-{{ item.id }}">
+        <div class="modal-content">
+            <!-- Conteúdo detalhado do item -->
+            <h2>{{ item.nome_comum }}</h2><br>
+            <p><b>Termo Médico:</b><br> {{ item.termo_medico }}</p><br>
+            <p><b>Descrição / O que é?</b><br> {{ item.descricao|linebreaksbr }}</p><br>
+            <p><b>Causa:</b><br> {{ item.causa|linebreaksbr }}</p><br>
+            <p><b>Prevenção:</b><br> {{ item.prevencao|linebreaksbr }}</p><br>
+            <p><b>Sinais e Sintomas:</b><br> {{ item.sinal_sintoma|linebreaksbr }}</p><br>
+            <p><b>Fator de Risco:</b><br> {{ item.fator_risco|linebreaksbr }}</p><br>
+            <p><b>Diagnóstico e Tratamento:</b><br> {{ item.diagnostico_tratamento|linebreaksbr }}</p><br>
+            <p><b>Medidas Gerais:</b><br> {{ item.medidas_gerais|linebreaksbr }}</p><br>
+            <p><b>Medicamentos Gerais:</b><br> {{ item.medicamentos_gerais|linebreaksbr }}</p><br>
+            <p><b>Dieta:</b><br> {{ item.dieta|linebreaksbr }}</p><br>
+            <p><b>Prognóstico:</b><br> {{ item.prognostico|linebreaksbr }}</p><br>
+            <p><b>Suplemento:</b><br> {{ item.suplemento|linebreaksbr }}</p><br>
+            <p><b>FAQ / Perguntas Frequentes:</b><br> {{ item.faq_doenca|linebreaksbr }}</p><br>
+
+            <div id="referencias-{{ item.id }}" class="estudos"><b>Estudos Científicos / Referências
+                    Científicas:</b><br><br>
+                {{ item.referencia|safe }}</div><br><br>
+        </div>
     </div>
-</div>
-{% endfor %}
+    {% endfor %}
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modalBtns = document.querySelectorAll('.modal-btn');
+            const modals = document.querySelectorAll('.modal');
 
-<script>
-    const modalBtns = document.querySelectorAll('.modal-btn');
-    const modalCloseBtns = document.querySelectorAll('[data-modal-close]');
-    const modals = document.querySelectorAll('.modal');
+            modalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-modal-target');
+                    const modal = document.querySelector(target);
+                    modal.classList.add('open');
 
-    modalBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.getAttribute('data-modal-target');
-            const modal = document.querySelector(target);
-            modal.classList.add('open');
+                    const itemID = btn.getAttribute('data-item-id');
+                    convertToLinksAndSeparate(itemID);
+                });
+            });
+
+            modals.forEach(modal => {
+                modal.addEventListener('click', e => {
+                    if (e.target.classList.contains('modal')) {
+                        modal.classList.remove('open');
+                    }
+                });
+            });
         });
-    });
 
-    modalCloseBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const modal = btn.closest('.modal');
-            modal.classList.remove('open');
-        });
-    });
+        function convertToLinksAndSeparate(itemID) {
+            const paragraph = document.getElementById(`referencias-${itemID}`);
+            const content = paragraph.innerHTML; // Use innerHTML para obter o conteúdo corretamente
 
-    window.addEventListener('click', e => {
-        if (e.target.classList.contains('modal')) {
-            e.target.classList.remove('open');
+            // Replace all occurrences of "-" with "<br>"
+            const newContent = content.replace(/-/g, '<br>');
+
+            // Replace the content of the paragraph with the modified HTML
+            paragraph.innerHTML = newContent;
         }
-    });
-</script>
-
+    </script>
 
 
 
@@ -178,45 +189,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function () {
-            var modal = $('#modal-excluir');
-            var btnExcluir = $('.btn-excluir');
-            var btnConfirmar = $('.btn-confirmar');
-            var btnCancela = $('.btn-cancelar');
-            var itemId;
-
-            // Abra o modal quando clicar em um dos links de exclusão
-            btnExcluir.click(function (event) {
-                event.preventDefault(); // Impede o comportamento padrão de clicar no link
-                itemId = $(this).data('item-id');
-                console.log(itemId); // Imprime o valor de itemId no console
-                modal.modal('show');
-                $('#item_id_input').val(itemId); // Armazena o valor do item_id no campo oculto
-            });
-
-            // Ação quando o usuário clicar no botão "Sim" no modal de confirmação
-            btnConfirmar.click(function () {
-                // Realize a ação de exclusão (submeter o formulário de exclusão)
-                $('#form-excluir').submit();
-            });
-
-            // Ação quando o modal for ocultado
-            modal.on('hidden.bs.modal', function () {
-                // Atualize a página após um pequeno atraso
-                setTimeout(function () {
-                    location.reload();
-                }, 10);
-            });
-
-            // Ação quando o usuário clicar no botão "Cancelar" no modal de confirmação
-            btnCancela.click(function () {
-                modal.modal('hide');
-            });
-        });
-    </script>
-
 
 </body>
 

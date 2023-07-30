@@ -102,17 +102,14 @@ def editar_herbsSubstances(request, item_id):
 
 
 
-from django.shortcuts import get_object_or_404, redirect
-from herbsSubstances.models import herbsSubstance
-
 def excluir_substances(request, item_id):
+    disease_item = get_object_or_404(herbsSubstance, id=item_id)
     if request.method == 'GET':
-        # Obter o item a ser excluído
-        saude_item = get_object_or_404(herbsSubstance, id=item_id)
-
-        # Excluir o item
-        saude_item.delete()
-
-        # Redirecionar para a página de listagem após a exclusão
+        # Check if the request method is POST
+        # This ensures that the deletion occurs only when the form is submitted
+        disease_item.delete()
         return redirect('herbsSubstances')
+    
+    # If the request is not POST, render the template normally
+    return render(request, 'list_herbsSubstances.html', {'disease_items': herbsSubstance.objects.all()})
 
