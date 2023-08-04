@@ -21,7 +21,7 @@
             <h1>Herbs Substances</h1>
         </div>
         <a href="{% url 'add-herbsSubstances' %}" class="floating-button">+</a>
-        <section class="table__body" style="scale: 0.8;">
+        <section class="table__body" style="scale: 0.86;">
             <table>
                 <thead>
                     <tr>
@@ -43,7 +43,7 @@
                     {% for item in herbsSubstances_items %}
                     <tr>
                         <td>{{ item.id }}</td>
-                        <td>{{ item.name }}</td>
+                        <td>{{ item.name|truncatechars:50 }}</td>
                         <td>{{ item.resumo|truncatechars:50 }}</td>
                         <td>{{ item.oque_e|truncatechars:50 }}</td>
                         <td>{{ item.beneficios|truncatechars:50 }}</td>
@@ -54,8 +54,8 @@
                         <td>{{ item.dosagem|truncatechars:50 }}</td>
                         <td>{{ item.faq|truncatechars:50 }}</td>
                         <td>
-                            <div style="transform: translateX(30px) ;"> <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
-                                        class="bi bi-eye"></i> Detalhes</button>
+                            <div style="transform: translateX(30px) ;"> <button class="btn btn-primary modal-btn"
+                                    data-modal-target="#modal-{{ item.id }}"><i class="bi bi-eye"></i> Detalhes</button>
                                 <a href="{% url 'editar-herbsSubstances' item.id %}"><button
                                         class="btn btn-primary btn-excluir" data-item-id="{{ item.id }}"><i
                                             class="bi bi-trash"></i> Editar</button></a>
@@ -73,7 +73,7 @@
         <!-- Paginação -->
         <div class="pagination">
             <span class="step-links">
-                {% if saude_items.has_previous %}
+                {% if herbsSubstances_items.has_previous %}
                 <a href="?page=1">&laquo; Primeira página</a>
                 <a href="?page={{ herbsSubstances_items.previous_page_number }}">voltar</a>
                 {% endif %}
@@ -82,12 +82,13 @@
                     Página {{ herbsSubstances_items.number }} de {{ herbsSubstances_items.paginator.num_pages }}.
                 </span>
 
-                {% if saude_items.has_next %}
+                {% if herbsSubstances_items.has_next %}
                 <a href="?page={{ herbsSubstances_items.next_page_number }}">Próxima</a>
                 <a href="?page={{ herbsSubstances_items.paginator.num_pages }}">Ultima &raquo;</a>
                 {% endif %}
             </span>
         </div>
+
     </div>
 
     {% for item in herbsSubstances_items %}

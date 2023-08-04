@@ -5,17 +5,84 @@
 
 <head>
   <title>Adicionar Ervas | Substâncias</title>
-  <!-- Add your CSS stylesheets here -->
-  <link rel="stylesheet" href="{% static 'herbs/styles.css' %}">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .nav {
+
+      color: #2e45ca;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .nav h1 {
+      margin: 0;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #classificar {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+  </style>
 </head>
 
 <body>
   <div class="container">
     <div class="nav">
-      <h1>Herbs  Substances</h1>
+      <h1>Adicionar Ervas medicinais</h1>
     </div>
     <section>
-      <center>
         <form method="post" action="{% url 'add-herbsSubstances' %}">
           <br>
           <label id="label">Importar informação / ChatGPT:</label><br>
@@ -61,7 +128,6 @@
           <input type="submit" value="Enviar" id="button">
 
         </form>
-      </center>
 
     </section>
   </div>

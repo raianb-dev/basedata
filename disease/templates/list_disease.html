@@ -46,13 +46,12 @@
                         <th>Descrição<span class="icon-arrow">&UpArrow;</span></th>
                         <th>Causas<span class="icon-arrow">&UpArrow;</span></th>
                         <th>Prevenção<span class="icon-arrow">&UpArrow;</span></th>
-                        <th>Diagnóstico/Tratamento <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Diagnóstico/Trat. <span class="icon-arrow">&UpArrow;</span></th>
                         <th>Medidas Gerais<span class="icon-arrow">&UpArrow;</span></th>
                         <th>Medicamentos<span class="icon-arrow">&UpArrow;</span></th>
                         <th>Dieta<span class="icon-arrow">&UpArrow;</span></th>
                         <th>Prognóstico<span class="icon-arrow">&UpArrow;</span></th>
-                        <th></th>
-                        <th>Ações</th>
+                        <th style="z-index: 6;">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,7 +67,6 @@
                         <td>{{ item.fator_risco|truncatechars:25 }}</td>
                         <td>{{ item.diagnostico_tratamento|truncatechars:25 }}</td>
                         <td>{{ item.medidas_gerais|truncatechars:25}}</td>
-                        <td>{{ item.medicamentos_gerais|truncatechars:25 }}</td>
                         <td>{{ item.dieta|truncatechars:25 }}</td>
                         <td>
                             <div style="transform: translateX(30px)">

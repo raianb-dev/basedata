@@ -47,7 +47,7 @@ def salvar_herbsSubstances(request):
 def listar_herbsSubstances(request):
     herbsSubstances_items = herbsSubstance.objects.all()
 
-    itens_por_pagina = 7
+    itens_por_pagina = 100
     paginator = Paginator(herbsSubstances_items, itens_por_pagina)
 
     # Obtenha o número da página a partir dos parâmetros GET da URL

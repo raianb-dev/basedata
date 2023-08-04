@@ -82,7 +82,7 @@ def listar_disease(request):
         disease_items = Doenca.objects.all()
 
     # Paginate the results
-    itens_por_pagina = 3
+    itens_por_pagina = 100
     paginator = Paginator(disease_items, itens_por_pagina)
 
     page = request.GET.get('page')

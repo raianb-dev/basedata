@@ -101,11 +101,12 @@ body, html {
     max-height: calc(89% - 1.6rem);
     background-color: #fffb;
     /* Remova a propriedade "top: 60px;" para centralizar a tabela verticalmente */
-    position: relative;
+    position: fixed;
     margin: -5px auto;
     border-radius: .6rem;
     overflow: auto;
     overflow: overlay;
+    transform: translateY(370px);
 }
 
 

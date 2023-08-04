@@ -1,0 +1,252 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastrar Medicamento</title>
+    <!-- Adicione os arquivos CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Adicione o jQuery (se ainda não estiver sendo utilizado) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Adicione o arquivo JS do Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          // Inicialize o Select2
+          $('#classe_droga').select2();
+          $('#nome_comercial').select2();
+          $('#principio_ativo').select2();
+        });
+      </script>
+</head>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .nav {
+      left: 10px;
+      color: #0f42ce;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .nav h1 {
+      margin: 0;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #classificar {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    select {
+      min-width: 400px;
+      min-height: 40px;
+    }
+  </style>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1>Medicamentos</h1>
+        </div>
+        <section>
+            <form method="post" action="{% url 'adicionar_medicamento' %}" enctype="multipart/form-data">
+                <label for="prompt">Importar informação / ChatGPT:</label>
+                <br>
+                <textarea name="prompt" id="prompt" cols="140" rows="15" placeholder="Cole o texto aqui..."></textarea>
+                <br>
+                <input type="button" value="Importar" id="classificar">
+                <h2>Formulário</h2>
+                {% csrf_token %}
+
+                <!-- Princípio Ativo (Dropdown List) -->
+                <label for="principio_ativo">Princípio Ativo:</label>
+                <select name="principio_ativo" id="principio_ativo">
+                    <option value="opcao1">Opção 1</option>
+                    <option value="opcao2">Opção 2</option>
+                    <option value="opcao3">Opção 3</option>
+                    <!-- Adicione as demais opções aqui -->
+                </select>
+                <br><br>
+
+                <!-- Nome Comercial / Farmacêutica (Dropdown List) -->
+                <label for="nome_comercial">Nome Comercial / Farmacêutica:</label>
+                <select name="nome_comercial" id="nome_comercial">
+                    <option value="opcao1">Opção 1</option>
+                    <option value="opcao2">Opção 2</option>
+                    <option value="opcao3">Opção 3</option>
+                    <!-- Adicione as demais opções aqui -->
+                </select>
+                <br><br>
+
+                <!-- Classe de Droga (Dropdown List) -->
+                <label for="classe_droga">Classe de Droga:</label>
+                <select name="classe_droga" id="classe_droga">
+                    <option value="opcao1">Opção 1</option>
+                    <option value="opcao2">Opção 2</option>
+                    <option value="opcao3">Opção 3</option>
+                    <!-- Adicione as demais opções aqui -->
+                </select>
+                <br><br>
+
+                <!-- Campos restantes -->
+                <label for="nome_cientifico">Nome Científico:</label>
+                <br>
+                <textarea name="nome_cientifico" id="nome_cientifico" cols="140" rows="3"
+                    placeholder="Adicionar nome científico..."></textarea>
+                <br>
+                <label for="descricao">Descrição:</label>
+                <br>
+                <textarea name="descricao" id="descricao" cols="140" rows="3"
+                    placeholder="Adicionar descrição..."></textarea>
+                <br>
+                <label for="composicao_quimica">Composição Química:</label>
+                <br>
+                <textarea name="composicao_quimica" id="composicao_quimica" cols="140" rows="3"
+                    placeholder="Adicionar composição química..."></textarea>
+                <br>
+                <label for="usos_caracteristicas">Usos / Características Benéficas / Indicações:</label>
+                <br>
+                <textarea name="usos_caracteristicas" id="usos_caracteristicas" cols="140" rows="3"
+                    placeholder="Adicionar usos e características..."></textarea>
+                <br>
+                <label for="contra_indicacoes">Contra Indicações e Reações Adversas:</label>
+                <br>
+                <textarea name="contra_indicacoes" id="contra_indicacoes" cols="140" rows="3"
+                    placeholder="Adicionar contra indicações e reações adversas..."></textarea>
+                <br>
+                <label for="doencas_correlacionadas">Doenças/Situações correlacionadas:</label>
+                <br>
+                <textarea name="doencas_correlacionadas" id="doencas_correlacionadas" cols="140" rows="3"
+                    placeholder="Adicionar doenças/situações correlacionadas..."></textarea>
+                <br>
+                <label for="faq">FAQ / Perguntas Frequentes:</label>
+                <br>
+                <textarea name="faq" id="faq" cols="140" rows="15"
+                    placeholder="Adicionar faq, perguntas frequentes..."></textarea>
+                <br>
+
+                <label for="upload">Upload Bula:</label>
+                <br>
+                <input type="file" name="upload" id="upload">
+                <br>
+                <input type="submit" value="Enviar" id="button">
+            </form>
+        </section>
+    </div>
+
+    <div id="linkContainer"></div>
+
+    <!-- Adicione o script abaixo no mesmo local onde estava a função de autopreenchimento anterior -->
+    <script>
+        // Função para preencher os campos do formulário com base no texto fornecido
+        function autoPreenchimento() {
+            const texto = document.getElementById('prompt').value;
+            const regexTópicos = /%(\d+)%([^%]+)%(\d+)%/gs;
+
+            let match;
+            let tópicos = [];
+
+            while ((match = regexTópicos.exec(texto)) !== null) {
+                const conteudoTópico = match[2].trim();
+                tópicos.push(conteudoTópico);
+            }
+
+            if (tópicos.length >= 1) {
+                document.getElementById('name').value = tópicos[0];
+            }
+
+            if (tópicos.length >= 2) {
+                document.getElementById('descricao').value = tópicos[1];
+            }
+
+            if (tópicos.length >= 3) {
+                document.getElementById('mecanismo').value = tópicos[2];
+            }
+
+            if (tópicos.length >= 4) {
+                document.getElementById('beneficio').value = tópicos[3];
+            }
+
+            if (tópicos.length >= 5) {
+                document.getElementById('efeitos_colaterais').value = tópicos[4];
+            }
+
+            if (tópicos.length >= 6) {
+                document.getElementById('interacoes').value = tópicos[5];
+            }
+
+            if (tópicos.length >= 7) {
+                document.getElementById('experiencia').value = tópicos[6];
+            }
+
+            if (tópicos.length >= 8) {
+                document.getElementById('estudos_cientificos').value = tópicos[7];
+            }
+
+            if (tópicos.length >= 9) {
+                document.getElementById('faq').value = tópicos[8];
+            }
+        }
+
+        // Chame a função de preenchimento automático quando o campo de texto for alterado
+        document.getElementById('prompt').addEventListener('change', autoPreenchimento);
+    </script>
+
+</body>
+
+</html>

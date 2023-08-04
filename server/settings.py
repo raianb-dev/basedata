@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'health',
     'disease',
     'home',
-    'herbsSubstances'
+    'herbsSubstances',
+    'medicines'
 ]
 
 MIDDLEWARE = [
@@ -142,3 +143,6 @@ TINYMCE_DEFAULT_CONFIG = {
 
 
 AUTORELOAD = False
+import os
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

@@ -6,7 +6,7 @@ from health import views as views_health
 from herbsSubstances import views as views_herbsSubstances
 from disease import views as views_disease
 from home import views as views_home
-
+from medicines import views as views_medicines 
 # Urls "admin"
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +30,12 @@ urlpatterns = [
     path('doenca/cadastrar', views_disease.salvar_disease, name='add-doenca'),
     path('doenca/editar/<int:item_id>/', views_disease.editar_disease, name='editar-doenca'),
     path('doenca/excluir/<int:item_id>/', views_disease.excluir_disease, name='excluir-doenca'),
+
+    # Routes "medicamentos"
+    path('medicamentos/', views_medicines.listar_medicamentos, name='listar_medicamentos'),
+    path('medicamentos/cadastrar/', views_medicines.adicionar_medicamento, name='adicionar_medicamento'),
+    path('medicamentos/editar/<int:medicamento_id>/', views_medicines.editar_medicamento, name='editar_medicamento'),
+    path('medicamentos/excluir/<int:medicamento_id>/', views_medicines.excluir_medicamento, name='excluir_medicamento'),
 
     # Routes "home"
     path('', views_home.redirect, name='home'),
