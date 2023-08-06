@@ -1,0 +1,140 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastrar parâmetro | Medicamento</title>
+    <!-- Adicione os arquivos CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Adicione o jQuery (se ainda não estiver sendo utilizado) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Adicione o arquivo JS do Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          // Inicialize o Select2
+          $('#classe_droga').select2();
+          $('#nome_comercial').select2();
+          $('#principio_ativo').select2();
+        });
+      </script>
+</head>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .nav {
+      left: 10px;
+      color: #0f42ce;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .nav h1 {
+      margin: 0;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #classificar {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    select {
+      min-width: 400px;
+      min-height: 40px;
+    }
+  </style>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <h1>Adicionar parâmetro de consulta | Medicamento</h1>
+        </div>
+        <section>
+            <form id="consultaForm" action="{% url 'adicionar_consulta' %}" method="POST">
+                {% csrf_token %}
+                <label for="name_product">Princípio Ativo:</label>
+                <input type="text" id="name_product" name="name_product" required><br><br>
+
+                <label for="principioAtivo">Princípio Ativo:</label>
+                <input type="text" id="main_active" name="main_active" required><br><br>
+
+                <label for="register">Registro:</label>
+                <input type="text" id="register" name="register" required><br><br>
+
+                <label for="proccess">Processo:</label>
+                <input type="text" id="proccess" name="proccess" required><br><br>
+
+                <label for="cnpj"> CNPJ:</label>
+                <input type="text" id="cnpj" name="cnpj" required><br><br>
+
+                <label for="situation">Situação:</label>
+                <input type="text" id="situation" name="situation" required><br><br>
+
+                <label for="vencimento">Vencimento:</label>
+                <input type="datetime-local" id="vencimento" name="vencimento" required><br><br>
+                <center><input class="btn-primary btn" type="submit" value="Salvar"></center><br>
+                <center><input class="btn-primary btn" type="submit" value="Salvar e continuar"></center>
+            </form>
+        </section>
+    </div>
+
+    <div id="linkContainer"></div>
+
+
+</body>
+
+</html>

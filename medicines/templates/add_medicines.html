@@ -13,95 +13,90 @@
 
     <!-- Adicione o arquivo JS do Select2 -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-          // Inicialize o Select2
-          $('#classe_droga').select2();
-          $('#nome_comercial').select2();
-          $('#principio_ativo').select2();
-        });
-      </script>
+
 </head>
 <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-      width: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+        width: 100%;
     }
 
     .container {
-      max-width: 800px;
-      margin: 20px auto;
-      background-color: #ffffff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
     }
 
     .nav {
-      left: 10px;
-      color: #0f42ce;
-      text-align: center;
-      padding: 10px 0;
+        left: 10px;
+        color: #0f42ce;
+        text-align: center;
+        padding: 10px 0;
     }
 
     .nav h1 {
-      margin: 0;
+        margin: 0;
     }
 
     form {
-      max-width: 600px;
-      margin: 0 auto;
+        max-width: 600px;
+        margin: 0 auto;
     }
 
     label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
     }
 
     textarea,
     input[type="file"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
     }
 
     #button {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
     }
 
     #classificar {
-      background-color: #28a745;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 5px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
     }
 
     h2 {
-      margin-bottom: 10px;
+        margin-bottom: 10px;
     }
 
     select {
-      min-width: 400px;
-      min-height: 40px;
+        min-width: 400px;
+        min-height: 40px;
     }
-  </style>
+</style>
+
 
 <body>
+
     <div class="container">
         <div class="nav">
-            <h1>Medicamentos</h1>
+            <h1>Adicionar parâmetro de consulta | Medicamento</h1>
         </div>
         <section>
             <form method="post" action="{% url 'adicionar_medicamento' %}" enctype="multipart/form-data">
@@ -113,25 +108,24 @@
                 <h2>Formulário</h2>
                 {% csrf_token %}
 
-                <!-- Princípio Ativo (Dropdown List) -->
                 <label for="principio_ativo">Princípio Ativo:</label>
                 <select name="principio_ativo" id="principio_ativo">
-                    <option value="opcao1">Opção 1</option>
-                    <option value="opcao2">Opção 2</option>
-                    <option value="opcao3">Opção 3</option>
-                    <!-- Adicione as demais opções aqui -->
+                    {% for principio in principios_ativos %}
+                    <option value="{{ principio.main_active }}">{{ principio.main_active }}</option>
+                    {% endfor %}
                 </select>
+
                 <br><br>
+
 
                 <!-- Nome Comercial / Farmacêutica (Dropdown List) -->
                 <label for="nome_comercial">Nome Comercial / Farmacêutica:</label>
                 <select name="nome_comercial" id="nome_comercial">
-                    <option value="opcao1">Opção 1</option>
-                    <option value="opcao2">Opção 2</option>
-                    <option value="opcao3">Opção 3</option>
-                    <!-- Adicione as demais opções aqui -->
+                    <!-- As opções serão preenchidas dinamicamente através do AJAX -->
                 </select>
                 <br><br>
+
+
 
                 <!-- Classe de Droga (Dropdown List) -->
                 <label for="classe_droga">Classe de Droga:</label>
@@ -142,7 +136,14 @@
                     <!-- Adicione as demais opções aqui -->
                 </select>
                 <br><br>
-
+                <script>
+                    $(document).ready(function () {
+                        // Inicialize o Select2
+                        $('#classe_droga').select2();
+                        $('#nome_comercial').select2();
+                        $('#principio_ativo').select2();
+                    });
+                </script>
                 <!-- Campos restantes -->
                 <label for="nome_cientifico">Nome Científico:</label>
                 <br>
@@ -190,7 +191,24 @@
     </div>
 
     <div id="linkContainer"></div>
-
+    <script>
+        $(document).ready(function () {
+            $("#principio_ativo").change(function () {
+                var selectedMainActive = $(this).val();
+                $.ajax({
+                    url: "{% url 'get_product_names' %}",
+                    data: { 'selected_main_active': selectedMainActive },
+                    dataType: 'json',
+                    success: function (data) {
+                        // Código para atualizar o segundo select 'nome_comercial'
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            });
+        });
+    </script>
     <!-- Adicione o script abaixo no mesmo local onde estava a função de autopreenchimento anterior -->
     <script>
         // Função para preencher os campos do formulário com base no texto fornecido

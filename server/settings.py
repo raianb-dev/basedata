@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'disease',
     'home',
     'herbsSubstances',
-    'medicines'
+    'medicines',
+    'habits',
+    'blog'
 ]
 
 MIDDLEWARE = [

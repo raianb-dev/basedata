@@ -108,6 +108,10 @@ body, html {
 
 }
 
+.tabela{
+    margin: 10px auto;
+    max-width: 90%;
+}
 
 .table__body::-webkit-scrollbar{
     width: 0.5rem;

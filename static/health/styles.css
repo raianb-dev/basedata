@@ -87,7 +87,7 @@ body, html {
     width: 45%;
     background-color: #fff8;
     box-shadow: 0 .1rem .4rem #0002;
-    
+
 }
 
 .table__header .input-group img {
@@ -467,24 +467,3 @@ h1{
     color: #fff;
 }
 
-/* Estilo para o botão de fechar do modal */
-.close {
-    cursor: pointer;
-}
-
-/* Estilo para o botão de fechar do modal (ícone "X") */
-.close span {
-    position: relative;
-    top: -3px;
-}
-
-/* Estilo para o botão de fechar do modal quando hover */
-.close:hover {
-    color: #333;
-}
-textarea{
-    border-radius: 10px;
-}
-#label{
-    font-weight: bolder;
-}

@@ -106,8 +106,8 @@
       <!-- Princípio Ativo (Dropdown List) -->
       <label for="principio_ativo">Princípio Ativo:</label>
       <select name="principio_ativo" id="principio_ativo" >
-        <option value="ABACAVIR" {% if medicamento.classe_droga == 'A SAÚDE DA MULHER' %}selected{% endif %}>A SAÚDE DA MULHER</option>
-        <option value="ABARELIX" {% if medicamento.classe_droga == 'AAS' %}selected{% endif %}>AAS</option>
+        <option value="op1" {% if medicamento.principio_ativo == 'op1' %}selected{% endif %}>op1</option>
+        <option value="op2" {% if medicamento.principio_ativo == 'op2' %}selected{% endif %}>op2</option>
         <!-- Adicione as demais opções aqui -->
       </select>
       <br><br>
@@ -115,9 +115,8 @@
       <!-- Nome Comercial / Farmacêutica (Dropdown List) -->
       <label for="nome_comercial">Nome Comercial / Farmacêutica:</label>
       <select name="nome_comercial" id="nome_comercial">
-        <option value="opcao1">Opção 1</option>
-        <option value="opcao2">Opção 2</option>
-        <option value="opcao3">Opção 3</option>
+        <option value="ACETATO DE ZINCO" {% if medicamento.nome_comercial == 'ACETATO DE ZINCO' %}selected{% endif %}>ACETATO DE ZINCO</option>
+        <option value="ACTH E SIMILARES" {% if medicamento.nome_comercial == 'ACTH E SIMILARES' %}selected{% endif %}>ACTH E SIMILARES</option>
         <!-- Adicione as demais opções aqui -->
       </select>
       <br><br>
@@ -143,164 +142,6 @@
         <option value="AGENTE PARALISANTE NEUROMUSCULAR" {% if medicamento.classe_droga == 'AGENTE PARALISANTE NEUROMUSCULAR' %}selected{% endif %}>AGENTE PARALISANTE NEUROMUSCULAR</option>
         <option value="AGENTE QUELANTE DE FERRO" {% if medicamento.classe_droga == 'AGENTE QUELANTE DE FERRO' %}selected{% endif %}>AGENTE QUELANTE DE FERRO</option>
         <option value="AGENTES ADRENÉRGICOS E DOPAMINÉRGICOS" {% if medicamento.classe_droga == 'AGENTES ADRENÉRGICOS E DOPAMINÉRGICOS' %}selected{% endif %}>AGENTES ADRENÉRGICOS E DOPAMINÉRGICOS</option>
-        <option value="AGENTES ANTI-INFLAMATÓRIOS" {% if medicamento.classe_droga == 'AGENTES ANTI-INFLAMATÓRIOS' %}selected{% endif %}>AGENTES ANTI-INFLAMATÓRIOS</option>
-        <option value="AGENTES ANTI-INFLAMATÓRIOS" {% if medicamento.classe_droga == 'AGENTES ANTI-INFLAMATÓRIOS' %}selected{% endif %}>AGENTES ANTI-INFLAMATÓRIOS</option>
-        <option value="AGENTES ANTI-INFLAMATÓRIOS E ANTI-INFECCIOSOS EM ASSOCIAÇÃO" {% if medicamento.classe_droga == 'AGENTES ANTI-INFLAMATÓRIOS E ANTI-INFECCIOSOS EM ASSOCIAÇÃO' %}selected{% endif %}>AGENTES ANTI-INFLAMATÓRIOS E ANTI-INFECCIOSOS EM ASSOCIAÇÃO</option>
-        <option value="AGENTES ANTI-INFLAMATÓRIOS, NÃO ESTEROIDAIS" {% if medicamento.classe_droga == 'AGENTES ANTI-INFLAMATÓRIOS, NÃO ESTEROIDAIS' %}selected{% endif %}>AGENTES ANTI-INFLAMATÓRIOS, NÃO ESTEROIDAIS</option>
-        <option value="AGENTES ANTIINFLAMATÓRIOS/ANTIREUMÁTICOS EM ASSOCIAÇÃO" {% if medicamento.classe_droga == 'AGENTES ANTIINFLAMATÓRIOS/ANTIREUMÁTICOS EM ASSOCIAÇÃO' %}selected{% endif %}>AGENTES ANTIINFLAMATÓRIOS/ANTIREUMÁTICOS EM ASSOCIAÇÃO</option>
-        <option value="AGENTES ANTINEOPLÁSICOS" {% if medicamento.classe_droga == 'AGENTES ANTINEOPLÁSICOS' %}selected{% endif %}>AGENTES ANTINEOPLÁSICOS</option>
-        <option value="AGENTES ANTINEOPLÁSICOS E IMUNOMODULADORES" {% if medicamento.classe_droga == 'AGENTES ANTINEOPLÁSICOS E IMUNOMODULADORES' %}selected{% endif %}>AGENTES ANTINEOPLÁSICOS E IMUNOMODULADORES</option>
-        <option value="AGENTES ANTIPARATIREÓIDE" {% if medicamento.classe_droga == 'AGENTES ANTIPARATIREÓIDE' %}selected{% endif %}>AGENTES ANTIPARATIREÓIDE</option>
-        <option value="AGENTES ANTITROMBÓTICOS" {% if medicamento.classe_droga == 'AGENTES ANTITROMBÓTICOS' %}selected{% endif %}>AGENTES ANTITROMBÓTICOS</option>
-        <option value="AGENTES ANTITROMBÓTICOS" {% if medicamento.classe_droga == 'AGENTES ANTITROMBÓTICOS' %}selected{% endif %}>AGENTES ANTITROMBÓTICOS</option>
-        <option value="AGENTES BETABLOQUEADORES" {% if medicamento.classe_droga == 'AGENTES BETABLOQUEADORES' %}selected{% endif %}>AGENTES BETABLOQUEADORES</option>
-        <option value="AGENTES BETABLOQUEADORES" {% if medicamento.classe_droga == 'AGENTES BETABLOQUEADORES' %}selected{% endif %}>AGENTES BETABLOQUEADORES</option>
-        <option value="AGENTES BETABLOQUEADORES E VASODILATADORES" {% if medicamento.classe_droga == 'AGENTES BETABLOQUEADORES E VASODILATADORES' %}selected{% endif %}>AGENTES BETABLOQUEADORES E VASODILATADORES</option>
-        <option value="AGENTES BETABLOQUEADORES E OUTROS ANTI-HIPERTENSIVOS" {% if medicamento.classe_droga == 'AGENTES BETABLOQUEADORES E OUTROS ANTI-HIPERTENSIVOS' %}selected{% endif %}>AGENTES BETABLOQUEADORES E OUTROS ANTI-HIPERTENSIVOS</option>
-        <option value="AGENTES CONTRA DOENÇAS OBSTRUTIVAS DAS VIAS AÉREAS" {% if medicamento.classe_droga == 'AGENTES CONTRA DOENÇAS OBSTRUTIVAS DAS VIAS AÉREAS' %}selected{% endif %}>AGENTES CONTRA DOENÇAS OBSTRUTIVAS DAS VIAS AÉREAS</option>
-        <option value="AGENTES DE DIAGNÓSTICO" {% if medicamento.classe_droga == 'AGENTES DE DIAGNÓSTICO' %}selected{% endif %}>AGENTES DE DIAGNÓSTICO</option>
-        <option value="AGENTES DESTOXIFICANTES PARA TRATAMENTOS ANTINEOPLÁSICOS" {% if medicamento.classe_droga == 'AGENTES DESTOXIFICANTES PARA TRATAMENTOS ANTINEOPLÁSICOS' %}selected{% endif %}>AGENTES DESTOXIFICANTES PARA TRATAMENTOS ANTINEOPLÁSICOS</option>
-        <option value="AGENTES DIAGNOSTICOS NAO RADIOATIVOS" {% if medicamento.classe_droga == 'AGENTES DIAGNOSTICOS NAO RADIOATIVOS' %}selected{% endif %}>AGENTES DIAGNOSTICOS NAO RADIOATIVOS</option>
-        <option value="AGENTES DIAGNOSTICOS RADIOATIVOS" {% if medicamento.classe_droga == 'AGENTES DIAGNOSTICOS RADIOATIVOS' %}selected{% endif %}>AGENTES DIAGNOSTICOS RADIOATIVOS</option>
-        <option value="AGENTES ESCLEROSANTES PARA INJEÇÃO LOCAL" {% if medicamento.classe_droga == 'AGENTES ESCLEROSANTES PARA INJEÇÃO LOCAL' %}selected{% endif %}>AGENTES ESCLEROSANTES PARA INJEÇÃO LOCAL</option>
-        <option value="AGENTES QUE ATUAM NO SISTEMA RENINA-ANGIOTENSINA" {% if medicamento.classe_droga == 'AGENTES QUE ATUAM NO SISTEMA RENINA-ANGIOTENSINA' %}selected{% endif %}>AGENTES QUE ATUAM NO SISTEMA RENINA-ANGIOTENSINA</option>
-        <option value="AGENTES RELAXANTES MUSCULARES DE AÇÃO CENTRAL" {% if medicamento.classe_droga == 'AGENTES RELAXANTES MUSCULARES DE AÇÃO CENTRAL' %}selected{% endif %}>AGENTES RELAXANTES MUSCULARES DE AÇÃO CENTRAL</option>
-        <option value="CENTRAL" {% if medicamento.classe_droga == 'CENTRAL' %}selected{% endif %}>CENTRAL</option>
-        <option value="AGONISTAS DOPAMÍNICOS" {% if medicamento.classe_droga == 'AGONISTAS DOPAMÍNICOS' %}selected{% endif %}>AGONISTAS DOPAMÍNICOS</option>
-        <option value="ALBENDAZOL" {% if medicamento.classe_droga == 'ALBENDAZOL' %}selected{% endif %}>ALBENDAZOL</option>
-        <option value="ALBUMINA" {% if medicamento.classe_droga == 'ALBUMINA' %}selected{% endif %}>ALBUMINA</option>
-        <option value="ALCALOIDE DA VINCA" {% if medicamento.classe_droga == 'ALCALOIDE DA VINCA' %}selected{% endif %}>ALCALOIDE DA VINCA</option>
-        <option value="ALCALÓIDES DE PLANTAS E OUTROS PRODUTOS NATURAIS" {% if medicamento.classe_droga == 'ALCALÓIDES DE PLANTAS E OUTROS PRODUTOS NATURAIS' %}selected{% endif %}>ALCALÓIDES DE PLANTAS E OUTROS PRODUTOS NATURAIS</option>
-        <option value="ALERGENOS" {% if medicamento.classe_droga == 'ALERGENOS' %}selected{% endif %}>ALERGENOS</option>
-        <option value="ALOPURINOL" {% if medicamento.classe_droga == 'ALOPURINOL' %}selected{% endif %}>ALOPURINOL</option>
-        <option value="AMEBICIDA" {% if medicamento.classe_droga == 'AMEBICIDA' %}selected{% endif %}>AMEBICIDA</option>
-        <option value="AMEBICIDAS, GIARDICIDAS E TRICOMONICIDAS" {% if medicamento.classe_droga == 'AMEBICIDAS, GIARDICIDAS E TRICOMONICIDAS' %}selected{% endif %}>AMEBICIDAS, GIARDICIDAS E TRICOMONICIDAS</option>
-        <option value="AMINOGLICOSIDEOS" {% if medicamento.classe_droga == 'AMINOGLICOSIDEOS' %}selected{% endif %}>AMINOGLICOSIDEOS</option>
-        <option value="ANABOLIZANTES SIMPLES" {% if medicamento.classe_droga == 'ANABOLIZANTES SIMPLES' %}selected{% endif %}>ANABOLIZANTES SIMPLES</option>
-        <option value="ANABOLIZANTES-ASSOCIACOES MEDICAMENTOSAS" {% if medicamento.classe_droga == 'ANABOLIZANTES-ASSOCIACOES MEDICAMENTOSAS' %}selected{% endif %}>ANABOLIZANTES-ASSOCIACOES MEDICAMENTOSAS</option>
-        <option value="ANALGESICOS" {% if medicamento.classe_droga == 'ANALGESICOS' %}selected{% endif %}>ANALGESICOS</option>
-        <option value="ANALGESICOS CONTRA ENXAQUECA" {% if medicamento.classe_droga == 'ANALGESICOS CONTRA ENXAQUECA' %}selected{% endif %}>ANALGESICOS CONTRA ENXAQUECA</option>
-        <option value="ANALGESICOS NAO NARCOTICOS" {% if medicamento.classe_droga == 'ANALGESICOS NAO NARCOTICOS' %}selected{% endif %}>ANALGESICOS NAO NARCOTICOS</option>
-        <option value="ANALGESICOS NARCOTICOS" {% if medicamento.classe_droga == 'ANALGESICOS NARCOTICOS' %}selected{% endif %}>ANALGESICOS NARCOTICOS</option>
-        <option value="ANALGÉSICOS" {% if medicamento.classe_droga == 'ANALGÉSICOS' %}selected{% endif %}>ANALGÉSICOS</option>
-        <option value="ANALOGO SINTETICO DA VITAMINA D" {% if medicamento.classe_droga == 'ANALOGO SINTETICO DA VITAMINA D' %}selected{% endif %}>ANALOGO SINTETICO DA VITAMINA D</option>
-        <option value="ANDROGENOS SIMPLES" {% if medicamento.classe_droga == 'ANDROGENOS SIMPLES' %}selected{% endif %}>ANDROGENOS SIMPLES</option>
-        <option value="ANDROGENOS-ASSOCIACOES MEDICAMENTOSAS" {% if medicamento.classe_droga == 'ANDROGENOS-ASSOCIACOES MEDICAMENTOSAS' %}selected{% endif %}>ANDROGENOS-ASSOCIACOES MEDICAMENTOSAS</option>
-        <option value="ANEL VAGINAL COM PROGESTÁGENO E ESTRÓGENO" {% if medicamento.classe_droga == 'ANEL VAGINAL COM PROGESTÁGENO E ESTRÓGENO' %}selected{% endif %}>ANEL VAGINAL COM PROGESTÁGENO E ESTRÓGENO</option>
-        <option value="ANESTESICOS" {% if medicamento.classe_droga == 'ANESTESICOS' %}selected{% endif %}>ANESTESICOS</option>
-        <option value="ANESTESICOS GERAIS INJETAVEIS" {% if medicamento.classe_droga == 'ANESTESICOS GERAIS INJETAVEIS' %}selected{% endif %}>ANESTESICOS GERAIS INJETAVEIS</option>
-        <option value="ANESTESICOS GERAIS VOLATEIS E GASOSOS" {% if medicamento.classe_droga == 'ANESTESICOS GERAIS VOLATEIS E GASOSOS' %}selected{% endif %}>ANESTESICOS GERAIS VOLATEIS E GASOSOS</option>
-        <option value="ANESTESICOS LOCAIS" {% if medicamento.classe_droga == 'ANESTESICOS LOCAIS' %}selected{% endif %}>ANESTESICOS LOCAIS</option>
-        <option value="ANESTÉSICOS LOCAIS" {% if medicamento.classe_droga == 'ANESTÉSICOS LOCAIS' %}selected{% endif %}>ANESTÉSICOS LOCAIS</option>
-        <option value="ANESTÉSICOS LOCAIS" {% if medicamento.classe_droga == 'ANESTÉSICOS LOCAIS' %}selected{% endif %}>ANESTÉSICOS LOCAIS</option>
-        <option value="ANESTÉSICOS OPIÓIDES" {% if medicamento.classe_droga == 'ANESTÉSICOS OPIÓIDES' %}selected{% endif %}>ANESTÉSICOS OPIÓIDES</option>
-        <option value="ANESTÉSICOS PARA USO TÓPICO" {% if medicamento.classe_droga == 'ANESTÉSICOS PARA USO TÓPICO' %}selected{% endif %}>ANESTÉSICOS PARA USO TÓPICO</option>
-        <option value="ANILIDAS" {% if medicamento.classe_droga == 'ANILIDAS' %}selected{% endif %}>ANILIDAS</option>
-        <option value="ANOREXICOS SIMPLES" {% if medicamento.classe_droga == 'ANOREXICOS SIMPLES' %}selected{% endif %}>ANOREXICOS SIMPLES</option>
-        <option value="ANOREXICOS-ASSOCIACOES MEDICAMENTOSAS" {% if medicamento.classe_droga == 'ANOREXICOS-ASSOCIACOES MEDICAMENTOSAS' %}selected{% endif %}>ANOREXICOS-ASSOCIACOES MEDICAMENTOSAS</option>
-        <option value="ANSIOLITICOS SIMPLES" {% if medicamento.classe_droga == 'ANSIOLITICOS SIMPLES' %}selected{% endif %}>ANSIOLITICOS SIMPLES</option>
-        <option value="ANSIOLITICOS-ASSOCIACOES MEDICAMENTOSAS" {% if medicamento.classe_droga == 'ANSIOLITICOS-ASSOCIACOES MEDICAMENTOSAS' %}selected{% endif %}>ANSIOLITICOS-ASSOCIACOES MEDICAMENTOSAS</option>
-        <option value="ANSIOLÍTICOS" {% if medicamento.classe_droga == 'ANSIOLÍTICOS' %}selected{% endif %}>ANSIOLÍTICOS</option>
-        <option value="ANTAGONISTA DE BENZODIAZEPINAS" {% if medicamento.classe_droga == 'ANTAGONISTA DE BENZODIAZEPINAS' %}selected{% endif %}>ANTAGONISTA DE BENZODIAZEPINAS</option>
-        <option value="ANTAGONISTAS DA ANGIOTENSINA II E DIURÉTICOS" {% if medicamento.classe_droga == 'ANTAGONISTAS DA ANGIOTENSINA II E DIURÉTICOS' %}selected{% endif %}>ANTAGONISTAS DA ANGIOTENSINA II E DIURÉTICOS</option>
-        <option value="ANTAGONISTAS HORMONAIS E AGENTES RELACIONADOS" {% if medicamento.classe_droga == 'ANTAGONISTAS HORMONAIS E AGENTES RELACIONADOS' %}selected{% endif %}>ANTAGONISTAS HORMONAIS E AGENTES RELACIONADOS</option>
-        <option value="ANTI-FLOGISTICO E ANTI-PRURIGINOSO" {% if medicamento.classe_droga == 'ANTI-FLOGISTICO E ANTI-PRURIGINOSO' %}selected{% endif %}>ANTI-FLOGISTICO E ANTI-PRURIGINOSO</option>
-        <option value="ANTI-FUNGICOS" {% if medicamento.classe_droga == 'ANTI-FUNGICOS' %}selected{% endif %}>ANTI-FUNGICOS</option>
-        <option value="ANTI-HELMINTICOS DO TRATO GASTRINTESTINAL" {% if medicamento.classe_droga == 'ANTI-HELMINTICOS DO TRATO GASTRINTESTINAL' %}selected{% endif %}>ANTI-HELMINTICOS DO TRATO GASTRINTESTINAL</option>
-        <option value="ANTI-HEMORRAGICOS" {% if medicamento.classe_droga == 'ANTI-HEMORRAGICOS' %}selected{% endif %}>ANTI-HEMORRAGICOS</option>
-        <option value="ANTI-HEMORROIDARIOS TOPICOS" {% if medicamento.classe_droga == 'ANTI-HEMORROIDARIOS TOPICOS' %}selected{% endif %}>ANTI-HEMORROIDARIOS TOPICOS</option>
-        <option value="ANTI-HIPERTENSIVOS" {% if medicamento.classe_droga == 'ANTI-HIPERTENSIVOS' %}selected{% endif %}>ANTI-HIPERTENSIVOS</option>
-        <option value="ANTI-HIPERTENSIVOS" {% if medicamento.classe_droga == 'ANTI-HIPERTENSIVOS' %}selected{% endif %}>ANTI-HIPERTENSIVOS</option>
-        <option value="ANTI-HIPERTENSIVOS PARA HIPERTENSÃO ARTERIAL PULMONAR" {% if medicamento.classe_droga == 'ANTI-HIPERTENSIVOS PARA HIPERTENSÃO ARTERIAL PULMONAR' %}selected{% endif %}>ANTI-HIPERTENSIVOS PARA HIPERTENSÃO ARTERIAL PULMONAR</option>
-        <option value="ANTI-HIPERTENSIVOS SIMPLES" {% if medicamento.classe_droga == 'ANTI-HIPERTENSIVOS SIMPLES' %}selected{% endif %}>ANTI-HIPERTENSIVOS SIMPLES</option>
-        <option value="ANTI-HIPERTENSIVOS-ASSOCIACOES MEDICAMENTOSAS" {% if medicamento.classe_droga == 'ANTI-HIPERTENSIVOS-ASSOCIACOES MEDICAMENTOSAS' %}selected{% endif %}>ANTI-HIPERTENSIVOS-ASSOCIACOES MEDICAMENTOSAS</option>
-        <option value="ANTI-HISTAMINICOS SISTEMICOS" {% if medicamento.classe_droga == 'ANTI-HISTAMINICOS SISTEMICOS' %}selected{% endif %}>ANTI-HISTAMINICOS SISTEMICOS</option>
-        <option value="ANTI-HISTAMÍNICOS PARA USO SISTÊMICO" {% if medicamento.classe_droga == 'ANTI-HISTAMÍNICOS PARA USO SISTÊMICO' %}selected{% endif %}>ANTI-HISTAMÍNICOS PARA USO SISTÊMICO</option>
-        <option value="ANTI-HISTAMÍNICOS PARA USO SISTÊMICO" {% if medicamento.classe_droga == 'ANTI-HISTAMÍNICOS PARA USO SISTÊMICO' %}selected{% endif %}>ANTI-HISTAMÍNICOS PARA USO SISTÊMICO</option>
-        <option value="ANTI-INFECCIOSOS" {% if medicamento.classe_droga == 'ANTI-INFECCIOSOS' %}selected{% endif %}>ANTI-INFECCIOSOS</option>
-        <option value="ANTIACIDO" {% if medicamento.classe_droga == 'ANTIACIDO' %}selected{% endif %}>ANTIACIDO</option>
-        <option value="ANTIACIDOS E ANTIULCEROSOS" {% if medicamento.classe_droga == 'ANTIACIDOS E ANTIULCEROSOS' %}selected{% endif %}>ANTIACIDOS E ANTIULCEROSOS</option>
-        <option value="ANTIACIDOS E ANTIULCEROSOS ASSOCIADOS" {% if medicamento.classe_droga == 'ANTIACIDOS E ANTIULCEROSOS ASSOCIADOS' %}selected{% endif %}>ANTIACIDOS E ANTIULCEROSOS ASSOCIADOS</option>
-        <option value="ANTIACIDOS E ANTIULCEROSOS SIMPLES" {% if medicamento.classe_droga == 'ANTIACIDOS E ANTIULCEROSOS SIMPLES' %}selected{% endif %}>ANTIACIDOS E ANTIULCEROSOS SIMPLES</option>
-        <option value="ANTIAGREGANTE PLAQUETARIO" {% if medicamento.classe_droga == 'ANTIAGREGANTE PLAQUETARIO' %}selected{% endif %}>ANTIAGREGANTE PLAQUETARIO</option>
-        <option value="ANTIALCOOLICO" {% if medicamento.classe_droga == 'ANTIALCOOLICO' %}selected{% endif %}>ANTIALCOOLICO</option>
-        <option value="ANTIALERGICOS" {% if medicamento.classe_droga == 'ANTIALERGICOS' %}selected{% endif %}>ANTIALERGICOS</option>
-        <option value="ANTIALERGICOS TOPICOS" {% if medicamento.classe_droga == 'ANTIALERGICOS TOPICOS' %}selected{% endif %}>ANTIALERGICOS TOPICOS</option>
-        <option value="ANTIALOPECIA" {% if medicamento.classe_droga == 'ANTIALOPECIA' %}selected{% endif %}>ANTIALOPECIA</option>
-        <option value="ANTIANDRÓGENOS" {% if medicamento.classe_droga == 'ANTIANDRÓGENOS' %}selected{% endif %}>ANTIANDRÓGENOS</option>
-        <option value="ANTIANEMICOS" {% if medicamento.classe_droga == 'ANTIANEMICOS' %}selected{% endif %}>ANTIANEMICOS</option>
-        <option value="ANTIANEMICOS A BASE DE FERRO - ASSOCIACOES MEDICAMENTOSAS" {% if medicamento.classe_droga == 'ANTIANEMICOS A BASE DE FERRO - ASSOCIACOES MEDICAMENTOSAS' %}selected{% endif %}>ANTIANEMICOS A BASE DE FERRO - ASSOCIACOES MEDICAMENTOSAS</option>
-        <option value="ANTIANEMICOS SIMPLES" {% if medicamento.classe_droga == 'ANTIANEMICOS SIMPLES' %}selected{% endif %}>ANTIANEMICOS SIMPLES</option>
-        <option value="ANTIANEMICOS-EXTRATO HEPATICO SIMPLES OU ASSOCIADO" {% if medicamento.classe_droga == 'ANTIANEMICOS-EXTRATO HEPATICO SIMPLES OU ASSOCIADO' %}selected{% endif %}>ANTIANEMICOS-EXTRATO HEPATICO SIMPLES OU ASSOCIADO</option>
-        <option value="ANTIANGINOSOS E VASODILATADORES" {% if medicamento.classe_droga == 'ANTIANGINOSOS E VASODILATADORES' %}selected{% endif %}>ANTIANGINOSOS E VASODILATADORES</option>
-        <option value="ANTIARRITMICOS" {% if medicamento.classe_droga == 'ANTIARRITMICOS' %}selected{% endif %}>ANTIARRITMICOS</option>
-        <option value="ANTIASMATICOS" {% if medicamento.classe_droga == 'ANTIASMATICOS' %}selected{% endif %}>ANTIASMATICOS</option>
-        <option value="ANTIBACTERIANO" {% if medicamento.classe_droga == 'ANTIBACTERIANO' %}selected{% endif %}>ANTIBACTERIANO</option>
-        <option value="ANTIBACTERIANO TOPICO" {% if medicamento.classe_droga == 'ANTIBACTERIANO TOPICO' %}selected{% endif %}>ANTIBACTERIANO TOPICO</option>
-        <option value="ANTIBACTERIANOS PARA USO SISTÊMICO" {% if medicamento.classe_droga == 'ANTIBACTERIANOS PARA USO SISTÊMICO' %}selected{% endif %}>ANTIBACTERIANOS PARA USO SISTÊMICO</option>
-        <option value="ANTIBIOTICO (ANTIMICOTICO)" {% if medicamento.classe_droga == 'ANTIBIOTICO (ANTIMICOTICO)' %}selected{% endif %}>ANTIBIOTICO (ANTIMICOTICO)</option>
-        <option value="ANTIBIOTICOS ANTINEOPLASICOS" {% if medicamento.classe_droga == 'ANTIBIOTICOS ANTINEOPLASICOS' %}selected{% endif %}>ANTIBIOTICOS ANTINEOPLASICOS</option>
-        <option value="ANTIBIOTICOS SISTEM -ASSOC MEDIC ENTRE ANTINFEC" {% if medicamento.classe_droga == 'ANTIBIOTICOS SISTEM -ASSOC MEDIC ENTRE ANTINFEC' %}selected{% endif %}>ANTIBIOTICOS SISTEM -ASSOC MEDIC ENTRE ANTINFEC</option>
-        <option value="ANTIBIOTICOS SISTEMICOS SIMPLES" {% if medicamento.classe_droga == 'ANTIBIOTICOS SISTEMICOS SIMPLES' %}selected{% endif %}>ANTIBIOTICOS SISTEMICOS SIMPLES</option>
-        <option value="ANTIBIOTICOS SISTEMICOS-ASSOCIACOES MEDICAMENTOSAS" {% if medicamento.classe_droga == 'ANTIBIOTICOS SISTEMICOS-ASSOCIACOES MEDICAMENTOSAS' %}selected{% endif %}>ANTIBIOTICOS SISTEMICOS-ASSOCIACOES MEDICAMENTOSAS</option>
-        <option value="ANTIBIÓTICOS" {% if medicamento.classe_droga == 'ANTIBIÓTICOS' %}selected{% endif %}>ANTIBIÓTICOS</option>
-        <option value="ANTIBIÓTICOS" {% if medicamento.classe_droga == 'ANTIBIÓTICOS' %}selected{% endif %}>ANTIBIÓTICOS</option>
-        <option value="ANTIBIÓTICOS PARA USO TÓPICO" {% if medicamento.classe_droga == 'ANTIBIÓTICOS PARA USO TÓPICO' %}selected{% endif %}>ANTIBIÓTICOS PARA USO TÓPICO</option>
-        <option value="ANTICHAGASICOS" {% if medicamento.classe_droga == 'ANTICHAGASICOS' %}selected{% endif %}>ANTICHAGASICOS</option>
-        <option value="ANTICOAGULANTES" {% if medicamento.classe_droga == 'ANTICOAGULANTES' %}selected{% endif %}>ANTICOAGULANTES</option>
-        <option value="ANTICOAGULANTES FIBRINOLITICOS E PROTEOLITICOS N/DIGE" {% if medicamento.classe_droga == 'ANTICOAGULANTES FIBRINOLITICOS E PROTEOLITICOS N/DIGE' %}selected{% endif %}>ANTICOAGULANTES FIBRINOLITICOS E PROTEOLITICOS N/DIGE</option>
-        <option value="ANTICOLINESTERASES" {% if medicamento.classe_droga == 'ANTICOLINESTERASES' %}selected{% endif %}>ANTICOLINESTERASES</option>
-        <option value="ANTICOLINÉRGICOS" {% if medicamento.classe_droga == 'ANTICOLINÉRGICOS' %}selected{% endif %}>ANTICOLINÉRGICOS</option>
-        <option value="ANTICOLINÉRGICOS" {% if medicamento.classe_droga == 'ANTICOLINÉRGICOS' %}selected{% endif %}>ANTICOLINÉRGICOS</option>
-        <option value="ANTICONCEPCIONAIS" {% if medicamento.classe_droga == 'ANTICONCEPCIONAIS' %}selected{% endif %}>ANTICONCEPCIONAIS</option>
-        <option value="ANTICONVULSIVANTES" {% if medicamento.classe_droga == 'ANTICONVULSIVANTES' %}selected{% endif %}>ANTICONVULSIVANTES</option>
-        <option value="ANTICONVULSIVANTES E ANTIPARKINSONIANOS" {% if medicamento.classe_droga == 'ANTICONVULSIVANTES E ANTIPARKINSONIANOS' %}selected{% endif %}>ANTICONVULSIVANTES E ANTIPARKINSONIANOS</option>
-        <option value="ANTICORPOS MONOCLONAIS" {% if medicamento.classe_droga == 'ANTICORPOS MONOCLONAIS' %}selected{% endif %}>ANTICORPOS MONOCLONAIS</option>
-        <option value="ANTIDEPRESSIVOS" {% if medicamento.classe_droga == 'ANTIDEPRESSIVOS' %}selected{% endif %}>ANTIDEPRESSIVOS</option>
-        <option value="ANTIDEPRESSIVOS" {% if medicamento.classe_droga == 'ANTIDEPRESSIVOS' %}selected{% endif %}>ANTIDEPRESSIVOS</option>
-        <option value="ANTIDIABETICOS" {% if medicamento.classe_droga == 'ANTIDIABETICOS' %}selected{% endif %}>ANTIDIABETICOS</option>
-        <option value="ANTIDIARREICOS" {% if medicamento.classe_droga == 'ANTIDIARREICOS' %}selected{% endif %}>ANTIDIARREICOS</option>
-        <option value="ANTIDIARREICOS ADSORVENTES E ANTIFISETICOS" {% if medicamento.classe_droga == 'ANTIDIARREICOS ADSORVENTES E ANTIFISETICOS' %}selected{% endif %}>ANTIDIARREICOS ADSORVENTES E ANTIFISETICOS</option>
-        <option value="ANTIDIARREICOS SIMPLES SEM ACAO ANTIMICROBIANA" {% if medicamento.classe_droga == 'ANTIDIARREICOS SIMPLES SEM ACAO ANTIMICROBIANA' %}selected{% endif %}>ANTIDIARREICOS SIMPLES SEM ACAO ANTIMICROBIANA</option>
-        <option value="ANTIDIARREICOS-ASSOCIACOES MEDICAMENTOSAS" {% if medicamento.classe_droga == 'ANTIDIARREICOS-ASSOCIACOES MEDICAMENTOSAS' %}selected{% endif %}>ANTIDIARREICOS-ASSOCIACOES MEDICAMENTOSAS</option>
-        <option value="ANTIDOTOS" {% if medicamento.classe_droga == 'ANTIDOTOS' %}selected{% endif %}>ANTIDOTOS</option>
-        <option value="ANTIEMETICOS E ANTINAUSEANTES" {% if medicamento.classe_droga == 'ANTIEMETICOS E ANTINAUSEANTES' %}selected{% endif %}>ANTIEMETICOS E ANTINAUSEANTES</option>
-        <option value="ANTIEMÉTICOS E ANTINAUSEANTES" {% if medicamento.classe_droga == 'ANTIEMÉTICOS E ANTINAUSEANTES' %}selected{% endif %}>ANTIEMÉTICOS E ANTINAUSEANTES</option>
-        <option value="ANTIEMÉTICOS E ANTINAUSEANTES" {% if medicamento.classe_droga == 'ANTIEMÉTICOS E ANTINAUSEANTES' %}selected{% endif %}>ANTIEMÉTICOS E ANTINAUSEANTES</option>
-        <option value="ANTIEPILÉPTICOS" {% if medicamento.classe_droga == 'ANTIEPILÉPTICOS' %}selected{% endif %}>ANTIEPILÉPTICOS</option>
-        <option value="ANTIESPASMODICOS" {% if medicamento.classe_droga == 'ANTIESPASMODICOS' %}selected{% endif %}>ANTIESPASMODICOS</option>
-        <option value="ANTIESPASMODICOS E ANTICOLINERGICOS GASTRINTESTINAIS" {% if medicamento.classe_droga == 'ANTIESPASMODICOS E ANTICOLINERGICOS GASTRINTESTINAIS' %}selected{% endif %}>ANTIESPASMODICOS E ANTICOLINERGICOS GASTRINTESTINAIS</option>
-        <option value="ANTIESPASMODICOS E ANTICOLINERGICOS-ASSOC MEDICAMENTOSAS" {% if medicamento.classe_droga == 'ANTIESPASMODICOS E ANTICOLINERGICOS-ASSOC MEDICAMENTOSAS' %}selected{% endif %}>ANTIESPASMODICOS E ANTICOLINERGICOS-ASSOC MEDICAMENTOSAS</option>
-        <option value="ANTIESTRÓGENOS" {% if medicamento.classe_droga == 'ANTIESTRÓGENOS' %}selected{% endif %}>ANTIESTRÓGENOS</option>
-        <option value="ANTIFIBRINOLITICOS" {% if medicamento.classe_droga == 'ANTIFIBRINOLITICOS' %}selected{% endif %}>ANTIFIBRINOLITICOS</option>
-        <option value="ANTIFISETICO" {% if medicamento.classe_droga == 'ANTIFISETICO' %}selected{% endif %}>ANTIFISETICO</option>
-        <option value="ANTIFÚNGICOS PARA USO SISTÊMICO" {% if medicamento.classe_droga == 'ANTIFÚNGICOS PARA USO SISTÊMICO' %}selected{% endif %}>ANTIFÚNGICOS PARA USO SISTÊMICO</option>
-        <option value="ANTIFÚNGICOS PARA USO SISTÊMICO" {% if medicamento.classe_droga == 'ANTIFÚNGICOS PARA USO SISTÊMICO' %}selected{% endif %}>ANTIFÚNGICOS PARA USO SISTÊMICO</option>
-        <option value="ANTIFÚNGICOS PARA USO TÓPICO" {% if medicamento.classe_droga == 'ANTIFÚNGICOS PARA USO TÓPICO' %}selected{% endif %}>ANTIFÚNGICOS PARA USO TÓPICO</option>
-        <option value="ANTIGLAUCOMATOSOS" {% if medicamento.classe_droga == 'ANTIGLAUCOMATOSOS' %}selected{% endif %}>ANTIGLAUCOMATOSOS</option>
-        <option value="ANTIGONADOTROFINAS E AGENTES SIMILARES" {% if medicamento.classe_droga == 'ANTIGONADOTROFINAS E AGENTES SIMILARES' %}selected{% endif %}>ANTIGONADOTROFINAS E AGENTES SIMILARES</option>
-        <option value="ANTIGOTOSOS" {% if medicamento.classe_droga == 'ANTIGOTOSOS' %}selected{% endif %}>ANTIGOTOSOS</option>
-        <option value="ANTIINFECCIOSOS PARA USO SISTÊMICO" {% if medicamento.classe_droga == 'ANTIINFECCIOSOS PARA USO SISTÊMICO' %}selected{% endif %}>ANTIINFECCIOSOS PARA USO SISTÊMICO</option>
-        <option value="ANTIINFECIOSOS E ANTI-SÉPTICOS PARA TRATAMENTO ORAL LOCAL" {% if medicamento.classe_droga == 'ANTIINFECIOSOS E ANTI-SÉPTICOS PARA TRATAMENTO ORAL LOCAL' %}selected{% endif %}>ANTIINFECIOSOS E ANTI-SÉPTICOS PARA TRATAMENTO ORAL LOCAL</option>
-        <option value="ANTIINFLAMATÓRIOS E ANTIREUMÁTICOS" {% if medicamento.classe_droga == 'ANTIINFLAMATÓRIOS E ANTIREUMÁTICOS' %}selected{% endif %}>ANTIINFLAMATÓRIOS E ANTIREUMÁTICOS</option>
-        <option value="ANTIINFLAMATÓRIOS E ANTIREUMÁTICOS, NÃO ESTEROIDAIS" {% if medicamento.classe_droga == 'ANTIINFLAMATÓRIOS E ANTIREUMÁTICOS, NÃO ESTEROIDAIS' %}selected{% endif %}>ANTIINFLAMATÓRIOS E ANTIREUMÁTICOS, NÃO ESTEROIDAIS</option>
-        <option value="ANTILIPEMICOS" {% if medicamento.classe_droga == 'ANTILIPEMICOS' %}selected{% endif %}>ANTILIPEMICOS</option>
-        <option value="ANTIMALARICOS" {% if medicamento.classe_droga == 'ANTIMALARICOS' %}selected{% endif %}>ANTIMALARICOS</option>
-        <option value="ANTIMALÁRICOS" {% if medicamento.classe_droga == 'ANTIMALÁRICOS' %}selected{% endif %}>ANTIMALÁRICOS</option>
-        <option value="ANTIMETABOLICOS ANALOGOS DA PIRIMIDINA" {% if medicamento.classe_droga == 'ANTIMETABOLICOS ANALOGOS DA PIRIMIDINA' %}selected{% endif %}>ANTIMETABOLICOS ANALOGOS DA PIRIMIDINA</option>
-        <option value="ANTIMETABOLICOS ANALOGOS DA PURINA" {% if medicamento.classe_droga == 'ANTIMETABOLICOS ANALOGOS DA PURINA' %}selected{% endif %}>ANTIMETABOLICOS ANALOGOS DA PURINA</option>
-        <option value="ANTIMETABOLICOS ANTAGONISTAS DO ACIDO FOLICO" {% if medicamento.classe_droga == 'ANTIMETABOLICOS ANTAGONISTAS DO ACIDO FOLICO' %}selected{% endif %}>ANTIMETABOLICOS ANTAGONISTAS DO ACIDO FOLICO</option>
-        <option value="ANTIMIASTENICOS E DESCURARIZANTES" {% if medicamento.classe_droga == 'ANTIMIASTENICOS E DESCURARIZANTES' %}selected{% endif %}>ANTIMIASTENICOS E DESCURARIZANTES</option>
-        <option value="ANTIMICOBACTERIANOS" {% if medicamento.classe_droga == 'ANTIMICOBACTERIANOS' %}selected{% endif %}>ANTIMICOBACTERIANOS</option>
-        <option value="ANTIMICOTICO" {% if medicamento.classe_droga == 'ANTIMICOTICO' %}selected{% endif %}>ANTIMICOTICO</option>
-        <option value="ANTIMICOTICOS PARA USO TOPICO" {% if medicamento.classe_droga == 'ANTIMICOTICOS PARA USO TOPICO' %}selected{% endif %}>ANTIMICOTICOS PARA USO TOPICO</option>
-        <option value="ANTIMICOTICOS SISTEMICOS" {% if medicamento.classe_droga == 'ANTIMICOTICOS SISTEMICOS' %}selected{% endif %}>ANTIMICOTICOS SISTEMICOS</option>
-        <option value="ANTIMICÓTICOS PARA USO SISTÊMICO" {% if medicamento.classe_droga == 'ANTIMICÓTICOS PARA USO SISTÊMICO' %}selected{% endif %}>ANTIMICÓTICOS PARA USO SISTÊMICO</option>
-        <option value="ANTINEOPLASICO" {% if medicamento.classe_droga == 'ANTINEOPLASICO' %}selected{% endif %}>ANTINEOPLASICO</option>
-        <option value="ANTINEOPLASICOS CITOTOXICOS" {% if medicamento.classe_droga == 'ANTINEOPLASICOS CITOTOXICOS' %}selected{% endif %}>ANTINEOPLASICOS CITOTOXICOS</option>
-        <option value="ANTINFECCIOSOS" {% if medicamento.classe_droga == 'ANTINFECCIOSOS' %}selected{% endif %}>ANTINFECCIOSOS</option>
-        <option value="ANTINFECCIOSOS E ANTISSEPTICOS TOPICOS PARA OROFARINGE" {% if medicamento.classe_droga == 'ANTINFECCIOSOS E ANTISSEPTICOS TOPICOS PARA OROFARINGE' %}selected{% endif %}>ANTINFECCIOSOS E ANTISSEPTICOS TOPICOS PARA OROFARINGE</option>
-        <option value="ANTINFECCIOSOS TOPICOS" {% if medicamento.classe_droga == 'ANTINFECCIOSOS TOPICOS' %}selected{% endif %}>ANTINFECCIOSOS TOPICOS</option>
 
       </select>
       

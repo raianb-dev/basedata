@@ -16,3 +16,23 @@ class Medicines(models.Model):
     
     class Meta:
         db_table = 'medicines'
+
+class consulta_medicamentos(models.Model):
+    id = models.AutoField(primary_key=True)
+    product_name = models.CharField(max_length=1000)
+    main_active = models.CharField(max_length=1000)
+    register = models.CharField(max_length=1000)
+    preccess = models.CharField(max_length=1000)
+    cpnj = models.CharField(max_length=1000)
+    situation = models.CharField(max_length=1000)
+    maturity = models.CharField(max_length=1000)
+        
+    class Meta:
+        db_table = 'consulta_medicamentos'
+
+class classe_medicamentos(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=1000)
+
+    class Meta:
+        db_table = 'clase_medicamentos'

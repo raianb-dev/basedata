@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-from .models import Medicines
+from .models import Medicines, classe_medicamentos, consulta_medicamentos
 from .forms import ArquivoForm
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
+
+## VIEWS C MEDICAMENTOS ##
 
 def listar_medicamentos(request):
     search_query = request.GET.get('search')
@@ -34,10 +36,14 @@ def listar_medicamentos(request):
     except PageNotAnInteger:
         medicamentos_paginados = paginator.get_page(1)
 
-    return render(request, 'list_medicines.html', {'medicamentos': medicamentos_paginados, 'search_query': search_query})
-
+    return render(request, 'list_medicines.html', {'medicamentos': medicamentos_paginados, 
+                                                   'search_query': search_query
+                                                   })
 
 def adicionar_medicamento(request):
+    def get_principios_ativos():
+        return consulta_medicamentos.objects.all()
+    principio_ativos = get_principios_ativos()
     if request.method == 'POST':
         form_data = request.POST
         uploaded_file = request.FILES.get('upload')
@@ -73,8 +79,7 @@ def adicionar_medicamento(request):
         )
         return redirect('listar_medicamentos')
 
-    return render(request, 'add_medicines.html')
-
+    return render(request, 'add_medicines.html', {'principios_ativos': principio_ativos})
 
 def editar_medicamento(request, medicamento_id):
     medicamento = get_object_or_404(Medicines, id=medicamento_id)
@@ -109,17 +114,74 @@ def editar_medicamento(request, medicamento_id):
 
     return render(request, 'edit_medicines.html', {'medicamento': medicamento})
 
-    
-
 def excluir_medicamento(request, medicamento_id):
     medicamento = get_object_or_404(Medicines, id=medicamento_id)
 
-    if request.method == 'POST':
+    if request.method == 'GET':
         medicamento.delete()
         return redirect('listar_medicamentos')
 
     return render(request, 'list_medicines.html', {'medicamentos': Medicines.objects.all()})
+from django.core import serializers
+from django.http import JsonResponse
+def get_product_names(request):
+    selected_main_active = request.GET.get('selected_main_active')
+    products = consulta_medicamentos.objects.filter(main_active=selected_main_active)
+    products_data = serializers.serialize('json', products, fields=('id', 'product_name'))
+    return JsonResponse(products_data, safe=False)
 
 
-from django.shortcuts import render
 
+def adicionar_cosulta(request):
+    if request.method == 'POST':
+        form_data = request.POST
+
+        name_product = form_data.get('name_product')
+        main_active = form_data.get('main_active')
+        register = form_data.get('register')
+        process = form_data.get('proccess')
+        cnpj = form_data.get('cnpj')
+        situation = form_data.get('situation')
+        maturity = form_data.get('vencimento')
+
+        consulta = consulta_medicamentos.objects.create(
+            product_name = name_product,
+            main_active = main_active,
+            register = register,
+            preccess = process,
+            cpnj = cnpj,
+            situation = situation,
+            maturity = maturity
+        )
+        consulta.save()
+        return redirect('listar_medicamentos')
+    return render(request,'add_consulta.html')
+
+def excluir_consulta(request, consulta_id):
+    consulta = get_object_or_404(consulta_medicamentos, id=consulta_id)
+    if request.method == 'GET':
+        consulta_medicamentos.delete()
+        return redirect('listar_medicamentos')
+
+
+## VIEWS CLASSE DE DROGAS ##
+
+def listar_classe(request):
+    classe = classe_medicamentos.objects.all()
+    return render(request, 'list_classe.html', {'classe': classe})
+
+def adicionar_classe(request):
+    if request.method == 'POST':
+        form_data = request.POST
+        name = form_data.get('name')
+        classe = classe_medicamentos.objects.create(
+            name=name
+        )
+        return redirect(request, 'listar_medicamentos')
+    return render('list_medicines.html')
+
+def excluir_classe(request, classe_id):
+    if request.method == 'GET':
+        search = get_object_or_404(classe_medicamentos, id=classe_id)
+        classe_medicamentos.delete()
+        return redirect(request, 'listar_medicamentos')

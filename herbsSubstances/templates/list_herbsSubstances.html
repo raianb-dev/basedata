@@ -21,7 +21,25 @@
             <h1>Herbs Substances</h1>
         </div>
         <a href="{% url 'add-herbsSubstances' %}" class="floating-button">+</a>
-        <section class="table__body" style="scale: 0.86;">
+                <!-- Paginação -->
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if herbsSubstances_items.has_previous %}
+                        <a href="?page=1">&laquo; Primeira página</a>
+                        <a href="?page={{ herbsSubstances_items.previous_page_number }}">voltar</a>
+                        {% endif %}
+        
+                        <span class="current">
+                            Página {{ herbsSubstances_items.number }} de {{ herbsSubstances_items.paginator.num_pages }}.
+                        </span>
+        
+                        {% if herbsSubstances_items.has_next %}
+                        <a href="?page={{ herbsSubstances_items.next_page_number }}">Próxima</a>
+                        <a href="?page={{ herbsSubstances_items.paginator.num_pages }}">Ultima &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+        <section class="tabela" style="scale: 0.86;">
             <table>
                 <thead>
                     <tr>
@@ -70,24 +88,7 @@
                 </tbody>
             </table>
         </section>
-        <!-- Paginação -->
-        <div class="pagination">
-            <span class="step-links">
-                {% if herbsSubstances_items.has_previous %}
-                <a href="?page=1">&laquo; Primeira página</a>
-                <a href="?page={{ herbsSubstances_items.previous_page_number }}">voltar</a>
-                {% endif %}
 
-                <span class="current">
-                    Página {{ herbsSubstances_items.number }} de {{ herbsSubstances_items.paginator.num_pages }}.
-                </span>
-
-                {% if herbsSubstances_items.has_next %}
-                <a href="?page={{ herbsSubstances_items.next_page_number }}">Próxima</a>
-                <a href="?page={{ herbsSubstances_items.paginator.num_pages }}">Ultima &raquo;</a>
-                {% endif %}
-            </span>
-        </div>
 
     </div>
 

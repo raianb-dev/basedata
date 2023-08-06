@@ -2,6 +2,7 @@
 {% load custom_filters %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Listagem de Medicamentos</title>
     <link rel="stylesheet" href="{% static 'health/styles.css' %}">
@@ -19,21 +20,26 @@
             <div class="search-container">
                 <form id="search-form" action="{% url 'listar_medicamentos' %}">
                     {% if search_query %}
-                        <input type="text" id="search-input" name="search" value="{{ search_query }}">
+                    <input type="text" id="search-input" name="search" value="{{ search_query }}">
                     {% else %}
-                        <input type="text" id="search-input" name="search" placeholder="Pesquisar por nome...">
+                    <input type="text" id="search-input" name="search" placeholder="Pesquisar por nome...">
                     {% endif %}
                     <button type="submit"><i class="bi bi-search"></i></button>
                     {% if search_query %}
-                        <a href="{% url 'listar_medicamentos' %}" class="" style="margin-right: 10px;">Limpar filtro</a>
+                    <a href="{% url 'listar_medicamentos' %}" class="" style="margin-right: 10px;">Limpar filtro</a>
                     {% endif %}
                 </form>
             </div>
             <br>
             <h1>Medicamentos</h1>
         </div>
-        <a href="{% url 'adicionar_medicamento' %}" class="floating-button">+</a>
-        <section class="table__body">
+
+        <a href="{% url 'adicionar_consulta' %}"  class="floating-button" style="bottom: 110px; width: 70px; height: 60px;">💊</a>
+
+        <a href="{% url 'adicionar_medicamento' %}" class="floating-button"
+            style="width: 70px; height: 60px; font-size: 40px;">+</a>
+
+        <section class="table__body" style="scale: 0.87">
             <table>
                 <thead>
                     <tr>
@@ -50,33 +56,34 @@
                 </thead>
                 <tbody>
                     {% for medicamento in medicamentos %}
-                        <tr>
-                            <td>{{ medicamento.id }}</td>
-                            <td>{{ medicamento.nome_cientifico |truncate_chars:50 }}</td>
-                            <td>{{ medicamento.descricao|truncate_chars:50 }}</td>
-                            <td>{{ medicamento.composicao|truncate_chars:50 }}</td>
-                            <td>{{ medicamento.usos|truncate_chars:50 }}</td>
-                            <td>{{ medicamento.contra_indicacoes|truncate_chars:50 }}</td>
-                            <td>{{ medicamento.doencas_situacoes|truncate_chars:50 }}</td>
-                            <td>{{ medicamento.faq|truncate_chars:50 }}</td>
-                            <td>
-                                <div style="transform: translateX(30px);">
-                                    <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ medicamento.id }}">
-                                        <i class="bi bi-eye"></i> Detalhes
-                                    </button>
-                                    <button class="btn btn-primary">
-                                        <a href="{% url 'editar_medicamento' medicamento.id %}">
-                                            <i class="bi bi-pencil"></i> Editar
-                                        </a>
-                                    </button>
-                                    <a href="{% url 'excluir_medicamento' medicamento.id %}">
-                                        <button class="btn btn-danger btn-excluir" data-item-id="{{ medicamento.id }}">
-                                            <i class="bi bi-trash"></i> Excluir
-                                        </button>
+                    <tr>
+                        <td>{{ medicamento.id }}</td>
+                        <td>{{ medicamento.nome_cientifico |truncate_chars:50 }}</td>
+                        <td>{{ medicamento.descricao|truncate_chars:50 }}</td>
+                        <td>{{ medicamento.composicao|truncate_chars:50 }}</td>
+                        <td>{{ medicamento.usos|truncate_chars:50 }}</td>
+                        <td>{{ medicamento.contra_indicacoes|truncate_chars:50 }}</td>
+                        <td>{{ medicamento.doencas_situacoes|truncate_chars:50 }}</td>
+                        <td>{{ medicamento.faq|truncate_chars:50 }}</td>
+                        <td>
+                            <div style="transform: translateX(30px);">
+                                <button class="btn btn-primary modal-btn"
+                                    data-modal-target="#modal-{{ medicamento.id }}">
+                                    <i class="bi bi-eye"></i> Detalhes
+                                </button>
+                                <button class="btn btn-primary">
+                                    <a href="{% url 'editar_medicamento' medicamento.id %}">
+                                        <i class="bi bi-pencil"></i> Editar
                                     </a>
-                                </div>
-                            </td>
-                        </tr>
+                                </button>
+                                <a href="{% url 'excluir_medicamento' medicamento.id %}">
+                                    <button class="btn btn-danger btn-excluir" data-item-id="{{ medicamento.id }}">
+                                        <i class="bi bi-trash"></i> Excluir
+                                    </button>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>
@@ -85,8 +92,8 @@
         <div class="pagination">
             <span class="step-links">
                 {% if medicamentos.has_previous %}
-                    <a href="?page=1">&laquo; Primeira página</a>
-                    <a href="?page={{ medicamentos.previous_page_number }}">voltar</a>
+                <a href="?page=1">&laquo; Primeira página</a>
+                <a href="?page={{ medicamentos.previous_page_number }}">voltar</a>
                 {% endif %}
 
                 <span class="current">
@@ -94,8 +101,8 @@
                 </span>
 
                 {% if medicamentos.has_next %}
-                    <a href="?page={{ medicamentos.next_page_number }}">Próxima</a>
-                    <a href="?page={{ medicamentos.paginator.num_pages }}">Ultima &raquo;</a>
+                <a href="?page={{ medicamentos.next_page_number }}">Próxima</a>
+                <a href="?page={{ medicamentos.paginator.num_pages }}">Ultima &raquo;</a>
                 {% endif %}
             </span>
         </div>
@@ -105,18 +112,18 @@
 
     <!-- Modal -->
     {% for medicamento in medicamentos %}
-        <div class="modal" id="modal-{{ medicamento.id }}">
-            <div class="modal-content">
-                <!-- Conteúdo detalhado do item -->
-                <h2>{{ medicamento.nome }}</h2><br><br>
-                <p><b>Descrição / O que é?</b><br> {{ medicamento.descricao|linebreaksbr }}</p><br><br>
-                <p><b>Composição:</b><br> {{ medicamento.composicao|linebreaksbr }}</p><br><br>
-                <p><b>Usos:</b><br> {{ medicamento.usos|linebreaksbr }}</p><br><br>
-                <p><b>Contra Indicações:</b><br> {{ medicamento.contra_indicacoes|linebreaksbr }}</p><br><br>
-                <p><b>Doenças/Situações:</b><br> {{ medicamento.doencas_situacoes|linebreaksbr }}</p><br><br>
-                <p><b>FAQ / Perguntas Frequentes:</b><br> {{ medicamento.faq|linebreaksbr }}</p><br><br>
-            </div>
+    <div class="modal" id="modal-{{ medicamento.id }}">
+        <div class="modal-content">
+            <!-- Conteúdo detalhado do item -->
+            <h2>{{ medicamento.nome }}</h2><br><br>
+            <p><b>Descrição / O que é?</b><br> {{ medicamento.descricao|linebreaksbr }}</p><br><br>
+            <p><b>Composição:</b><br> {{ medicamento.composicao|linebreaksbr }}</p><br><br>
+            <p><b>Usos:</b><br> {{ medicamento.usos|linebreaksbr }}</p><br><br>
+            <p><b>Contra Indicações:</b><br> {{ medicamento.contra_indicacoes|linebreaksbr }}</p><br><br>
+            <p><b>Doenças/Situações:</b><br> {{ medicamento.doencas_situacoes|linebreaksbr }}</p><br><br>
+            <p><b>FAQ / Perguntas Frequentes:</b><br> {{ medicamento.faq|linebreaksbr }}</p><br><br>
         </div>
+    </div>
     {% endfor %}
 
     <!-- Add your JavaScript here to handle the modal functionality -->
@@ -142,93 +149,94 @@
             </div>
         </div>
     </div>
-<!-- Seu HTML continua acima... -->
+    <!-- Seu HTML continua acima... -->
 
-<!-- Add your JavaScript here to handle the modal functionality -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const modalBtns = document.querySelectorAll('.modal-btn');
-        const modals = document.querySelectorAll('.modal');
+    <!-- Add your JavaScript here to handle the modal functionality -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modalBtns = document.querySelectorAll('.modal-btn');
+            const modals = document.querySelectorAll('.modal');
 
-        modalBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.getAttribute('data-modal-target');
-                const modal = document.querySelector(target);
-                modal.classList.add('open');
+            modalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-modal-target');
+                    const modal = document.querySelector(target);
+                    modal.classList.add('open');
 
-                const itemID = btn.getAttribute('data-item-id');
-                convertToLinks(itemID);
+                    const itemID = btn.getAttribute('data-item-id');
+                    convertToLinks(itemID);
+                });
             });
-        });
 
-        modals.forEach(modal => {
-            modal.addEventListener('click', e => {
-                if (e.target.classList.contains('modal')) {
-                    modal.classList.remove('open');
+            modals.forEach(modal => {
+                modal.addEventListener('click', e => {
+                    if (e.target.classList.contains('modal')) {
+                        modal.classList.remove('open');
+                    }
+                });
+            });
+
+            function convertToLinks(itemID) {
+                const paragraph = document.getElementById(`estudos-cientificos-${itemID}`);
+                const content = paragraph.innerHTML;
+
+                // Create a temporary element to parse the content as HTML
+                const tempElement = document.createElement('div');
+                tempElement.innerHTML = content;
+
+                // Get all the links in the content
+                const links = tempElement.getElementsByTagName('a');
+
+                // Create a new HTML content to replace the existing one
+                let newContent = '';
+
+                // Iterate through the links and add each link to the new content
+                for (const link of links) {
+                    newContent += `<a href="${link.href}" target="_blank">${link.innerText}</a><br>`;
                 }
+
+                // Replace the content of the paragraph with the modified HTML
+                paragraph.innerHTML = newContent;
+            }
+        });
+
+        $(document).ready(function () {
+            var modal = $('#modal-excluir');
+            var btnExcluir = $('.btn-excluir');
+            var btnConfirmar = $('.btn-confirmar');
+            var btnCancela = $('.btn-cancelar');
+            var itemId;
+
+            // Abra o modal quando clicar em um dos links de exclusão
+            btnExcluir.click(function (event) {
+                event.preventDefault(); // Impede o comportamento padrão de clicar no link
+                itemId = $(this).data('item-id');
+                console.log(itemId); // Imprime o valor de itemId no console
+                modal.modal('show');
+                $('#item_id_input').val(itemId); // Armazena o valor do item_id no campo oculto
+            });
+
+            // Ação quando o usuário clicar no botão "Sim" no modal de confirmação
+            btnConfirmar.click(function () {
+                // Realize a ação de exclusão (submeter o formulário de exclusão)
+                $('#form-excluir').submit();
+            });
+
+            // Ação quando o modal for ocultado
+            modal.on('hidden.bs.modal', function () {
+                // Atualize a página após um pequeno atraso
+                setTimeout(function () {
+                    location.reload();
+                }, 100);
+            });
+
+            // Ação quando o usuário clicar no botão "Cancelar" no modal de confirmação
+            btnCancela.click(function () {
+                modal.modal('hide');
             });
         });
-
-        function convertToLinks(itemID) {
-            const paragraph = document.getElementById(`estudos-cientificos-${itemID}`);
-            const content = paragraph.innerHTML;
-
-            // Create a temporary element to parse the content as HTML
-            const tempElement = document.createElement('div');
-            tempElement.innerHTML = content;
-
-            // Get all the links in the content
-            const links = tempElement.getElementsByTagName('a');
-
-            // Create a new HTML content to replace the existing one
-            let newContent = '';
-
-            // Iterate through the links and add each link to the new content
-            for (const link of links) {
-                newContent += `<a href="${link.href}" target="_blank">${link.innerText}</a><br>`;
-            }
-
-            // Replace the content of the paragraph with the modified HTML
-            paragraph.innerHTML = newContent;
-        }
-    });
-
-    $(document).ready(function () {
-        var modal = $('#modal-excluir');
-        var btnExcluir = $('.btn-excluir');
-        var btnConfirmar = $('.btn-confirmar');
-        var btnCancela = $('.btn-cancelar');
-        var itemId;
-
-        // Abra o modal quando clicar em um dos links de exclusão
-        btnExcluir.click(function (event) {
-            event.preventDefault(); // Impede o comportamento padrão de clicar no link
-            itemId = $(this).data('item-id');
-            console.log(itemId); // Imprime o valor de itemId no console
-            modal.modal('show');
-            $('#item_id_input').val(itemId); // Armazena o valor do item_id no campo oculto
-        });
-
-        // Ação quando o usuário clicar no botão "Sim" no modal de confirmação
-        btnConfirmar.click(function () {
-            // Realize a ação de exclusão (submeter o formulário de exclusão)
-            $('#form-excluir').submit();
-        });
-
-        // Ação quando o modal for ocultado
-        modal.on('hidden.bs.modal', function () {
-            // Atualize a página após um pequeno atraso
-            setTimeout(function () {
-                location.reload();
-            }, 100);
-        });
-
-        // Ação quando o usuário clicar no botão "Cancelar" no modal de confirmação
-        btnCancela.click(function () {
-            modal.modal('hide');
-        });
-    });
-</script>
+    </script>
 
 </body>
+
 </html>

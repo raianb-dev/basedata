@@ -70,13 +70,13 @@
                         <td>{{ item.dieta|truncatechars:25 }}</td>
                         <td>
                             <div style="transform: translateX(30px)">
-                                <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
+                                <button class="btn btn-primary modal-btn" style="background-color: rgb(201, 194, 134); color: rgb(53, 46, 46);" data-modal-target="#modal-{{ item.id }}"><i
                                     class="bi bi-eye"></i> Detalhes</button>
-                            <button class="btn btn-primary"><a href="{% url 'editar-doenca' item.id %}"><i
-                                        class="bi bi-pencil"></i>
+                            <button class="btn btn-primary" ><a href="{% url 'editar-doenca' item.id %}"><i
+                                        class="bi bi-eye"></i>
                                     Editar</a></button>
                             <a href="{% url 'excluir-doenca' item.id %}"><button class="btn btn-danger btn-excluir"
-                                    data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</button></a>
+                                    data-item-id="{{ item.id }}"><i class="bi bi-trash" ></i> Excluir</button></a>
                             </div>
                             
                         </td>
