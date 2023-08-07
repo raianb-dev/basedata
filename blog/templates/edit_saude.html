@@ -1,0 +1,48 @@
+{% load static %}
+<head>
+  <link rel="stylesheet" href="{% static 'health/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'health/media.css' %}">
+  <script src="{% static 'health/main.js' %}"></script>
+  <title>Editar | Saude health</title>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <h1>Saude Health (Editar)</h1><br>
+    </div>
+  <center>
+    <form method="post" action="{% url 'editar-saude' saude_item.id %}">
+      {% csrf_token %}
+      <!-- ... (your other fields) ... -->
+
+      <!-- Populate the form fields with the existing data -->
+      <label id="label">Nome:</label><br>
+      <textarea name="name" id="name" cols="140" rows="5" placeholder="nome...">{{ saude_item.name }}</textarea><br>
+      <label id="label">O que é / Descrição:</label><br>
+      <textarea name="description" id="descricao" cols="140" rows="5"
+        placeholder="Adicionar descrição...">{{ saude_item.description }}</textarea><br>
+      <label id="label">Mecanismos de ação / Como funciona:</label><br>
+      <textarea name="action_mechanisms" id="mecanismo" cols="140" rows="5"
+        placeholder="Adicionar mecanismo de ação...">{{ saude_item.action_mechanisms }}</textarea><br>
+      <label id="label">Potencial Benefícios / Para que serve:</label><br>
+      <textarea name="potential_benefits" id="beneficio" cols="140" rows="5"
+        placeholder="Adicionar potencial...">{{ saude_item.potential_benefits }}</textarea><br>
+      <label id="label">Efeitos colaterais/Cuidados:</label><br>
+      <textarea name="effects_precautions" id="efeitos_colaterais" cols="140" rows="5"
+        placeholder="Adicionar efeitos colaterais...">{{ saude_item.effects_precautions }}</textarea><br>
+      <label id="label">Interações gênicas:</label><br>
+      <textarea name="gene_interactions" id="interacoes" cols="140" rows="5"
+        placeholder="Adicionar interações gênicas...">{{ saude_item.gene_interactions }}</textarea><br>
+      <label id="label">Experiência dos Usuários:</label><br>
+      <textarea name="user_experience" id="experiencia" cols="140" rows="5"
+        placeholder="Adicionar experiencia dos Usuários...">{{ saude_item.user_experience }}</textarea><br>
+      <label id="label">Estudos Científicos / Referências Científica:</label><br>
+      <textarea name="scientific_studies" id="estudos_cientificos" cols="140" rows="5"
+        placeholder="Adicionar estudos científicos...">{{ saude_item.scientific_studies }}</textarea><br>
+      <label id="label">FAQ / Perguntas Frequentes:</label><br>
+      <textarea name="faq" id="faq" cols="140" rows="5"
+        placeholder="Adicionar faq, perguntas frequentes...">{{ saude_item.faq }}</textarea><br>
+      <input type="submit" value="Salvar" id="button">
+    </form>
+    </center>
+</body>

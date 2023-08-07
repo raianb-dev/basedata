@@ -9,14 +9,6 @@ from health import models
 Saude = models.Saude
 
 
-def todos_os_dados(request):
-    saude_items = Saude.objects.all()
-    return render(request, 'list_saude.html', {'saude_items': saude_items})
-
-def detalhes_item(request, item_id):
-    saude_item = get_object_or_404(Saude, id=item_id)
-    return render(request, 'saude_id.html', {'saude_item': saude_item})
-    
 def salvar_saude(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -44,24 +36,6 @@ def salvar_saude(request):
 
     return render(request, 'add_saude.html')
 
-def listar_saude(request):
-    saude_items = Saude.objects.all()
-
-    # Defina o número de itens por página
-    itens_por_pagina = 100
-    paginator = Paginator(saude_items, itens_por_pagina)
-
-    # Obtenha o número da página a partir dos parâmetros GET da URL
-    page = request.GET.get('page')
-
-    try:
-        # Obtenha os itens da página solicitada
-        saude_items_paginados = paginator.get_page(page)
-    except EmptyPage:
-        # Caso a página solicitada esteja fora do alcance, retorne a última página
-        saude_items_paginados = paginator.get_page(paginator.num_pages)
-
-    return render(request, 'list_saude.html', {'saude_items': saude_items_paginados})
 
 def editar_saude(request, item_id):
     saude_item = get_object_or_404(Saude, id=item_id)

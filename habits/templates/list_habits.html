@@ -1,0 +1,238 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Listagem de Rotinas | Hábitos</title>
+    <link rel="stylesheet" href="{% static 'health/styles.css' %}">
+    <style>
+        .studies,
+        p {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <div class="search-container">
+                <form id="search-form" action="{% url 'habits' %}">
+                    {% if search_query %}
+                    <input type="text" id="search-input" name="search" value="{{ search_query }}">
+                    {% else %}
+                    <input type="text" id="search-input" name="search" placeholder="Pesquisar por nome...">
+                    {% endif %}
+                    <button type="submit"><i class="bi bi-search"></i></button>
+                    {% if search_query %}
+                    <a href="{% url 'habits' %}" class="" style="margin-right: 10px;">Limpar filtro</a>
+                    {% endif %}
+                </form>
+            </div>
+            <br>
+            <h1>Rotinas/Hábitos</h1>
+        </div>
+        <a href="{% url 'add-habits' %}" class="floating-button">+</a>
+        <section class="table__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Nome <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Descrição <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Equipamentos/Requisitos <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Como fazer? <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Por que Funciona? <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Tempo estimado <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Frequência Sugerida <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>efeitos <span class="icon-arrow">&UpArrow;</span></th>
+                        <th>Dicas <span class="icon-arrow">&UpArrow;</span></th>
+                        <th style="z-index: 500;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in habits_items %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.nome |truncate_chars:50 }}</td>
+                        <td>{{ item.equipamentos_requisitos|truncate_chars:50 }}</td>
+                        <td>{{ item.como_fazer|truncate_chars:50 }}</td>
+                        <td>{{ item.por_que_funciona|truncate_chars:50 }}</td>
+                        <td>{{ item.tempo_estimado|truncate_chars:50 }}</td>
+                        <td>{{ item.frequencia|truncate_chars:50 }}</td>
+                        <td>{{ item.hora_do_dia|truncate_chars:50 }}</td>
+                        <td>{{ item.efeitos|truncate_chars:50 }}</td>
+                        <td>{{ item.dicas|truncate_chars:50 }}</td>
+                        <td>
+                            <div style="transform: translateX(30px);"> <button class="btn btn-primary modal-btn" data-modal-target="#modal-{{ item.id }}"><i
+                                        class="bi bi-eye"></i> Detalhes</button>
+                                <button class="btn btn-primary"><a href=""><i
+                                            class="bi bi-pencil"></i> Editar</a></button>
+                                <a href="{% url 'excluir-habits' item.id %}"><button class="btn btn-danger btn-excluir"
+                                        data-item-id="{{ item.id }}"><i class="bi bi-trash"></i> Excluir</button></a>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <!-- Paginação -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if habits_items.has_previous %}
+                <a href="?page=1">&laquo; Primeira página</a>
+                <a href="?page={{ habits_items.previous_page_number }}">voltar</a>
+                {% endif %}
+
+                <span class="current">
+                    Página {{ habits_items.number }} de {{ habits_items.paginator.num_pages }}.
+                </span>
+
+                {% if habits_items.has_next %}
+                <a href="?page={{ habits_items.next_page_number }}">Próxima</a>
+                <a href="?page={{ habits_items.paginator.num_pages }}">Ultima &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
+
+    <!-- Seu HTML -->
+
+    <!-- Modal -->
+    {% for item in habits_items %}
+    <div class="modal" id="modal-{{ item.id }}">
+        <div class="modal-content">
+            <!-- Conteúdo detalhado do item -->
+            <h2>{{ item.name }}</h2><br><br>
+            <p><b>Descrição / O que é?</b><br> {{ item.description|linebreaksbr }}</p><br><br>
+            <p><b>Mecanismos de Ação:</b><br> {{ item.action_mechanisms|linebreaksbr }}</p><br><br>
+            <p><b>Benefícios Potenciais:</b><br> {{ item.potential_benefits|linebreaksbr }}</p><br><br>
+            <p><b>Efeitos Colaterais/Cuidados:</b><br> {{ item.effects_precautions|linebreaksbr }}</p><br><br>
+            <p><b>Interações Gênicas:</b><br> {{ item.gene_interactions|linebreaksbr }}</p><br><br>
+            <p><b>Experiência dos Usuários:</b><br>{{ item.user_experience|linebreaksbr }}</p><br><br>
+            <p><b>FAQ / Perguntas Frequentes:</b><br> {{ item.faq|linebreaksbr }}</p><br><br>
+            <div id="estudos-cientificos-{{ item.id }}" class="studies"><b>Estudos Científicos / Referências
+                    Científicas:</b><br><br>
+                {{ item.scientific_studies|safe }}</div><br><br>
+        </div>
+    </div>
+    {% endfor %}
+
+
+    <!-- Add your JavaScript here to handle the modal functionality -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modalBtns = document.querySelectorAll('.modal-btn');
+            const modals = document.querySelectorAll('.modal');
+
+            modalBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-modal-target');
+                    const modal = document.querySelector(target);
+                    modal.classList.add('open');
+
+                    const itemID = btn.getAttribute('data-item-id');
+                    convertToLinks(itemID);
+                });
+            });
+
+            modals.forEach(modal => {
+                modal.addEventListener('click', e => {
+                    if (e.target.classList.contains('modal')) {
+                        modal.classList.remove('open');
+                    }
+                });
+            });
+        });
+
+        function convertToLinks(itemID) {
+            const paragraph = document.getElementById(`estudos-cientificos-${itemID}`);
+            const content = paragraph.innerHTML; // Use innerHTML para obter os links corretamente
+
+            // Create a temporary element to parse the content as HTML
+            const tempElement = document.createElement('div');
+            tempElement.innerHTML = content;
+
+            // Get all the links in the content
+            const links = tempElement.getElementsByTagName('a');
+
+            // Create a new HTML content to replace the existing one
+            let newContent = '';
+
+            // Iterate through the links and add each link to the new content
+            for (const link of links) {
+                newContent += `<a href="${link.href}" target="_blank">${link.innerText}</a><br>`;
+            }
+
+            // Replace the content of the paragraph with the modified HTML
+            paragraph.innerHTML = newContent;
+        }
+    </script>
+
+    <!-- Seu HTML continua abaixo... -->
+
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div class="modal" id="modal-excluir">
+        <div class="modal-content">
+            <h2>Confirmação de Exclusão</h2>
+            <p>Você tem certeza que deseja excluir este item?</p>
+            <div class="modal-buttons">
+                <form method="GET" id="form-excluir">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" id="item_id_input">
+                    <button type="submit" class="btn btn-primary btn-confirmar">Sim</button>
+                </form>
+                <button class="btn btn-secondary btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var modal = $('#modal-excluir');
+            var btnExcluir = $('.btn-excluir');
+            var btnConfirmar = $('.btn-confirmar');
+            var btnCancela = $('.btn-cancelar');
+            var itemId;
+
+            // Abra o modal quando clicar em um dos links de exclusão
+            btnExcluir.click(function (event) {
+                event.preventDefault(); // Impede o comportamento padrão de clicar no link
+                itemId = $(this).data('item-id');
+                console.log(itemId); // Imprime o valor de itemId no console
+                modal.modal('show');
+                $('#item_id_input').val(itemId); // Armazena o valor do item_id no campo oculto
+            });
+
+            // Ação quando o usuário clicar no botão "Sim" no modal de confirmação
+            btnConfirmar.click(function () {
+                // Realize a ação de exclusão (submeter o formulário de exclusão)
+                $('#form-excluir').submit();
+            });
+
+            // Ação quando o modal for ocultado
+            modal.on('hidden.bs.modal', function () {
+                // Atualize a página após um pequeno atraso
+                setTimeout(function () {
+                    location.reload();
+                }, 100);
+            });
+
+            // Ação quando o usuário clicar no botão "Cancelar" no modal de confirmação
+            btnCancela.click(function () {
+                modal.modal('hide');
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

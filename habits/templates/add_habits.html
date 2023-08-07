@@ -1,0 +1,202 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Adicionar items / Tabela Saúde</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+  
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+  
+      .nav {
+
+        color: #2e45ca;
+        text-align: center;
+        padding: 10px 0;
+      }
+  
+      .nav h1 {
+        margin: 0;
+      }
+  
+      form {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+  
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+  
+      textarea,
+      input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+  
+      #button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+  
+      #classificar {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+  
+      h2 {
+        margin-bottom: 10px;
+      }
+  
+    </style>
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="nav">
+        <h1>Rotinas | Hábitos</h1>
+      </div>
+      <section>
+        <form method="post" action="{% url 'add-habits' %}">
+          <label id="label">Importar informação / ChatGPT:</label><br>
+          <textarea name="prompt" id="prompt" cols="140" rows="15" placeholder="Cole o texto aqui..."></textarea><br>
+          <input type="button" value="Importar" id="classificar">
+          <h2>Formulário</h2>
+          {% csrf_token %}
+          <label for="name">Nome:</label><br>
+          <textarea name="nome" id="nome" cols="140" rows="3" placeholder="Adicionar nome..."></textarea><br>
+          
+          <label for="descricao">Descrição:</label><br>
+          <textarea name="descricao" id="descricao" cols="140" rows="3" placeholder="Adicionar descrição..."></textarea><br>
+          
+          <label for="beneficio">Possiveis beneficios:</label><br>
+          <textarea name="beneficio" id="beneficio" cols="140" rows="3" placeholder="Adicionar descrição..."></textarea><br>
+
+          <label for="equipamentos_requisitos">Equipamentos/Requisitos:</label><br>
+          <textarea name="equipamentos_requisitos" id="equipamentos_requisitos" cols="140" rows="3" placeholder="Adicionar descrição..."></textarea><br>
+         
+          <label for="como_fazer">Como fazer?</label><br>
+          <textarea name="como_fazer" id="como_fazer" cols="140" rows="3" placeholder="Adicionar descrição..."></textarea><br>
+          
+          <label for="por_que_funciona">Por que Funciona?</label><br>
+          <textarea name="por_que_funciona" id="por_que_funciona" cols="140" rows="3" placeholder="Adicionar descrição..."></textarea><br>
+          
+          <label for="tempo_estimado">Tempo estimado:</label><br>
+          <textarea name="tempo_estimado" id="tempo_estimado" cols="140" rows="3" placeholder="Adicionar descrição..."></textarea><br>
+          
+          <label for="frequencia">Frequência Sugerida:</label><br>
+          <textarea name="frequencia" id="frequencia" cols="140" rows="3" placeholder="Adicionar descrição..."></textarea><br>
+          
+          <label for="hora_do_dia">Hora do dia</label>
+          <textarea name="hora_do_dia" id="hora_do_dia" cols="140" rows="3" placeholder="Adicionar descrição..."></textarea><br>
+          
+          <label for="efeitos">Possiveis efeitos colaterais:</label><br>
+          <textarea name="efeitos" id="efeitos" cols="140" rows="3" placeholder="Adicionar efeitos..."></textarea><br>
+          
+          <label for="dicas">Dicas:</label>
+          <textarea name="dicas" id="dicas" cols="140" rows="3" placeholder="Adicionar Dicas..."></textarea><br>
+          <input type="submit" value="Enviar" id="button">
+        </form>
+      </section>
+    </div>
+  
+    <div id="linkContainer"></div>
+
+
+  <!-- Adicione o script abaixo no mesmo local onde estava a função de autopreenchimento anterior -->
+  <script>
+    // Função para preencher os campos do formulário com base no texto fornecido
+    function autoPreenchimento() {
+      const texto = document.getElementById('prompt').value;
+      const regexTópicos = /%(\d+)%([^%]+)%(\d+)%/gs;
+
+      let match;
+      let tópicos = [];
+
+      while ((match = regexTópicos.exec(texto)) !== null) {
+        const conteudoTópico = match[2].trim();
+        tópicos.push(conteudoTópico);
+      }
+
+      if (tópicos.length >= 1) {
+        document.getElementById('nome').value = tópicos[0];
+      }
+
+      if (tópicos.length >= 2) {
+        document.getElementById('descricao').value = tópicos[1];
+      }
+
+      if (tópicos.length >= 3) {
+        document.getElementById('beneficio').value = tópicos[2];
+      }
+
+      if (tópicos.length >= 4) {
+        document.getElementById('equipamentos_requisitos').value = tópicos[3];
+      }
+
+      if (tópicos.length >= 5) {
+        document.getElementById('efeitos_colaterais').value = tópicos[4];
+      }
+
+      if (tópicos.length >= 6) {
+        document.getElementById('como_fazer').value = tópicos[5];
+      }
+
+      if (tópicos.length >= 7) {
+        document.getElementById('por_que_funciona').value = tópicos[6];
+      }
+
+      if (tópicos.length >= 8) {
+        document.getElementById('tempo_estimado').value = tópicos[7];
+      }
+
+      if (tópicos.length >= 9) {
+        document.getElementById('frequencia').value = tópicos[8];
+      }
+
+      if (tópicos.length >= 10) {
+        document.getElementById('hora_do_dia').value = tópicos[9];
+      }
+
+      if (tópicos.length >= 11) {
+        document.getElementById('efeitos').value = tópicos[10];
+      }
+
+      if (tópicos.length >= 12) {
+        document.getElementById('dicas').value = tópicos[11];
+      }
+    }
+
+    // Chame a função de preenchimento automático quando o campo de texto for alterado
+    document.getElementById('prompt').addEventListener('change', autoPreenchimento);
+  </script>
+
+
+
+</html>

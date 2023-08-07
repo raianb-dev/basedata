@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 <head>
-  
+
 
   <script src="{% static 'home/main.js' %}"></script>
 </head>
@@ -20,50 +20,56 @@
     <div class="nav">
       <h1>Saude Health | Pagina inicial</h1><br>
     </div>
-  <section class="table__body">
-    <table>
-      <thead>
-        <tr>
-          <th> Id <span class="icon-arrow">&UpArrow;</span></th>
-          <th> Nome <span class="icon-arrow">&UpArrow;</span></th>
-          <th> </span></th>
-          <th> Ultimo update <span class="icon-arrow">&UpArrow;</span></th>
-          <th> Qtde. total <span class="icon-arrow">&UpArrow;</span></th>
-          <th> </span></th>
+    <section class="table__body">
+      <table>
+        <thead>
+          <tr>
+            <th> Id <span class="icon-arrow">&UpArrow;</span></th>
+            <th> Nome <span class="icon-arrow">&UpArrow;</span></th>
+            <th> </span></th>
+            <th> Ultimo update <span class="icon-arrow">&UpArrow;</span></th>
+            <th> Qtde. total <span class="icon-arrow">&UpArrow;</span></th>
+            <th> </span></th>
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td> 1 </td>
-          <td> Saude </td>
-          <td></td>
-          <td> --- </td>
-          <td><strong> --- </strong></td>
-          <td>
-            <a href="{% url 'health' %}"><p class="">ver</p></a>
-          </td>
-        </tr>
-        <tr>
-          <td> 2 </td>
-          <td> Doença</td>
-          <td></td>
-          <td> --- </td>
-          <td><strong> --- </strong></td>
-          <td>
-            <a href="{% url 'doenca' %}"><p class="">ver</p></a>
-          </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> 1 </td>
+            <td> Saude </td>
+            <td></td>
+            <td> --- </td>
+            <td><strong> --- </strong></td>
+            <td>
+              <a href="{% url 'health' %}">
+                <p class="">ver</p>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td> 2 </td>
+            <td> Doença</td>
+            <td></td>
+            <td> --- </td>
+            <td><strong> --- </strong></td>
+            <td>
+              <a href="{% url 'doenca' %}">
+                <p class="">ver</p>
+              </a>
+            </td>
 
-        </tr>
-        <tr>
-          <td> 3 </td>
-          <td> Ervas | Sub.</td>
-          <td></td>
-          <td> --- </td>
-          <td><strong> --- </strong></td>
-          <td>
-            <a href="{% url 'herbsSubstances' %}"><p class="">ver</p></a>
-          </td>
+          </tr>
+          <tr>
+            <td> 3 </td>
+            <td> Ervas | Sub.</td>
+            <td></td>
+            <td> --- </td>
+            <td><strong> --- </strong></td>
+            <td>
+              <a href="{% url 'herbsSubstances' %}">
+                <p class="">ver</p>
+              </a>
+            </td>
           <tr>
             <td> 4 </td>
             <td> Medicamentos | Farmacêutica</td>
@@ -71,12 +77,26 @@
             <td> --- </td>
             <td><strong> --- </strong></td>
             <td>
-              <a href=""><p class="">ver</p></a>
+              <a href="{% url 'listar_medicamentos' %}">
+                <p class="">ver</p>
+              </a>
             </td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+          </tr>
+          <tr>
+            <td> 5 </td>
+            <td> Rotinas | Hábitos</td>
+            <td></td>
+            <td> --- </td>
+            <td><strong> --- </strong></td>
+            <td>
+              <a href="">
+                <p class="{% url 'habits' %}">ver</p>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
 
 </body>
